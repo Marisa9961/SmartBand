@@ -57,28 +57,12 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define KEY_Pin GPIO_PIN_13
-#define KEY_GPIO_Port GPIOC
-#define DET_CHARGE_Pin GPIO_PIN_0
-#define DET_CHARGE_GPIO_Port GPIOA
-#define PWR_ENABLE_Pin GPIO_PIN_1
-#define PWR_ENABLE_GPIO_Port GPIOA
-#define TP_RST_Pin GPIO_PIN_3
-#define TP_RST_GPIO_Port GPIOA
 #define LCD_RST_Pin GPIO_PIN_4
 #define LCD_RST_GPIO_Port GPIOA
 #define LCD_CS_Pin GPIO_PIN_0
 #define LCD_CS_GPIO_Port GPIOB
 #define LCD_DC_Pin GPIO_PIN_1
 #define LCD_DC_GPIO_Port GPIOB
-#define Sensor_INT_Pin GPIO_PIN_2
-#define Sensor_INT_GPIO_Port GPIOB
-#define Flash_CS_Pin GPIO_PIN_12
-#define Flash_CS_GPIO_Port GPIOB
-#define USB_ENABLE_Pin GPIO_PIN_10
-#define USB_ENABLE_GPIO_Port GPIOA
-#define BLE_ENABLE_Pin GPIO_PIN_5
-#define BLE_ENABLE_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
