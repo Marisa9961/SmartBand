@@ -11,19 +11,16 @@ add_executable(${CMAKE_PROJECT_NAME}.elf)
 
 # ------------------------------ Directory Path ------------------------------ #
 set(APP_PATH    "app")
-set(BSP_PATH    "bsp")
 set(THIRD_PATH  "third-party")
 
 # ------------------------------- Source Files ------------------------------- #
 file(GLOB_RECURSE sources_file 
     "${APP_PATH}/*.c" 
     "${APP_PATH}/*.cpp" 
-    "${BSP_PATH}/*.c"
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME}.elf PRIVATE
     ${APP_PATH}
-    ${BSP_PATH}
 )
 
 target_sources(${CMAKE_PROJECT_NAME}.elf PRIVATE
