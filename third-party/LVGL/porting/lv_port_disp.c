@@ -18,11 +18,11 @@
  *      DEFINES
  *********************/
 #ifndef MY_DISP_HOR_RES
-#define MY_DISP_HOR_RES 320
+#define MY_DISP_HOR_RES 240
 #endif
 
 #ifndef MY_DISP_VER_RES
-#define MY_DISP_VER_RES 172
+#define MY_DISP_VER_RES 280
 #endif
 
 #define BYTE_PER_PIXEL                                                         \
@@ -132,8 +132,7 @@ static void disp_flush(lv_display_t *disp_drv, const lv_area_t *area,
      * screen one-by-one*/
 
     lv_draw_sw_rgb565_swap(px_map, lv_area_get_size(area));
-    LCD_drawPicture(area->x1, area->y1, area->x2 - area->x1 + 1,
-                    area->y2 - area->y1 + 1, px_map);
+    LCD_draw(area->x1, area->y1, area->x2, area->y2, px_map);
   }
 
   /*IMPORTANT!!!

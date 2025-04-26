@@ -15,8 +15,11 @@ SPI_HandleTypeDef *const LCD_SPI = &hspi1;
 extern TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef *const LCD_TIM = &htim1;
 
+// IMPORTANT!
+#define Y_OFFSET 20
+
 #define SPI_transmit(spi_handler, p_data, size)                                \
-  HAL_SPI_Transmit(spi_handler, (uint8_t *)p_data, size, 9961)
+  HAL_SPI_Transmit(spi_handler, (uint8_t *)p_data, size, HAL_MAX_DELAY)
 
 #define LCD_resetCS()                                                          \
   do {                                                                         \
@@ -143,11 +146,11 @@ void LCD_init(void) {
   HAL_TIM_PWM_Start(LCD_TIM, TIM_CHANNEL_2);
 }
 
-void LCD_drawPicture(uint16_t x, uint16_t y, uint16_t width, uint16_t height,
-                     uint8_t pic[]) {
-  LCD_setAddress(x, y, x + width, y + height);
-
+void LCD_draw(uint16_t xbegin, uint16_t ybegin, uint16_t xend, uint16_t yend,
+              uint8_t pic[]) {
+  LCD_setAddress(xbegin, ybegin + Y_OFFSET, xend, yend + Y_OFFSET);
   LCD_resetCS();
-  HAL_SPI_Transmit(LCD_SPI, pic, width * height * 2, 9961);
+  HAL_SPI_Transmit(LCD_SPI, pic, (xend - xbegin + 1) * (yend - ybegin + 1) * 2,
+                   HAL_MAX_DELAY);
   LCD_setCS();
 }

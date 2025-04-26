@@ -93,7 +93,8 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-
+  extern void init();
+  init();
   /* USER CODE END 2 */
 
   /* Init scheduler */

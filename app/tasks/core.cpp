@@ -10,19 +10,10 @@
 #include "tasks/core.hpp"
 
 #include "tasks/gui.hpp"
-#include "tasks/sensor.hpp"
-#include "tasks/storage.hpp"
 
 namespace bd::task {
 void CoreTask(void *argument) {
   gui.run();
-  sensor.run();
-  storage.run();
-
-  osThreadFlagsWait(gui.getUid() | sensor.getUid() | storage.getUid(),
-                    osFlagsWaitAll, osWaitForever);
-
-  osThreadFlagsSet(gui.getHandle(), core.getUid());
 
   while (true) {
     osThreadSuspend(osThreadGetId());
