@@ -9,6 +9,8 @@ include(cmake/stm32cubemx.cmake)
 project(${CMAKE_PROJECT_NAME} LANGUAGES C CXX ASM)
 add_executable(${CMAKE_PROJECT_NAME}.elf)
 
+add_subdirectory(third-party/lvgl)
+
 # ------------------------------ Directory Path ------------------------------ #
 set(APP_PATH    "app")
 set(THIRD_PATH  "third-party")
@@ -30,6 +32,7 @@ target_sources(${CMAKE_PROJECT_NAME}.elf PRIVATE
 # ------------------------------- Third Party --------------------------------- #
 target_link_libraries(${CMAKE_PROJECT_NAME}.elf PRIVATE
     stm32cubemx
+    lvgl::lvgl
 )
 
 # ------------------------------- After Build --------------------------------- #
