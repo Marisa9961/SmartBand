@@ -11,17 +11,19 @@
 
 #include <lvgl/lvgl.h>
 #include <porting/lv_port_disp.h>
+#include <porting/lv_port_indev.h>
 
 #include "tasks/core.hpp"
+
+#include "ui/ui.h"
 
 namespace bd::task {
 void GuiTask(void *argument) {
   lv_init();
   lv_port_disp_init();
+  lv_port_indev_init();
 
-  lv_obj_t *spinner = lv_spinner_create(lv_screen_active());
-  lv_obj_set_size(spinner, 64, 64);
-  lv_obj_align(spinner, LV_ALIGN_CENTER, 0, 0);
+  ui_init();
 
   while (true) {
     lv_task_handler();
