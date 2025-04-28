@@ -34,7 +34,7 @@ void TOUCH_freshXY(void) {
   uint8_t data[4] = {};
   HAL_I2C_Master_Receive(&TOUCH_I2C, TOUCH_I2C_ADDR, data, 4, HAL_MAX_DELAY);
   touch_info.x_pos = ((data[0] & 0x0F) << 8) | data[1];
-  touch_info.y_pos = (((data[2] & 0x0F) << 8) | data[3]) + 15;
+  touch_info.y_pos = (((data[2] & 0x0F) << 8) | data[3]);
 }
 
 uint8_t TOUCH_getFingerNum(void) {
