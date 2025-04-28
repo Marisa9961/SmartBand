@@ -15,8 +15,8 @@ void ui_Home_screen_init(void)
     ui_Home_Date = lv_label_create(ui_Home);
     lv_obj_set_width(ui_Home_Date, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Home_Date, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Home_Date, 10);
-    lv_obj_set_y(ui_Home_Date, -100);
+    lv_obj_set_x(ui_Home_Date, 5);
+    lv_obj_set_y(ui_Home_Date, -95);
     lv_obj_set_align(ui_Home_Date, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Home_Date, "04-15");
     lv_obj_set_style_text_color(ui_Home_Date, lv_color_hex(0xEEEEEE), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -27,7 +27,7 @@ void ui_Home_screen_init(void)
     lv_obj_set_width(ui_Home_Mouth, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Home_Mouth, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_x(ui_Home_Mouth, -70);
-    lv_obj_set_y(ui_Home_Mouth, -100);
+    lv_obj_set_y(ui_Home_Mouth, -95);
     lv_obj_set_align(ui_Home_Mouth, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Home_Mouth, "Tue");
     lv_obj_set_style_text_color(ui_Home_Mouth, lv_color_hex(0xEEEEEE), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -43,18 +43,7 @@ void ui_Home_screen_init(void)
     lv_label_set_text(ui_Home_TimeMinute, "12");
     lv_obj_set_style_text_color(ui_Home_TimeMinute, lv_color_hex(0xEEEEEE), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_Home_TimeMinute, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Home_TimeMinute, &lv_font_montserrat_48, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_Home_TimeSplit = lv_label_create(ui_Home);
-    lv_obj_set_width(ui_Home_TimeSplit, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Home_TimeSplit, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Home_TimeSplit, -35);
-    lv_obj_set_y(ui_Home_TimeSplit, -60);
-    lv_obj_set_align(ui_Home_TimeSplit, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Home_TimeSplit, ":");
-    lv_obj_set_style_text_color(ui_Home_TimeSplit, lv_color_hex(0xEEEEEE), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Home_TimeSplit, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Home_TimeSplit, &lv_font_montserrat_48, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Home_TimeMinute, &ui_font_FontMontserrat, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Home_TimeSecond = lv_label_create(ui_Home);
     lv_obj_set_width(ui_Home_TimeSecond, LV_SIZE_CONTENT);   /// 1
@@ -65,7 +54,7 @@ void ui_Home_screen_init(void)
     lv_label_set_text(ui_Home_TimeSecond, "34");
     lv_obj_set_style_text_color(ui_Home_TimeSecond, lv_color_hex(0xEEEEEE), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_Home_TimeSecond, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Home_TimeSecond, &lv_font_montserrat_48, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Home_TimeSecond, &ui_font_FontMontserrat, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Home_ArcBattery = lv_arc_create(ui_Home);
     lv_obj_set_width(ui_Home_ArcBattery, 66);
@@ -86,8 +75,8 @@ void ui_Home_screen_init(void)
     ui_Home_LabelBattery = lv_label_create(ui_Home_ArcBattery);
     lv_obj_set_width(ui_Home_LabelBattery, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Home_LabelBattery, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Home_LabelBattery, 0);
-    lv_obj_set_y(ui_Home_LabelBattery, -5);
+    lv_obj_set_x(ui_Home_LabelBattery, -2);
+    lv_obj_set_y(ui_Home_LabelBattery, -1);
     lv_obj_set_align(ui_Home_LabelBattery, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Home_LabelBattery, "50%");
     lv_obj_set_style_text_color(ui_Home_LabelBattery, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -115,8 +104,8 @@ void ui_Home_screen_init(void)
     ui_Home_LabelTemp = lv_label_create(ui_Home_ContainerInfo);
     lv_obj_set_width(ui_Home_LabelTemp, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Home_LabelTemp, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Home_LabelTemp, -31);
-    lv_obj_set_y(ui_Home_LabelTemp, 8);
+    lv_obj_set_x(ui_Home_LabelTemp, -29);
+    lv_obj_set_y(ui_Home_LabelTemp, 11);
     lv_obj_set_align(ui_Home_LabelTemp, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Home_LabelTemp, "25/15°C");
     lv_obj_set_style_text_color(ui_Home_LabelTemp, lv_color_hex(0xEEEEEE), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -125,7 +114,7 @@ void ui_Home_screen_init(void)
     ui_Home_LabelWeather = lv_label_create(ui_Home_ContainerInfo);
     lv_obj_set_width(ui_Home_LabelWeather, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Home_LabelWeather, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Home_LabelWeather, -42);
+    lv_obj_set_x(ui_Home_LabelWeather, -40);
     lv_obj_set_y(ui_Home_LabelWeather, -9);
     lv_obj_set_align(ui_Home_LabelWeather, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Home_LabelWeather, "Sun");
@@ -178,6 +167,31 @@ void ui_Home_screen_init(void)
     lv_obj_set_align(ui_Home_LabelStep, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Home_LabelStep, "Today's step: 3456");
 
+    ui_Home_Arc1 = lv_arc_create(ui_Home);
+    lv_obj_set_width(ui_Home_Arc1, 6);
+    lv_obj_set_height(ui_Home_Arc1, 6);
+    lv_obj_set_x(ui_Home_Arc1, -30);
+    lv_obj_set_y(ui_Home_Arc1, -70);
+    lv_obj_set_align(ui_Home_Arc1, LV_ALIGN_CENTER);
+    lv_obj_remove_flag(ui_Home_Arc1, LV_OBJ_FLAG_CLICKABLE);      /// Flags
+    lv_arc_set_value(ui_Home_Arc1, 0);
+    lv_arc_set_bg_angles(ui_Home_Arc1, 0, 360);
+
+    lv_obj_set_style_opa(ui_Home_Arc1, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
+
+    ui_Home_Arc2 = lv_arc_create(ui_Home);
+    lv_obj_set_width(ui_Home_Arc2, 6);
+    lv_obj_set_height(ui_Home_Arc2, 6);
+    lv_obj_set_x(ui_Home_Arc2, -30);
+    lv_obj_set_y(ui_Home_Arc2, -50);
+    lv_obj_set_align(ui_Home_Arc2, LV_ALIGN_CENTER);
+    lv_obj_remove_flag(ui_Home_Arc2, LV_OBJ_FLAG_CLICKABLE);      /// Flags
+    lv_arc_set_value(ui_Home_Arc2, 0);
+    lv_arc_set_bg_angles(ui_Home_Arc2, 0, 360);
+
+    lv_obj_set_style_opa(ui_Home_Arc2, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
+
+    lv_obj_add_event_cb(ui_Home_PanelInfo, ui_event_Home_PanelInfo, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Home, ui_event_Home, LV_EVENT_ALL, NULL);
 
 }

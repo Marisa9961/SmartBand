@@ -23,7 +23,6 @@ extern lv_obj_t * ui_Home;
 extern lv_obj_t * ui_Home_Date;
 extern lv_obj_t * ui_Home_Mouth;
 extern lv_obj_t * ui_Home_TimeMinute;
-extern lv_obj_t * ui_Home_TimeSplit;
 extern lv_obj_t * ui_Home_TimeSecond;
 extern lv_obj_t * ui_Home_ArcBattery;
 extern lv_obj_t * ui_Home_LabelBattery;
@@ -34,8 +33,11 @@ extern lv_obj_t * ui_Home_LabelWeather;
 extern lv_obj_t * ui_Home_ImageWeather;
 extern lv_obj_t * ui_Home_LabelHeartbeat;
 extern lv_obj_t * ui_Home_ImageHeartbeat;
+void ui_event_Home_PanelInfo(lv_event_t * e);
 extern lv_obj_t * ui_Home_PanelInfo;
 extern lv_obj_t * ui_Home_LabelStep;
+extern lv_obj_t * ui_Home_Arc1;
+extern lv_obj_t * ui_Home_Arc2;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_NotificationPanel
@@ -58,7 +60,7 @@ extern lv_obj_t * ui_NotificationPanel_ButtonSleep;
 extern lv_obj_t * ui_NotificationPanel_ImageSleep;
 extern lv_obj_t * ui_NotificationPanel_LabelInfo;
 extern lv_obj_t * ui_NotificationPanel_ImageBand;
-extern lv_obj_t * ui_NotificationPanel_Slider1;
+extern lv_obj_t * ui_NotificationPanel_SliderLight;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_Settings
@@ -66,17 +68,36 @@ void ui_Settings_screen_init(void);
 void ui_event_Settings(lv_event_t * e);
 extern lv_obj_t * ui_Settings;
 extern lv_obj_t * ui_Settings_Container;
-extern lv_obj_t * ui_Settings_Container1;
-extern lv_obj_t * ui_Settings_Image1;
-extern lv_obj_t * ui_Settings_Label1;
-extern lv_obj_t * ui_Settings_Container2;
-extern lv_obj_t * ui_Settings_Image3;
-extern lv_obj_t * ui_Settings_Container3;
-extern lv_obj_t * ui_Settings_Image2;
-extern lv_obj_t * ui_Settings_Container4;
-extern lv_obj_t * ui_Settings_Image4;
-extern lv_obj_t * ui_Settings_Container5;
-extern lv_obj_t * ui_Settings_Image5;
+void ui_event_Settings_ContainerAbout(lv_event_t * e);
+extern lv_obj_t * ui_Settings_ContainerAbout;
+extern lv_obj_t * ui_Settings_ImageAbout;
+extern lv_obj_t * ui_Settings_LabelAbout;
+// CUSTOM VARIABLES
+
+// SCREEN: ui_Application
+void ui_Application_screen_init(void);
+void ui_event_Application(lv_event_t * e);
+extern lv_obj_t * ui_Application;
+extern lv_obj_t * ui_Application_Container;
+void ui_event_Application_ContainerCalendar(lv_event_t * e);
+extern lv_obj_t * ui_Application_ContainerCalendar;
+extern lv_obj_t * ui_Application_ImageCalendar;
+extern lv_obj_t * ui_Application_LabelCalendar;
+// CUSTOM VARIABLES
+
+// SCREEN: ui_Calendar
+void ui_Calendar_screen_init(void);
+void ui_event_Calendar(lv_event_t * e);
+extern lv_obj_t * ui_Calendar;
+extern lv_obj_t * ui_Calendar_CalendarInstance;
+// CUSTOM VARIABLES
+
+// SCREEN: ui_About
+void ui_About_screen_init(void);
+void ui_event_About(lv_event_t * e);
+extern lv_obj_t * ui_About;
+extern lv_obj_t * ui_About_LabelInfo;
+extern lv_obj_t * ui_About_Image;
 // CUSTOM VARIABLES
 
 // EVENTS
@@ -94,6 +115,11 @@ LV_IMG_DECLARE(ui_img_alarm_png);    // assets/alarm.png
 LV_IMG_DECLARE(ui_img_no_disturb_png);    // assets/no_disturb.png
 LV_IMG_DECLARE(ui_img_sleep_png);    // assets/sleep.png
 LV_IMG_DECLARE(ui_img_band_png);    // assets/band.png
+LV_IMG_DECLARE(ui_img_calendar_png);    // assets/calendar.png
+LV_IMG_DECLARE(ui_img_author_png);    // assets/author.png
+
+// FONTS
+LV_FONT_DECLARE(ui_font_FontMontserrat);
 
 // UI INIT
 void ui_init(void);

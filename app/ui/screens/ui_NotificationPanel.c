@@ -156,8 +156,8 @@ void ui_NotificationPanel_screen_init(void)
     ui_NotificationPanel_LabelInfo = lv_label_create(ui_NotificationPanel);
     lv_obj_set_width(ui_NotificationPanel_LabelInfo, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_NotificationPanel_LabelInfo, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_NotificationPanel_LabelInfo, 23);
-    lv_obj_set_y(ui_NotificationPanel_LabelInfo, 70);
+    lv_obj_set_x(ui_NotificationPanel_LabelInfo, 22);
+    lv_obj_set_y(ui_NotificationPanel_LabelInfo, 69);
     lv_obj_set_align(ui_NotificationPanel_LabelInfo, LV_ALIGN_CENTER);
     lv_label_set_text(ui_NotificationPanel_LabelInfo, "STM32 Smart Band\nVersion 1.0\nDesigned by Marisa9961");
     lv_obj_set_style_text_color(ui_NotificationPanel_LabelInfo, lv_color_hex(0xEEEEEE), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -174,27 +174,28 @@ void ui_NotificationPanel_screen_init(void)
     lv_obj_remove_flag(ui_NotificationPanel_ImageBand, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_blend_mode(ui_NotificationPanel_ImageBand, LV_BLEND_MODE_ADDITIVE, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_NotificationPanel_Slider1 = lv_slider_create(ui_NotificationPanel);
-    lv_slider_set_value(ui_NotificationPanel_Slider1, 25, LV_ANIM_OFF);
-    if(lv_slider_get_mode(ui_NotificationPanel_Slider1) == LV_SLIDER_MODE_RANGE) lv_slider_set_left_value(
-            ui_NotificationPanel_Slider1, 0, LV_ANIM_OFF);
-    lv_obj_set_width(ui_NotificationPanel_Slider1, 20);
-    lv_obj_set_height(ui_NotificationPanel_Slider1, 120);
-    lv_obj_set_x(ui_NotificationPanel_Slider1, 90);
-    lv_obj_set_y(ui_NotificationPanel_Slider1, -50);
-    lv_obj_set_align(ui_NotificationPanel_Slider1, LV_ALIGN_CENTER);
-    lv_obj_set_style_bg_color(ui_NotificationPanel_Slider1, lv_color_hex(0x83858B), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_NotificationPanel_Slider1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_NotificationPanel_SliderLight = lv_slider_create(ui_NotificationPanel);
+    lv_slider_set_value(ui_NotificationPanel_SliderLight, 25, LV_ANIM_OFF);
+    if(lv_slider_get_mode(ui_NotificationPanel_SliderLight) == LV_SLIDER_MODE_RANGE) lv_slider_set_left_value(
+            ui_NotificationPanel_SliderLight, 0, LV_ANIM_OFF);
+    lv_obj_set_width(ui_NotificationPanel_SliderLight, 20);
+    lv_obj_set_height(ui_NotificationPanel_SliderLight, 120);
+    lv_obj_set_x(ui_NotificationPanel_SliderLight, 90);
+    lv_obj_set_y(ui_NotificationPanel_SliderLight, -50);
+    lv_obj_set_align(ui_NotificationPanel_SliderLight, LV_ALIGN_CENTER);
+    lv_obj_set_style_bg_color(ui_NotificationPanel_SliderLight, lv_color_hex(0x83858B), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_NotificationPanel_SliderLight, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    lv_obj_set_style_bg_color(ui_NotificationPanel_Slider1, lv_color_hex(0xFFFFFF), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_NotificationPanel_Slider1, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_NotificationPanel_SliderLight, lv_color_hex(0xFFFFFF),
+                              LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_NotificationPanel_SliderLight, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
 
-    lv_obj_set_style_opa(ui_NotificationPanel_Slider1, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_opa(ui_NotificationPanel_SliderLight, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
 
     //Compensating for LVGL9.1 draw crash with bar/slider max value when top-padding is nonzero and right-padding is 0
-    if(lv_obj_get_style_pad_top(ui_NotificationPanel_Slider1,
-                                LV_PART_MAIN) > 0) lv_obj_set_style_pad_right(ui_NotificationPanel_Slider1,
-                                                                                  lv_obj_get_style_pad_right(ui_NotificationPanel_Slider1, LV_PART_MAIN) + 1, LV_PART_MAIN);
+    if(lv_obj_get_style_pad_top(ui_NotificationPanel_SliderLight,
+                                LV_PART_MAIN) > 0) lv_obj_set_style_pad_right(ui_NotificationPanel_SliderLight,
+                                                                                  lv_obj_get_style_pad_right(ui_NotificationPanel_SliderLight, LV_PART_MAIN) + 1, LV_PART_MAIN);
     lv_obj_add_event_cb(ui_NotificationPanel_ButtonSetting, ui_event_NotificationPanel_ButtonSetting, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_NotificationPanel, ui_event_NotificationPanel, LV_EVENT_ALL, NULL);
 

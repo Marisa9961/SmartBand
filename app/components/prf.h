@@ -11,14 +11,8 @@
 
 #include "main.h"
 
-/**
-* @brief  延时
-*/
-#ifndef USE_RTOS
 #include <cmsis_os2.h>
+
 #define delay(x) osDelay(x)
-#else
-#define delay(x) HAL_Delay(x)
-#endif
 
 #endif
