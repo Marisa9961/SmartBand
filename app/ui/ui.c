@@ -50,9 +50,9 @@ lv_obj_t * ui_NotificationPanel_ButtonNoDisturb;
 lv_obj_t * ui_NotificationPanel_ImageNoDisturb;
 lv_obj_t * ui_NotificationPanel_ButtonSleep;
 lv_obj_t * ui_NotificationPanel_ImageSleep;
+lv_obj_t * ui_NotificationPanel_SliderLight;
 lv_obj_t * ui_NotificationPanel_LabelInfo;
 lv_obj_t * ui_NotificationPanel_ImageBand;
-lv_obj_t * ui_NotificationPanel_SliderLight;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_Settings
@@ -205,6 +205,8 @@ void ui_event_About(lv_event_t * e)
 
 void ui_init(void)
 {
+    LV_EVENT_GET_COMP_CHILD = lv_event_register_id();
+
     lv_disp_t * dispp = lv_display_get_default();
     lv_theme_t * theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED),
                                                false, LV_FONT_DEFAULT);

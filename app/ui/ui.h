@@ -13,6 +13,8 @@ extern "C" {
 #include "lvgl/lvgl.h"
 
 #include "ui_helpers.h"
+#include "components/ui_comp.h"
+#include "components/ui_comp_hook.h"
 #include "ui_events.h"
 
 
@@ -58,9 +60,9 @@ extern lv_obj_t * ui_NotificationPanel_ButtonNoDisturb;
 extern lv_obj_t * ui_NotificationPanel_ImageNoDisturb;
 extern lv_obj_t * ui_NotificationPanel_ButtonSleep;
 extern lv_obj_t * ui_NotificationPanel_ImageSleep;
+extern lv_obj_t * ui_NotificationPanel_SliderLight;
 extern lv_obj_t * ui_NotificationPanel_LabelInfo;
 extern lv_obj_t * ui_NotificationPanel_ImageBand;
-extern lv_obj_t * ui_NotificationPanel_SliderLight;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_Settings

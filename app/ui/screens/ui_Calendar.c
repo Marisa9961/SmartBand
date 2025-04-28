@@ -12,13 +12,9 @@ void ui_Calendar_screen_init(void)
     lv_obj_set_style_bg_color(ui_Calendar, lv_color_hex(0x393C41), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_Calendar, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Calendar_CalendarInstance = lv_calendar_create(ui_Calendar);
-    lv_obj_t * ui_Calendar_CalendarInstance_header = lv_calendar_header_arrow_create(ui_Calendar_CalendarInstance);
-    lv_obj_set_width(ui_Calendar_CalendarInstance, 208);
-    lv_obj_set_height(ui_Calendar_CalendarInstance, 240);
-    lv_obj_set_align(ui_Calendar_CalendarInstance, LV_ALIGN_CENTER);
-    lv_obj_set_style_bg_color(ui_Calendar_CalendarInstance, lv_color_hex(0xF4F4F4), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Calendar_CalendarInstance, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_Calendar_CalendarInstance = ui_Calendar_create(ui_Calendar);
+    lv_obj_set_x(ui_Calendar_CalendarInstance, 0);
+    lv_obj_set_y(ui_Calendar_CalendarInstance, 0);
 
     lv_obj_add_event_cb(ui_Calendar, ui_event_Calendar, LV_EVENT_ALL, NULL);
 
