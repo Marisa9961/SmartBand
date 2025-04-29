@@ -13,6 +13,14 @@
 
 #include <cmsis_os2.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define delay(x) osDelay(x)
+
+#ifdef __cplusplus
+} /*extern "C"*/
+#endif
 
 #endif

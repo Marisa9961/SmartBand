@@ -12,6 +12,10 @@
 
 #include "components/prf.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct {
   uint16_t x_pos;
   uint16_t y_pos;
@@ -22,5 +26,9 @@ extern TOUCH_Info touch_info;
 void TOUCH_init();
 void TOUCH_freshXY();
 uint8_t TOUCH_getFingerNum();
+
+#ifdef __cplusplus
+} /*extern "C"*/
+#endif
 
 #endif
