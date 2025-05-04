@@ -14,7 +14,7 @@
 
 namespace bd {
 class Task {
-  using UID = uint32_t;
+  using Flag = uint32_t;
 
 public:
   Task(osThreadFunc_t func, const char *name, uint32_t stack_size,
@@ -26,12 +26,12 @@ public:
   Task &operator=(Task &&) = delete;
 
   inline constexpr osThreadId_t getHandle() { return handle_; }
-  inline constexpr UID getUid() { return task_uid_; }
+  inline constexpr Flag flag() { return task_flag_; }
 
   bool run(void *argument = nullptr);
 
 private:
-  UID task_uid_;
+  Flag task_flag_;
 
   const char *name_;
   uint32_t stack_size_;

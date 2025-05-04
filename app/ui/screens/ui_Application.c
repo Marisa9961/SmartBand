@@ -14,29 +14,28 @@ void ui_Application_screen_init(void)
 
     ui_Application_Container = lv_obj_create(ui_Application);
     lv_obj_remove_style_all(ui_Application_Container);
-    lv_obj_set_width(ui_Application_Container, 175);
-    lv_obj_set_height(ui_Application_Container, 240);
+    lv_obj_set_width(ui_Application_Container, 180);
+    lv_obj_set_height(ui_Application_Container, 220);
     lv_obj_set_align(ui_Application_Container, LV_ALIGN_CENTER);
     lv_obj_set_flex_flow(ui_Application_Container, LV_FLEX_FLOW_COLUMN);
-    lv_obj_set_flex_align(ui_Application_Container, LV_FLEX_ALIGN_SPACE_AROUND, LV_FLEX_ALIGN_START,
-                          LV_FLEX_ALIGN_SPACE_AROUND);
+    lv_obj_set_flex_align(ui_Application_Container, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
     lv_obj_remove_flag(ui_Application_Container, LV_OBJ_FLAG_CLICKABLE);      /// Flags
 
     ui_Application_ContainerCalendar = lv_obj_create(ui_Application_Container);
     lv_obj_remove_style_all(ui_Application_ContainerCalendar);
-    lv_obj_set_width(ui_Application_ContainerCalendar, 160);
-    lv_obj_set_height(ui_Application_ContainerCalendar, 60);
+    lv_obj_set_width(ui_Application_ContainerCalendar, 170);
+    lv_obj_set_height(ui_Application_ContainerCalendar, 50);
     lv_obj_set_align(ui_Application_ContainerCalendar, LV_ALIGN_CENTER);
     lv_obj_set_flex_flow(ui_Application_ContainerCalendar, LV_FLEX_FLOW_ROW);
     lv_obj_set_flex_align(ui_Application_ContainerCalendar, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER,
-                          LV_FLEX_ALIGN_SPACE_AROUND);
+                          LV_FLEX_ALIGN_CENTER);
     lv_obj_remove_flag(ui_Application_ContainerCalendar, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
     ui_Application_ImageCalendar = lv_image_create(ui_Application_ContainerCalendar);
     lv_image_set_src(ui_Application_ImageCalendar, &ui_img_calendar_png);
     lv_obj_set_width(ui_Application_ImageCalendar, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Application_ImageCalendar, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Application_ImageCalendar, LV_ALIGN_LEFT_MID);
+    lv_obj_set_align(ui_Application_ImageCalendar, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_Application_ImageCalendar, LV_OBJ_FLAG_CLICKABLE);     /// Flags
     lv_obj_remove_flag(ui_Application_ImageCalendar, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
@@ -47,7 +46,7 @@ void ui_Application_screen_init(void)
     lv_label_set_text(ui_Application_LabelCalendar, " Calendar");
     lv_obj_set_style_text_color(ui_Application_LabelCalendar, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_Application_LabelCalendar, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Application_LabelCalendar, &lv_font_montserrat_24, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Application_LabelCalendar, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_Application_ContainerCalendar, ui_event_Application_ContainerCalendar, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Application, ui_event_Application, LV_EVENT_ALL, NULL);

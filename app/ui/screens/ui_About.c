@@ -12,27 +12,26 @@ void ui_About_screen_init(void)
     lv_obj_set_style_bg_color(ui_About, lv_color_hex(0x393C41), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_About, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_About_LabelInfo = lv_label_create(ui_About);
-    lv_obj_set_width(ui_About_LabelInfo, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_About_LabelInfo, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_About_LabelInfo, 0);
-    lv_obj_set_y(ui_About_LabelInfo, 32);
-    lv_obj_set_align(ui_About_LabelInfo, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_About_LabelInfo, "Marisa9961\n\nSTM32 Smart Band\nVsersion 1.0");
-    lv_obj_set_style_text_color(ui_About_LabelInfo, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_About_LabelInfo, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_align(ui_About_LabelInfo, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_About_LabelInfo, &lv_font_montserrat_24, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_About_ImageAuthor = lv_image_create(ui_About);
+    lv_image_set_src(ui_About_ImageAuthor, &ui_img_author_png);
+    lv_obj_set_width(ui_About_ImageAuthor, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_About_ImageAuthor, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_About_ImageAuthor, 0);
+    lv_obj_set_y(ui_About_ImageAuthor, -50);
+    lv_obj_set_align(ui_About_ImageAuthor, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_About_ImageAuthor, LV_OBJ_FLAG_CLICKABLE);     /// Flags
+    lv_obj_remove_flag(ui_About_ImageAuthor, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
-    ui_About_Image = lv_image_create(ui_About);
-    lv_image_set_src(ui_About_Image, &ui_img_author_png);
-    lv_obj_set_width(ui_About_Image, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_About_Image, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_About_Image, 0);
-    lv_obj_set_y(ui_About_Image, -64);
-    lv_obj_set_align(ui_About_Image, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_About_Image, LV_OBJ_FLAG_CLICKABLE);     /// Flags
-    lv_obj_remove_flag(ui_About_Image, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    ui_About_LabelAuthor = lv_label_create(ui_About);
+    lv_obj_set_width(ui_About_LabelAuthor, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_About_LabelAuthor, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_About_LabelAuthor, 0);
+    lv_obj_set_y(ui_About_LabelAuthor, 40);
+    lv_obj_set_align(ui_About_LabelAuthor, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_About_LabelAuthor, "Github@Marisa9961\n\nSTM32 Smart Band\nVersion 1.0");
+    lv_obj_set_style_text_color(ui_About_LabelAuthor, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_About_LabelAuthor, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_About_LabelAuthor, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_About, ui_event_About, LV_EVENT_ALL, NULL);
 

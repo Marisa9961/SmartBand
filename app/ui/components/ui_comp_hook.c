@@ -3,8 +3,3 @@
 // LVGL version: 9.2.2
 // Project name: SmartBand
 
-#include "../ui.h"
-
-void ui_comp_Calendar_create_hook(lv_obj_t * comp)
-{
-}

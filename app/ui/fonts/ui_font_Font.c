@@ -1,16 +1,16 @@
 /*******************************************************************************
  * Size: 48 px
  * Bpp: 1
- * Opts: --bpp 1 --size 48 --font C:/Users/Marisa/Downloads/SmartBand/assets/Montserrat-Regular.ttf -o C:/Users/Marisa/Downloads/SmartBand/assets\ui_font_FontMontserrat.c --format lvgl -r 0x30-0x39 --no-compress --no-prefilter
+ * Opts: --bpp 1 --size 48 --font C:/Users/Marisa/SquareLine/assets/Montserrat-Regular.ttf -o C:/Users/Marisa/SquareLine/assets\ui_font_Font.c --format lvgl -r 0x30-0x39 --no-compress --no-prefilter
  ******************************************************************************/
 
 #include "../ui.h"
 
-#ifndef UI_FONT_FONTMONTSERRAT
-#define UI_FONT_FONTMONTSERRAT 1
+#ifndef UI_FONT_FONT
+#define UI_FONT_FONT 1
 #endif
 
-#if UI_FONT_FONTMONTSERRAT
+#if UI_FONT_FONT
 
 /*-----------------
  *    BITMAPS
@@ -244,9 +244,9 @@ static lv_font_fmt_txt_dsc_t font_dsc = {
 
 /*Initialize a public general font descriptor*/
 #if LVGL_VERSION_MAJOR >= 8
-const lv_font_t ui_font_FontMontserrat = {
+const lv_font_t ui_font_Font = {
 #else
-lv_font_t ui_font_FontMontserrat = {
+lv_font_t ui_font_Font = {
 #endif
     .get_glyph_dsc = lv_font_get_glyph_dsc_fmt_txt,    /*Function pointer to get glyph's data*/
     .get_glyph_bitmap = lv_font_get_bitmap_fmt_txt,    /*Function pointer to get glyph's bitmap*/
@@ -268,5 +268,5 @@ lv_font_t ui_font_FontMontserrat = {
 
 
 
-#endif /*#if UI_FONT_FONTMONTSERRAT*/
+#endif /*#if UI_FONT_FONT*/
 

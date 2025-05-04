@@ -18,8 +18,8 @@ Task::Task(osThreadFunc_t func, const char *name, uint32_t stack_size,
            osPriority_t priority)
     : name_(name), stack_size_(stack_size), priority_(priority),
       handle_(nullptr), func_(func) {
-  static UID uid = 1;
-  task_uid_ = uid;
+  static Flag uid = 1;
+  task_flag_ = uid;
   uid <<= 1;
 }
 

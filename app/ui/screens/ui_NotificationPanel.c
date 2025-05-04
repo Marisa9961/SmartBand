@@ -14,76 +14,73 @@ void ui_NotificationPanel_screen_init(void)
 
     ui_NotificationPanel_Container = lv_obj_create(ui_NotificationPanel);
     lv_obj_remove_style_all(ui_NotificationPanel_Container);
-    lv_obj_set_width(ui_NotificationPanel_Container, 175);
-    lv_obj_set_height(ui_NotificationPanel_Container, 140);
+    lv_obj_set_width(ui_NotificationPanel_Container, 160);
+    lv_obj_set_height(ui_NotificationPanel_Container, 120);
     lv_obj_set_x(ui_NotificationPanel_Container, -20);
-    lv_obj_set_y(ui_NotificationPanel_Container, -50);
+    lv_obj_set_y(ui_NotificationPanel_Container, -65);
     lv_obj_set_align(ui_NotificationPanel_Container, LV_ALIGN_CENTER);
     lv_obj_set_flex_flow(ui_NotificationPanel_Container, LV_FLEX_FLOW_ROW_WRAP);
     lv_obj_set_flex_align(ui_NotificationPanel_Container, LV_FLEX_ALIGN_SPACE_AROUND, LV_FLEX_ALIGN_START,
                           LV_FLEX_ALIGN_SPACE_AROUND);
     lv_obj_remove_flag(ui_NotificationPanel_Container, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
-    ui_NotificationPanel_ButtonBlueTooth = lv_button_create(ui_NotificationPanel_Container);
-    lv_obj_set_width(ui_NotificationPanel_ButtonBlueTooth, 45);
-    lv_obj_set_height(ui_NotificationPanel_ButtonBlueTooth, 45);
-    lv_obj_set_x(ui_NotificationPanel_ButtonBlueTooth, -70);
-    lv_obj_set_y(ui_NotificationPanel_ButtonBlueTooth, -89);
-    lv_obj_set_align(ui_NotificationPanel_ButtonBlueTooth, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_NotificationPanel_ButtonBlueTooth,
+    ui_NotificationPanel_ButtonBluetooth = lv_button_create(ui_NotificationPanel_Container);
+    lv_obj_set_width(ui_NotificationPanel_ButtonBluetooth, 45);
+    lv_obj_set_height(ui_NotificationPanel_ButtonBluetooth, 45);
+    lv_obj_set_x(ui_NotificationPanel_ButtonBluetooth, -70);
+    lv_obj_set_y(ui_NotificationPanel_ButtonBluetooth, -89);
+    lv_obj_set_align(ui_NotificationPanel_ButtonBluetooth, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_NotificationPanel_ButtonBluetooth,
                     LV_OBJ_FLAG_CHECKABLE | LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_remove_flag(ui_NotificationPanel_ButtonBlueTooth, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_NotificationPanel_ButtonBlueTooth, lv_color_hex(0x82858D),
+    lv_obj_remove_flag(ui_NotificationPanel_ButtonBluetooth, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_NotificationPanel_ButtonBluetooth, lv_color_hex(0x82858D),
                               LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_NotificationPanel_ButtonBlueTooth, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_NotificationPanel_ButtonBlueTooth, lv_color_hex(0x00AEB4),
+    lv_obj_set_style_bg_opa(ui_NotificationPanel_ButtonBluetooth, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_NotificationPanel_ButtonBluetooth, lv_color_hex(0x00AEB4),
                               LV_PART_MAIN | LV_STATE_CHECKED);
-    lv_obj_set_style_bg_opa(ui_NotificationPanel_ButtonBlueTooth, 255, LV_PART_MAIN | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_opa(ui_NotificationPanel_ButtonBluetooth, 255, LV_PART_MAIN | LV_STATE_CHECKED);
 
-    ui_NotificationPanel_ImageBluetooth = lv_image_create(ui_NotificationPanel_ButtonBlueTooth);
+    ui_NotificationPanel_ImageBluetooth = lv_image_create(ui_NotificationPanel_ButtonBluetooth);
     lv_image_set_src(ui_NotificationPanel_ImageBluetooth, &ui_img_bluetooth_png);
     lv_obj_set_width(ui_NotificationPanel_ImageBluetooth, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_NotificationPanel_ImageBluetooth, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_align(ui_NotificationPanel_ImageBluetooth, LV_ALIGN_CENTER);
     lv_obj_remove_flag(ui_NotificationPanel_ImageBluetooth, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_blend_mode(ui_NotificationPanel_ImageBluetooth, LV_BLEND_MODE_ADDITIVE,
-                                LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_NotificationPanel_ButtonLighting = lv_button_create(ui_NotificationPanel_Container);
-    lv_obj_set_width(ui_NotificationPanel_ButtonLighting, 45);
-    lv_obj_set_height(ui_NotificationPanel_ButtonLighting, 45);
-    lv_obj_set_x(ui_NotificationPanel_ButtonLighting, -70);
-    lv_obj_set_y(ui_NotificationPanel_ButtonLighting, -89);
-    lv_obj_set_align(ui_NotificationPanel_ButtonLighting, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_NotificationPanel_ButtonLighting, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_remove_flag(ui_NotificationPanel_ButtonLighting,
-                       LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_NotificationPanel_ButtonLighting, lv_color_hex(0x82858D), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_NotificationPanel_ButtonLighting, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_NotificationPanel_ButtonLighting, lv_color_hex(0x00AEB4), LV_PART_MAIN | LV_STATE_CHECKED);
-    lv_obj_set_style_bg_opa(ui_NotificationPanel_ButtonLighting, 255, LV_PART_MAIN | LV_STATE_CHECKED);
+    ui_NotificationPanel_ButtonFlash = lv_button_create(ui_NotificationPanel_Container);
+    lv_obj_set_width(ui_NotificationPanel_ButtonFlash, 45);
+    lv_obj_set_height(ui_NotificationPanel_ButtonFlash, 45);
+    lv_obj_set_x(ui_NotificationPanel_ButtonFlash, -70);
+    lv_obj_set_y(ui_NotificationPanel_ButtonFlash, -89);
+    lv_obj_set_align(ui_NotificationPanel_ButtonFlash, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_NotificationPanel_ButtonFlash, LV_OBJ_FLAG_CHECKABLE | LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_remove_flag(ui_NotificationPanel_ButtonFlash, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_NotificationPanel_ButtonFlash, lv_color_hex(0x82858D), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_NotificationPanel_ButtonFlash, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_NotificationPanel_ButtonFlash, lv_color_hex(0x00AEB4), LV_PART_MAIN | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_opa(ui_NotificationPanel_ButtonFlash, 255, LV_PART_MAIN | LV_STATE_CHECKED);
 
-    ui_NotificationPanel_ImageLighting = lv_image_create(ui_NotificationPanel_ButtonLighting);
-    lv_image_set_src(ui_NotificationPanel_ImageLighting, &ui_img_lighting_png);
-    lv_obj_set_width(ui_NotificationPanel_ImageLighting, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_NotificationPanel_ImageLighting, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_NotificationPanel_ImageLighting, LV_ALIGN_CENTER);
-    lv_obj_remove_flag(ui_NotificationPanel_ImageLighting, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    ui_NotificationPanel_ImageFlash = lv_image_create(ui_NotificationPanel_ButtonFlash);
+    lv_image_set_src(ui_NotificationPanel_ImageFlash, &ui_img_lighting_png);
+    lv_obj_set_width(ui_NotificationPanel_ImageFlash, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_NotificationPanel_ImageFlash, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_NotificationPanel_ImageFlash, LV_ALIGN_CENTER);
+    lv_obj_remove_flag(ui_NotificationPanel_ImageFlash, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
-    ui_NotificationPanel_ButtonSetting = lv_button_create(ui_NotificationPanel_Container);
-    lv_obj_set_width(ui_NotificationPanel_ButtonSetting, 45);
-    lv_obj_set_height(ui_NotificationPanel_ButtonSetting, 45);
-    lv_obj_set_x(ui_NotificationPanel_ButtonSetting, -70);
-    lv_obj_set_y(ui_NotificationPanel_ButtonSetting, -89);
-    lv_obj_set_align(ui_NotificationPanel_ButtonSetting, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_NotificationPanel_ButtonSetting, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_remove_flag(ui_NotificationPanel_ButtonSetting, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_NotificationPanel_ButtonSetting, lv_color_hex(0x82858D), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_NotificationPanel_ButtonSetting, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_NotificationPanel_ButtonSetting, lv_color_hex(0x00AEB4), LV_PART_MAIN | LV_STATE_CHECKED);
-    lv_obj_set_style_bg_opa(ui_NotificationPanel_ButtonSetting, 255, LV_PART_MAIN | LV_STATE_CHECKED);
+    ui_NotificationPanel_ButtonSettings = lv_button_create(ui_NotificationPanel_Container);
+    lv_obj_set_width(ui_NotificationPanel_ButtonSettings, 45);
+    lv_obj_set_height(ui_NotificationPanel_ButtonSettings, 45);
+    lv_obj_set_x(ui_NotificationPanel_ButtonSettings, -70);
+    lv_obj_set_y(ui_NotificationPanel_ButtonSettings, -89);
+    lv_obj_set_align(ui_NotificationPanel_ButtonSettings, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_NotificationPanel_ButtonSettings, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_remove_flag(ui_NotificationPanel_ButtonSettings, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_NotificationPanel_ButtonSettings, lv_color_hex(0x82858D), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_NotificationPanel_ButtonSettings, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_NotificationPanel_ButtonSettings, lv_color_hex(0x00AEB4), LV_PART_MAIN | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_opa(ui_NotificationPanel_ButtonSettings, 255, LV_PART_MAIN | LV_STATE_CHECKED);
 
-    ui_NotificationPanel_ImageSettings = lv_image_create(ui_NotificationPanel_ButtonSetting);
+    ui_NotificationPanel_ImageSettings = lv_image_create(ui_NotificationPanel_ButtonSettings);
     lv_image_set_src(ui_NotificationPanel_ImageSettings, &ui_img_settings_png);
     lv_obj_set_width(ui_NotificationPanel_ImageSettings, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_NotificationPanel_ImageSettings, LV_SIZE_CONTENT);    /// 1
@@ -108,7 +105,6 @@ void ui_NotificationPanel_screen_init(void)
     lv_obj_set_width(ui_NotificationPanel_ImageAlarm, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_NotificationPanel_ImageAlarm, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_align(ui_NotificationPanel_ImageAlarm, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_NotificationPanel_ImageAlarm, LV_OBJ_FLAG_CLICKABLE);     /// Flags
     lv_obj_remove_flag(ui_NotificationPanel_ImageAlarm, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
     ui_NotificationPanel_ButtonNoDisturb = lv_button_create(ui_NotificationPanel_Container);
@@ -154,34 +150,11 @@ void ui_NotificationPanel_screen_init(void)
     lv_obj_set_align(ui_NotificationPanel_ImageSleep, LV_ALIGN_CENTER);
     lv_obj_remove_flag(ui_NotificationPanel_ImageSleep, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
-    ui_NotificationPanel_SliderLight = lv_slider_create(ui_NotificationPanel);
-    lv_slider_set_value(ui_NotificationPanel_SliderLight, 25, LV_ANIM_OFF);
-    if(lv_slider_get_mode(ui_NotificationPanel_SliderLight) == LV_SLIDER_MODE_RANGE) lv_slider_set_left_value(
-            ui_NotificationPanel_SliderLight, 0, LV_ANIM_OFF);
-    lv_obj_set_width(ui_NotificationPanel_SliderLight, 20);
-    lv_obj_set_height(ui_NotificationPanel_SliderLight, 120);
-    lv_obj_set_x(ui_NotificationPanel_SliderLight, 90);
-    lv_obj_set_y(ui_NotificationPanel_SliderLight, -50);
-    lv_obj_set_align(ui_NotificationPanel_SliderLight, LV_ALIGN_CENTER);
-    lv_obj_remove_flag(ui_NotificationPanel_SliderLight, LV_OBJ_FLAG_GESTURE_BUBBLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_NotificationPanel_SliderLight, lv_color_hex(0x83858B), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_NotificationPanel_SliderLight, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    lv_obj_set_style_bg_color(ui_NotificationPanel_SliderLight, lv_color_hex(0xFFFFFF),
-                              LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_NotificationPanel_SliderLight, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-
-    lv_obj_set_style_opa(ui_NotificationPanel_SliderLight, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
-
-    //Compensating for LVGL9.1 draw crash with bar/slider max value when top-padding is nonzero and right-padding is 0
-    if(lv_obj_get_style_pad_top(ui_NotificationPanel_SliderLight,
-                                LV_PART_MAIN) > 0) lv_obj_set_style_pad_right(ui_NotificationPanel_SliderLight,
-                                                                                  lv_obj_get_style_pad_right(ui_NotificationPanel_SliderLight, LV_PART_MAIN) + 1, LV_PART_MAIN);
     ui_NotificationPanel_LabelInfo = lv_label_create(ui_NotificationPanel);
     lv_obj_set_width(ui_NotificationPanel_LabelInfo, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_NotificationPanel_LabelInfo, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_NotificationPanel_LabelInfo, 22);
-    lv_obj_set_y(ui_NotificationPanel_LabelInfo, 69);
+    lv_obj_set_x(ui_NotificationPanel_LabelInfo, 20);
+    lv_obj_set_y(ui_NotificationPanel_LabelInfo, 60);
     lv_obj_set_align(ui_NotificationPanel_LabelInfo, LV_ALIGN_CENTER);
     lv_label_set_text(ui_NotificationPanel_LabelInfo, "STM32 Smart Band\nVersion 1.0\nDesigned by Marisa9961");
     lv_obj_set_style_text_color(ui_NotificationPanel_LabelInfo, lv_color_hex(0xEEEEEE), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -191,14 +164,34 @@ void ui_NotificationPanel_screen_init(void)
     lv_image_set_src(ui_NotificationPanel_ImageBand, &ui_img_band_png);
     lv_obj_set_width(ui_NotificationPanel_ImageBand, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_NotificationPanel_ImageBand, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_NotificationPanel_ImageBand, -89);
-    lv_obj_set_y(ui_NotificationPanel_ImageBand, 70);
+    lv_obj_set_x(ui_NotificationPanel_ImageBand, -90);
+    lv_obj_set_y(ui_NotificationPanel_ImageBand, 60);
     lv_obj_set_align(ui_NotificationPanel_ImageBand, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_NotificationPanel_ImageBand, LV_OBJ_FLAG_CLICKABLE);     /// Flags
     lv_obj_remove_flag(ui_NotificationPanel_ImageBand, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_blend_mode(ui_NotificationPanel_ImageBand, LV_BLEND_MODE_ADDITIVE, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    lv_obj_add_event_cb(ui_NotificationPanel_ButtonSetting, ui_event_NotificationPanel_ButtonSetting, LV_EVENT_ALL, NULL);
+    ui_NotificationPanel_Slider1 = lv_slider_create(ui_NotificationPanel);
+    lv_slider_set_value(ui_NotificationPanel_Slider1, 25, LV_ANIM_OFF);
+    if(lv_slider_get_mode(ui_NotificationPanel_Slider1) == LV_SLIDER_MODE_RANGE) lv_slider_set_left_value(
+            ui_NotificationPanel_Slider1, 0, LV_ANIM_OFF);
+    lv_obj_set_width(ui_NotificationPanel_Slider1, 20);
+    lv_obj_set_height(ui_NotificationPanel_Slider1, 100);
+    lv_obj_set_x(ui_NotificationPanel_Slider1, 80);
+    lv_obj_set_y(ui_NotificationPanel_Slider1, -65);
+    lv_obj_set_align(ui_NotificationPanel_Slider1, LV_ALIGN_CENTER);
+    lv_obj_set_style_bg_color(ui_NotificationPanel_Slider1, lv_color_hex(0x83858B), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_NotificationPanel_Slider1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_set_style_bg_color(ui_NotificationPanel_Slider1, lv_color_hex(0xFFFFFF), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_NotificationPanel_Slider1, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+
+    lv_obj_set_style_opa(ui_NotificationPanel_Slider1, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
+
+    //Compensating for LVGL9.1 draw crash with bar/slider max value when top-padding is nonzero and right-padding is 0
+    if(lv_obj_get_style_pad_top(ui_NotificationPanel_Slider1,
+                                LV_PART_MAIN) > 0) lv_obj_set_style_pad_right(ui_NotificationPanel_Slider1,
+                                                                                  lv_obj_get_style_pad_right(ui_NotificationPanel_Slider1, LV_PART_MAIN) + 1, LV_PART_MAIN);
+    lv_obj_add_event_cb(ui_NotificationPanel_ButtonSettings, ui_event_NotificationPanel_ButtonSettings, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_NotificationPanel, ui_event_NotificationPanel, LV_EVENT_ALL, NULL);
 
 }

@@ -9,13 +9,15 @@
 
 #include "ble.h"
 
-extern UART_HandleTypeDef huart1;
-#define SERIAL_PORT_UART &huart1
+#include <string.h>
 
-#define SERIAL_BUFFER_SIZE 256U
+extern UART_HandleTypeDef huart1;
+#define BLE_UART &huart1
+
+#define BLE_BUFFER_SIZE 128U
 
 static struct {
-  uint8_t data[SERIAL_BUFFER_SIZE];
+  uint8_t data[BLE_BUFFER_SIZE];
   uint8_t read;
   uint8_t write;
   uint8_t count;
@@ -23,8 +25,9 @@ static struct {
 
 // blue tooth init
 void BLE_init() {
-  HAL_UARTEx_ReceiveToIdle_DMA(SERIAL_PORT_UART, serial_port_buffer.data,
-                               SERIAL_BUFFER_SIZE);
+  BLE_enable();
+  HAL_UARTEx_ReceiveToIdle_DMA(BLE_UART, serial_port_buffer.data,
+                               BLE_BUFFER_SIZE);
 }
 
 // blue tooth deinit
@@ -41,20 +44,22 @@ void BLE_callback(uint16_t size) {
     serial_port_buffer.count += size - serial_port_buffer.write;
   } else if (size < serial_port_buffer.write) {
     serial_port_buffer.count +=
-        SERIAL_BUFFER_SIZE - serial_port_buffer.read + size;
+        BLE_BUFFER_SIZE - serial_port_buffer.read + size;
   }
 
   serial_port_buffer.write = size;
+
+  BLE_setCallback();
 }
 
-// When new data comes, flag is true
+// when new data comes, flag is true
 bool BLE_flag() { return serial_port_buffer.count > 0; }
 
 // pop the next char
 char BLE_readNextChar() {
   char c = serial_port_buffer.data[serial_port_buffer.read];
 
-  serial_port_buffer.read = serial_port_buffer.read + 1 >= SERIAL_BUFFER_SIZE
+  serial_port_buffer.read = serial_port_buffer.read + 1 >= BLE_BUFFER_SIZE
                                 ? 0
                                 : serial_port_buffer.read + 1;
   serial_port_buffer.count -= 1;
@@ -62,5 +67,12 @@ char BLE_readNextChar() {
   return c;
 }
 
-// used for turn on or off
-uint32_t HW_BLE;
+// call back flag
+static uint32_t HW_BLE_CALLBACK;
+void BLE_setCallback() { HW_BLE_CALLBACK = true; }
+void BLE_ClearCallback() { HW_BLE_CALLBACK = false; }
+
+// transmit message
+void BLE_transmit(const char *str) {
+  HAL_UART_Transmit_DMA(BLE_UART, (uint8_t *)str, strlen(str));
+}

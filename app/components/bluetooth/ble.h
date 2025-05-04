@@ -16,8 +16,6 @@
 extern "C" {
 #endif
 
-extern uint32_t HW_BLE;
-
 void BLE_init();
 
 void BLE_enable();
@@ -25,6 +23,11 @@ void BLE_disable();
 
 bool BLE_flag();
 char BLE_readNextChar();
+
+void BLE_setCallback();
+void BLE_ClearCallback();
+
+void BLE_transmit(const char *str);
 
 #ifdef __cplusplus
 } /*extern "C"*/
