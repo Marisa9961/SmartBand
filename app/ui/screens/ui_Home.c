@@ -18,7 +18,7 @@ void ui_Home_screen_init(void)
     lv_obj_set_x(ui_Home_Date, 0);
     lv_obj_set_y(ui_Home_Date, -100);
     lv_obj_set_align(ui_Home_Date, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Home_Date, "04-15");
+    lv_label_set_text(ui_Home_Date, "05-01");
     lv_obj_set_style_text_color(ui_Home_Date, lv_color_hex(0xEEEEEE), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_Home_Date, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_Home_Date, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -29,7 +29,7 @@ void ui_Home_screen_init(void)
     lv_obj_set_x(ui_Home_Mouth, -80);
     lv_obj_set_y(ui_Home_Mouth, -100);
     lv_obj_set_align(ui_Home_Mouth, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Home_Mouth, "Tue");
+    lv_label_set_text(ui_Home_Mouth, "Thu");
     lv_obj_set_style_text_color(ui_Home_Mouth, lv_color_hex(0xEEEEEE), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_Home_Mouth, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_Home_Mouth, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -81,7 +81,7 @@ void ui_Home_screen_init(void)
     lv_obj_set_width(ui_Home_LabelApplication, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Home_LabelApplication, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_align(ui_Home_LabelApplication, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Home_LabelApplication, "Today's Step: 7500");
+    lv_label_set_text(ui_Home_LabelApplication, "Today's Step: 103");
     lv_obj_set_style_text_color(ui_Home_LabelApplication, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_Home_LabelApplication, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
@@ -101,7 +101,7 @@ void ui_Home_screen_init(void)
     lv_obj_set_x(ui_Home_LabelWeather, -35);
     lv_obj_set_y(ui_Home_LabelWeather, -15);
     lv_obj_set_align(ui_Home_LabelWeather, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Home_LabelWeather, "Sunny\n25/15 C°");
+    lv_label_set_text(ui_Home_LabelWeather, "Sunny\n28/15 °C");
     lv_obj_set_style_text_color(ui_Home_LabelWeather, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_Home_LabelWeather, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
@@ -132,7 +132,7 @@ void ui_Home_screen_init(void)
     lv_obj_set_y(ui_Home_ArcBattery, -80);
     lv_obj_set_align(ui_Home_ArcBattery, LV_ALIGN_CENTER);
     lv_obj_remove_flag(ui_Home_ArcBattery, LV_OBJ_FLAG_CLICKABLE);      /// Flags
-    lv_arc_set_value(ui_Home_ArcBattery, 50);
+    lv_arc_set_value(ui_Home_ArcBattery, 78);
     lv_obj_set_style_arc_width(ui_Home_ArcBattery, 8, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_set_style_bg_color(ui_Home_ArcBattery, lv_color_hex(0xEEEEEE), LV_PART_INDICATOR | LV_STATE_DEFAULT);
@@ -157,7 +157,7 @@ void ui_Home_screen_init(void)
     lv_obj_set_width(ui_Home_LabelBattery, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Home_LabelBattery, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_align(ui_Home_LabelBattery, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Home_LabelBattery, "50%");
+    lv_label_set_text(ui_Home_LabelBattery, "78%");
     lv_obj_set_style_text_color(ui_Home_LabelBattery, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_opa(ui_Home_LabelBattery, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 

@@ -53,7 +53,7 @@ void ui_NotificationPanel_screen_init(void)
     lv_obj_set_x(ui_NotificationPanel_ButtonFlash, -70);
     lv_obj_set_y(ui_NotificationPanel_ButtonFlash, -89);
     lv_obj_set_align(ui_NotificationPanel_ButtonFlash, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_NotificationPanel_ButtonFlash, LV_OBJ_FLAG_CHECKABLE | LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_add_flag(ui_NotificationPanel_ButtonFlash, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_remove_flag(ui_NotificationPanel_ButtonFlash, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_NotificationPanel_ButtonFlash, lv_color_hex(0x82858D), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_NotificationPanel_ButtonFlash, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -179,6 +179,7 @@ void ui_NotificationPanel_screen_init(void)
     lv_obj_set_x(ui_NotificationPanel_Slider1, 80);
     lv_obj_set_y(ui_NotificationPanel_Slider1, -65);
     lv_obj_set_align(ui_NotificationPanel_Slider1, LV_ALIGN_CENTER);
+    lv_obj_remove_flag(ui_NotificationPanel_Slider1, LV_OBJ_FLAG_GESTURE_BUBBLE);      /// Flags
     lv_obj_set_style_bg_color(ui_NotificationPanel_Slider1, lv_color_hex(0x83858B), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_NotificationPanel_Slider1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
@@ -191,6 +192,7 @@ void ui_NotificationPanel_screen_init(void)
     if(lv_obj_get_style_pad_top(ui_NotificationPanel_Slider1,
                                 LV_PART_MAIN) > 0) lv_obj_set_style_pad_right(ui_NotificationPanel_Slider1,
                                                                                   lv_obj_get_style_pad_right(ui_NotificationPanel_Slider1, LV_PART_MAIN) + 1, LV_PART_MAIN);
+    lv_obj_add_event_cb(ui_NotificationPanel_ButtonFlash, ui_event_NotificationPanel_ButtonFlash, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_NotificationPanel_ButtonSettings, ui_event_NotificationPanel_ButtonSettings, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_NotificationPanel, ui_event_NotificationPanel, LV_EVENT_ALL, NULL);
 
