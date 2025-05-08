@@ -10,6 +10,7 @@ project(${CMAKE_PROJECT_NAME} LANGUAGES C CXX ASM)
 add_executable(${CMAKE_PROJECT_NAME}.elf)
 
 add_subdirectory(third-party/lvgl)
+add_subdirectory(third-party/LittleFS)
 
 # ------------------------------ Directory Path ------------------------------ #
 set(APP_PATH    "app")
@@ -32,7 +33,8 @@ target_sources(${CMAKE_PROJECT_NAME}.elf PRIVATE
 # ------------------------------- Third Party --------------------------------- #
 target_link_libraries(${CMAKE_PROJECT_NAME}.elf PRIVATE
     stm32cubemx
-    lvgl::lvgl
+    lvgl
+    lfs
 )
 
 # ------------------------------- After Build --------------------------------- #

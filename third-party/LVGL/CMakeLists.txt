@@ -5,7 +5,6 @@ set(LVGL_PORT_DIR   "${LVGL_ROOT_DIR}/porting")
 
 # Build LVGL library
 add_library(lvgl INTERFACE)
-add_library(lvgl::lvgl ALIAS lvgl)
 
 # Set sources used for LVGL components
 file(GLOB_RECURSE SOURCES
