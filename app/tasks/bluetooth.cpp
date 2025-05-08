@@ -19,7 +19,7 @@
 
 namespace bd::task {
 enum BluetoothState {
-  UNKNOWN,
+  ERROR,
   SET_TIME,
   SET_DATE,
   FIND_BAT,
@@ -27,31 +27,31 @@ enum BluetoothState {
   FIND_STEP,
 };
 
-struct BluetoothCommand {
-  std::array<char, 16> buffer{};
-  uint32_t length{};
-} command;
+std::array<char, 16> rx_buffer{};
+std::array<char, 16> tx_buffer{};
 
 BluetoothState parseBluetoothData() {
   if (BLE_readNextChar() != '@') {
-    return UNKNOWN;
+    return ERROR;
   }
 
-  command = {};
+  for (uint32_t i{}; i < rx_buffer.size(); i++) {
+    auto c{BLE_readNextChar()};
+    if (c == '@') {
+      break;
+    }
 
-  for (uint32_t i{}; command.buffer[i] != '@'; i++) {
-    command.buffer[i] = BLE_readNextChar();
-    command.length++;
+    rx_buffer[i] = c;
   }
 
   auto isSame{[](const char *str) {
-    return std::strncmp(command.buffer.data(), str, std::strlen(str));
+    return std::strncmp(rx_buffer.data(), str, std::strlen(str)) == 0;
   }};
 
   BluetoothState bluetooth_state{};
   if (isSame("TIME:")) {
     bluetooth_state = SET_TIME;
-  } else if (isSame("Date:")) {
+  } else if (isSame("DATE:")) {
     bluetooth_state = SET_DATE;
   } else if (isSame("BATTERY?")) {
     bluetooth_state = FIND_BAT;
@@ -64,41 +64,54 @@ BluetoothState parseBluetoothData() {
   return bluetooth_state;
 }
 
+void printBluetoothData(const char *str) {
+  std::sprintf(tx_buffer.data(), "#%s#", str);
+}
+
+void printBluetoothData(const char *str, bool state) {
+  if (state) {
+    std::sprintf(tx_buffer.data(), "#%s_OK#", str);
+  } else {
+    std::sprintf(tx_buffer.data(), "#RETRY");
+  }
+}
+
+void printBluetoothData(const char *str, int dat) {
+  std::sprintf(tx_buffer.data(), "#%s:%d#", str, dat);
+}
+
 void BluetoothTask(void *parameter) {
   BLE_init();
-
-  auto send{[](const char *str, int dat) {
-    std::array<char, 16> buf{};
-    std::sprintf(buf.data(), "#%s:%d#", str, dat);
-    BLE_transmit(buf.data());
-  }};
+  BLE_freshInterrupt();
 
   while (true) {
     osThreadFlagsWait(core.flag(), osFlagsWaitAll, osWaitForever);
 
-    // TODO Finish parser function
+    rx_buffer.fill(0);
+    tx_buffer.fill(0);
 
     switch (parseBluetoothData()) {
-    case UNKNOWN:
-      break;
-    case SET_TIME:
-      break;
-    case SET_DATE:
-      break;
-    case FIND_BAT:
-      send("BATTERY", 50);
-      break;
-    case FIND_HR:
-      send("HEARTRATE", 90);
-      break;
-    case FIND_STEP:
-      send("STEPS", 8000);
-      break;
+    case SET_TIME: {
+      printBluetoothData("TIME", true);
+    } break;
+    case SET_DATE: {
+      printBluetoothData("DATE", true);
+    } break;
+    case FIND_BAT: {
+      printBluetoothData("BATTERY", 50);
+    } break;
+    case FIND_HR: {
+      printBluetoothData("HEARTRATE", 90);
+    } break;
+    case FIND_STEP: {
+      printBluetoothData("STEPS", 8000);
+    } break;
+    case ERROR: {
+      printBluetoothData("ERROR");
+    } break;
     }
 
-    if (!BLE_flag()) {
-      BLE_ClearCallback();
-    }
+    BLE_transmit(tx_buffer.data());
   }
 }
 
