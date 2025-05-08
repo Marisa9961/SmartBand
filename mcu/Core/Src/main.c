@@ -100,6 +100,8 @@ int main(void)
   MX_I2C3_Init();
   MX_USART1_UART_Init();
   MX_RTC_Init();
+  MX_I2C2_Init();
+  MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
   extern void init();
   init();

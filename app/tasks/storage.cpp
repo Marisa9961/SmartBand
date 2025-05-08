@@ -9,6 +9,8 @@
 
 #include "tasks/storage.hpp"
 
+#include "components/flash/w25q16.h"
+
 namespace bd::task {
 void StorageTask(void *argument) {}
 

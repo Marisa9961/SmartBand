@@ -63,6 +63,8 @@ void Error_Handler(void);
 #define LCD_CS_GPIO_Port GPIOB
 #define LCD_DC_Pin GPIO_PIN_1
 #define LCD_DC_GPIO_Port GPIOB
+#define FLASH_CS_Pin GPIO_PIN_12
+#define FLASH_CS_GPIO_Port GPIOB
 #define BLE_ENABLE_Pin GPIO_PIN_5
 #define BLE_ENABLE_GPIO_Port GPIOB
 
