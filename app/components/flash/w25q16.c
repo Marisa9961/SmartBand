@@ -19,9 +19,38 @@ extern SPI_HandleTypeDef hspi2;
 #define FLASH_SECTOR_ERASE_4KB 0x20
 #define FLASH_READ_DATA 0x03
 
-static void FLASH_WriteEnable(void) {
+#define FLASH_setCS()                                                          \
+  do {                                                                         \
+    HAL_GPIO_WritePin(FLASH_CS_GPIO_Port, FLASH_CS_Pin, GPIO_PIN_SET);         \
+  } while (0)
+
+#define FLASH_resetCS()                                                        \
+  do {                                                                         \
+    HAL_GPIO_WritePin(FLASH_CS_GPIO_Port, FLASH_CS_Pin, GPIO_PIN_RESET);       \
+  } while (0)
+
+static void FLASH_WriteEnable() {
   uint8_t cmd = FLASH_WRITE_ENABLE;
+  FLASH_resetCS();
   HAL_SPI_Transmit(FLASH_HANDLE, &cmd, 1, HAL_MAX_DELAY);
+  FLASH_setCS();
+}
+
+static void FLASH_sync(void) {
+  uint8_t cmd = FLASH_READ_STATUS_REG_1;
+  uint8_t status;
+
+  do {
+    FLASH_resetCS();
+    HAL_SPI_Transmit(FLASH_HANDLE, &cmd, 1, 10);
+    HAL_SPI_Receive(FLASH_HANDLE, &status, 1, 10);
+    FLASH_setCS();
+
+    if (!(status & 0x01)) {
+      break;
+    }
+
+  } while (1);
 }
 
 void FLASH_read(uint32_t address, uint8_t *p_data, uint32_t size) {
@@ -32,8 +61,12 @@ void FLASH_read(uint32_t address, uint8_t *p_data, uint32_t size) {
   cmd[2] = (address >> 8) & 0xFF;
   cmd[3] = address & 0xFF;
 
+  FLASH_resetCS();
   HAL_SPI_Transmit(FLASH_HANDLE, cmd, 4, HAL_MAX_DELAY);
   HAL_SPI_Receive(FLASH_HANDLE, p_data, size, HAL_MAX_DELAY);
+  FLASH_setCS();
+
+  FLASH_sync();
 }
 
 void FLASH_prog(uint32_t address, uint8_t *p_data, uint16_t size) {
@@ -46,8 +79,12 @@ void FLASH_prog(uint32_t address, uint8_t *p_data, uint16_t size) {
   cmd[2] = (address >> 8) & 0xFF;
   cmd[3] = address & 0xFF;
 
+  FLASH_resetCS();
   HAL_SPI_Transmit(FLASH_HANDLE, cmd, 4, HAL_MAX_DELAY);
   HAL_SPI_Transmit(FLASH_HANDLE, p_data, size, HAL_MAX_DELAY);
+  FLASH_setCS();
+
+  FLASH_sync();
 }
 
 void FLASH_erase(uint32_t address) {
@@ -60,22 +97,9 @@ void FLASH_erase(uint32_t address) {
   cmd[2] = (address >> 8) & 0xFF;
   cmd[3] = address & 0xFF;
 
+  FLASH_resetCS();
   HAL_SPI_Transmit(FLASH_HANDLE, cmd, 4, HAL_MAX_DELAY);
-}
+  FLASH_setCS();
 
-void FLASH_sync(void) {
-  uint8_t cmd = FLASH_READ_STATUS_REG_1;
-  uint8_t status;
-
-  do {
-    HAL_SPI_Transmit(FLASH_HANDLE, &cmd, 1, 10);
-    HAL_SPI_Receive(FLASH_HANDLE, &status, 1, 10);
-
-    if (!(status & 0x01)) {
-      break;
-    }
-
-    delay(5);
-
-  } while (1);
+  FLASH_sync();
 }
