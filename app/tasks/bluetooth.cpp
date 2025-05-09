@@ -82,7 +82,6 @@ void printBluetoothData(const char *str, int dat) {
 
 void BluetoothTask(void *parameter) {
   BLE_init();
-  BLE_freshInterrupt();
 
   while (true) {
     osThreadFlagsWait(core.flag(), osFlagsWaitAll, osWaitForever);

@@ -23,7 +23,6 @@ bool BLE_flag();
 char BLE_readNextChar();
 
 void BLE_transmit(const char *str);
-void BLE_freshInterrupt();
 
 #ifdef __cplusplus
 } /*extern "C"*/

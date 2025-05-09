@@ -21,50 +21,43 @@ static struct {
   uint8_t read;
   uint8_t write;
   uint8_t count;
-} serial_port_buffer = {};
+} ble_buffer = {};
 
-// blue tooth deinit
 void BLE_init() {
   HAL_GPIO_WritePin(BLE_ENABLE_GPIO_Port, BLE_ENABLE_Pin, GPIO_PIN_RESET);
+  HAL_UARTEx_ReceiveToIdle_DMA(BLE_UART, ble_buffer.data, BLE_BUFFER_SIZE);
+
+  extern DMA_HandleTypeDef hdma_usart1_rx;
+  __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_HT);
+  __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_TC);
 }
+
 void BLE_deinit() {
   HAL_GPIO_WritePin(BLE_ENABLE_GPIO_Port, BLE_ENABLE_Pin, GPIO_PIN_SET);
 }
 
-void BLE_freshInterrupt() {
-  HAL_UARTEx_ReceiveToIdle_DMA(BLE_UART, serial_port_buffer.data,
-                               BLE_BUFFER_SIZE);
-}
-
 void BLE_callback(uint16_t size) {
-  // each time call the BLE_freshInterrupt()
-  // the buffer will be clear
-  // so, there doesn't need ring buffer?
-  // why? why? why?
+  if (size > ble_buffer.write) {
+    ble_buffer.count += size - ble_buffer.write;
+  } else if (size < ble_buffer.write) {
+    ble_buffer.count += BLE_BUFFER_SIZE - ble_buffer.read + size;
+  }
 
-  // if (size > serial_port_buffer.write) {
-  //   serial_port_buffer.count += size - serial_port_buffer.write;
-  // } else if (size < serial_port_buffer.write) {
-  //   serial_port_buffer.count +=
-  //       BLE_BUFFER_SIZE - serial_port_buffer.read + size;
-  // }
-
-  serial_port_buffer.read = 0;
-  serial_port_buffer.count = size;
+  ble_buffer.write = size;
 }
 
-bool BLE_flag() { return serial_port_buffer.count > 0; }
+bool BLE_flag() { return ble_buffer.count > 0; }
 
 char BLE_readNextChar() {
-  char c = serial_port_buffer.data[serial_port_buffer.read];
+  char c = ble_buffer.data[ble_buffer.read];
 
-  serial_port_buffer.read += 1;
-  serial_port_buffer.count -= 1;
+  ble_buffer.read =
+      ble_buffer.read + 1 >= BLE_BUFFER_SIZE ? 0 : ble_buffer.read + 1;
+  ble_buffer.count -= 1;
 
   return c;
 }
 
-// stop using DMA, avoid competition
 void BLE_transmit(const char *str) {
-  HAL_UART_Transmit(BLE_UART, (uint8_t *)str, strlen(str), HAL_MAX_DELAY);
+  HAL_UART_Transmit_DMA(BLE_UART, (uint8_t *)str, strlen(str));
 }
