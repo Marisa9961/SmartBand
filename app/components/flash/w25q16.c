@@ -17,7 +17,6 @@ extern SPI_HandleTypeDef hspi2;
 #define FLASH_READ_STATUS_REG_2 0x35
 #define FLASH_PAGE_PROGRAM 0x02
 #define FLASH_SECTOR_ERASE_4KB 0x20
-#define FLASH_CHIP_ERASE 0xC7
 #define FLASH_READ_DATA 0x03
 
 static void FLASH_WriteEnable(void) {
@@ -25,7 +24,46 @@ static void FLASH_WriteEnable(void) {
   HAL_SPI_Transmit(FLASH_HANDLE, &cmd, 1, HAL_MAX_DELAY);
 }
 
-static void FLASH_WaitBusy(void) {
+void FLASH_read(uint32_t address, uint8_t *p_data, uint32_t size) {
+  uint8_t cmd[4];
+
+  cmd[0] = FLASH_READ_DATA;
+  cmd[1] = (address >> 16) & 0xFF;
+  cmd[2] = (address >> 8) & 0xFF;
+  cmd[3] = address & 0xFF;
+
+  HAL_SPI_Transmit(FLASH_HANDLE, cmd, 4, HAL_MAX_DELAY);
+  HAL_SPI_Receive(FLASH_HANDLE, p_data, size, HAL_MAX_DELAY);
+}
+
+void FLASH_prog(uint32_t address, uint8_t *p_data, uint16_t size) {
+  uint8_t cmd[4];
+
+  FLASH_WriteEnable();
+
+  cmd[0] = FLASH_PAGE_PROGRAM;
+  cmd[1] = (address >> 16) & 0xFF;
+  cmd[2] = (address >> 8) & 0xFF;
+  cmd[3] = address & 0xFF;
+
+  HAL_SPI_Transmit(FLASH_HANDLE, cmd, 4, HAL_MAX_DELAY);
+  HAL_SPI_Transmit(FLASH_HANDLE, p_data, size, HAL_MAX_DELAY);
+}
+
+void FLASH_erase(uint32_t address) {
+  uint8_t cmd[4];
+
+  FLASH_WriteEnable();
+
+  cmd[0] = FLASH_SECTOR_ERASE_4KB;
+  cmd[1] = (address >> 16) & 0xFF;
+  cmd[2] = (address >> 8) & 0xFF;
+  cmd[3] = address & 0xFF;
+
+  HAL_SPI_Transmit(FLASH_HANDLE, cmd, 4, HAL_MAX_DELAY);
+}
+
+void FLASH_sync(void) {
   uint8_t cmd = FLASH_READ_STATUS_REG_1;
   uint8_t status;
 
@@ -40,55 +78,4 @@ static void FLASH_WaitBusy(void) {
     delay(5);
 
   } while (1);
-}
-
-void FLASH_SectorChip(void) {
-  FLASH_WriteEnable();
-
-  uint8_t cmd = FLASH_CHIP_ERASE;
-  HAL_SPI_Transmit(FLASH_HANDLE, &cmd, 1, HAL_MAX_DELAY);
-
-  FLASH_WaitBusy();
-}
-
-void FLASH_SectorErase(uint32_t Address) {
-  uint8_t cmd[4];
-
-  FLASH_WriteEnable();
-
-  cmd[0] = FLASH_SECTOR_ERASE_4KB;
-  cmd[1] = (Address >> 16) & 0xFF;
-  cmd[2] = (Address >> 8) & 0xFF;
-  cmd[3] = Address & 0xFF;
-
-  HAL_SPI_Transmit(FLASH_HANDLE, cmd, 4, HAL_MAX_DELAY);
-  FLASH_WaitBusy();
-}
-
-void FLASH_ReadData(uint32_t Address, uint8_t *DataArray, uint32_t Count) {
-  uint8_t cmd[4];
-
-  cmd[0] = FLASH_READ_DATA;
-  cmd[1] = (Address >> 16) & 0xFF;
-  cmd[2] = (Address >> 8) & 0xFF;
-  cmd[3] = Address & 0xFF;
-
-  HAL_SPI_Transmit(FLASH_HANDLE, cmd, 4, HAL_MAX_DELAY);
-  HAL_SPI_Receive(FLASH_HANDLE, DataArray, Count, HAL_MAX_DELAY);
-}
-
-void FLASH_PageProgram(uint32_t Address, uint8_t *DataArray, uint16_t Count) {
-  uint8_t cmd[4];
-
-  FLASH_WriteEnable();
-
-  cmd[0] = FLASH_PAGE_PROGRAM;
-  cmd[1] = (Address >> 16) & 0xFF;
-  cmd[2] = (Address >> 8) & 0xFF;
-  cmd[3] = Address & 0xFF;
-
-  HAL_SPI_Transmit(FLASH_HANDLE, cmd, 4, HAL_MAX_DELAY);
-  HAL_SPI_Transmit(FLASH_HANDLE, DataArray, Count, HAL_MAX_DELAY);
-
-  FLASH_WaitBusy();
 }

@@ -12,9 +12,9 @@
 
 #include "components/prf.h"
 
-void FLASH_SectorChip(void);
-void FLASH_SectorErase(uint32_t Address);
-void FLASH_ReadData(uint32_t Address, uint8_t *DataArray, uint32_t Count);
-void FLASH_PageProgram(uint32_t Address, uint8_t *DataArray, uint16_t Count);
+void FLASH_sync(void);
+void FLASH_erase(uint32_t address);
+void FLASH_read(uint32_t address, uint8_t *p_data, uint32_t size);
+void FLASH_prog(uint32_t address, uint8_t *p_data, uint16_t size);
 
 #endif

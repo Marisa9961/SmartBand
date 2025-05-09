@@ -9,10 +9,18 @@
 
 #include "tasks/storage.hpp"
 
-#include "components/flash/w25q16.h"
+#include "tasks/core.hpp"
+
+#include "func/lfs.hpp"
+
+// TODO lfs
 
 namespace bd::task {
-void StorageTask(void *argument) {}
+void StorageTask(void *argument) {
+  while (true) {
+    osThreadFlagsWait(core.flag(), osFlagsWaitAll, osWaitForever);
+  }
+}
 
 Task storage{StorageTask, "Storage", 128 * 4, osPriorityNormal};
 } // namespace bd::task
