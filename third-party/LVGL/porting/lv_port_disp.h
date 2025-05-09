@@ -7,8 +7,8 @@
  * content*/
 #if 1
 
-#ifndef LV_PORT_DISP_TEMPL_H
-#define LV_PORT_DISP_TEMPL_H
+#ifndef LV_PORT_DISP_H
+#define LV_PORT_DISP_H
 
 #ifdef __cplusplus
 extern "C" {
