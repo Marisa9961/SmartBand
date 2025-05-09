@@ -12,9 +12,17 @@
 
 #include "components/prf.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void FLASH_sync(void);
 void FLASH_erase(uint32_t address);
 void FLASH_read(uint32_t address, uint8_t *p_data, uint32_t size);
 void FLASH_prog(uint32_t address, uint8_t *p_data, uint16_t size);
+
+#ifdef __cplusplus
+} /*extern "C"*/
+#endif
 
 #endif
