@@ -13,12 +13,14 @@
 
 #include "tasks/bluetooth.hpp"
 #include "tasks/gui.hpp"
+#include "tasks/storage.hpp"
 
 #include "components/bluetooth/ble.h"
 
 namespace bd::task {
 void CoreTask(void *argument) {
   gui.run();
+  storage.run();
   bluetooth.run();
 
   while (true) {

@@ -17,3 +17,8 @@ target_sources(lfs INTERFACE
 target_include_directories(lfs INTERFACE
     ${LFS_DIR}
 )
+
+# Define config
+target_compile_definitions(lfs INTERFACE
+    -DLFS_DEFINES=lfs_conf.h
+)
