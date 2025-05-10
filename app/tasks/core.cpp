@@ -15,7 +15,7 @@
 #include "tasks/gui.hpp"
 #include "tasks/storage.hpp"
 
-#include "components/bluetooth/ble.h"
+#include "components/bluetooth/kt6368a.h"
 
 namespace bd::task {
 void CoreTask(void *argument) {
@@ -24,11 +24,11 @@ void CoreTask(void *argument) {
   bluetooth.run();
 
   while (true) {
+    osDelay(100);
+
     if (BLE_flag()) {
       osThreadFlagsSet(bluetooth.getHandle(), core.flag());
     }
-
-    osDelay(100);
   }
 }
 

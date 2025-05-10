@@ -15,7 +15,7 @@
 
 #include "tasks/core.hpp"
 
-#include "components/bluetooth/ble.h"
+#include "components/bluetooth/kt6368a.h"
 
 namespace bd::task {
 enum BluetoothState {

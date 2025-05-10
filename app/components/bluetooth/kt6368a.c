@@ -7,7 +7,7 @@
  * @copyright Copyright (c) Marisa9961 2025
  */
 
-#include "ble.h"
+#include "kt6368a.h"
 
 #include <string.h>
 
