@@ -20,6 +20,8 @@ void LCD_init(void);
 void LCD_draw(uint16_t xbegin, uint16_t ybegin, uint16_t xend, uint16_t yend,
               uint8_t pic[]);
 
+void LCD_setLight(uint8_t level);
+
 #ifdef __cplusplus
 } /*extern "C"*/
 #endif

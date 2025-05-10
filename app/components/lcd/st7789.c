@@ -142,7 +142,6 @@ void LCD_init(void) {
 
   LCD_writeREG(0x29); // PLAY_ON
 
-  // TODO Set Light
   HAL_TIM_PWM_Start(LCD_TIM, TIM_CHANNEL_2);
 }
 
@@ -154,3 +153,10 @@ void LCD_draw(uint16_t xbegin, uint16_t ybegin, uint16_t xend, uint16_t yend,
                    HAL_MAX_DELAY);
   LCD_setCS();
 }
+
+void LCD_setLight(uint8_t level) {
+  HAL_TIM_PWM_Stop(LCD_TIM, TIM_CHANNEL_2);
+  __HAL_TIM_SET_COMPARE(LCD_TIM, TIM_CHANNEL_2,
+                        level == 0 ? (0) : (level * 3 - 1));
+  HAL_TIM_PWM_Start(LCD_TIM, TIM_CHANNEL_2);
+};

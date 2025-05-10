@@ -29,14 +29,6 @@ void StorageTask(void *argument) {
     lfs_mount(&lfs, &lfs_config);
   }
 
-  uint8_t data{};
-  EEPROM_read(0, &data, 1);
-
-  data += 1;
-  EEPROM_write(0, &data, 1);
-
-  osDelay(5);
-
   while (true) {
     osThreadFlagsWait(core.flag(), osFlagsWaitAll, osWaitForever);
   }
