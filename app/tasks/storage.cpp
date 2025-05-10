@@ -14,6 +14,8 @@
 #include "porting/lfs_heap.h"
 #include "porting/lfs_porting.h"
 
+#include "components/eeprom/bl24.h"
+
 namespace bd::task {
 void StorageTask(void *argument) {
   lfs_t lfs{};
@@ -27,19 +29,13 @@ void StorageTask(void *argument) {
     lfs_mount(&lfs, &lfs_config);
   }
 
-  lfs_file_t file{};
+  uint8_t data{};
+  EEPROM_read(0, &data, 1);
 
-  uint32_t boot_count = 0;
-  lfs_file_open(&lfs, &file, "boot_count", LFS_O_RDWR | LFS_O_CREAT);
-  lfs_file_read(&lfs, &file, &boot_count, sizeof(boot_count));
+  data += 1;
+  EEPROM_write(0, &data, 1);
 
-  boot_count += 1;
-  lfs_file_rewind(&lfs, &file);
-  lfs_file_write(&lfs, &file, &boot_count, sizeof(boot_count));
-
-  lfs_file_close(&lfs, &file);
-
-  lfs_unmount(&lfs);
+  osDelay(5);
 
   while (true) {
     osThreadFlagsWait(core.flag(), osFlagsWaitAll, osWaitForever);
