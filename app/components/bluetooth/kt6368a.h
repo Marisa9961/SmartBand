@@ -1,5 +1,5 @@
 /**
- * @file   ble.h
+ * @file   KT6368A.h
  * @author Marisa9961 (marisa15532@gmail.com)
  * @brief  bluetooth serial port define
  * @date   2025-04-29
@@ -7,8 +7,8 @@
  * @copyright Copyright (c) Marisa9961 2025
  */
 
-#ifndef __BLE_H__
-#define __BLE_H__
+#ifndef __KT6368A_H__
+#define __KT6368A_H__
 
 #include "components/prf.h"
 

@@ -1,5 +1,5 @@
 /**
- * @file   ble.c
+ * @file   KT6368A.c
  * @author Marisa9961 (marisa15532@gmail.com)
  * @brief  bluetooth serial port impl
  * @date   2025-04-29
