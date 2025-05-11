@@ -18,7 +18,11 @@ extern "C" {
 
 extern uint32_t HW_BATTERY;
 
+void BAT_enable();
+void BAT_disable();
 void BAT_fresh();
+
+bool BAT_charging();
 
 #ifdef __cplusplus
 } /*extern "C"*/
