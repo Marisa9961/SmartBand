@@ -9,7 +9,7 @@
 
 #include "bluetooth_helper.hpp"
 
-#include <cstdint>
+#include <cctype>
 #include <cstdio>
 #include <cstring>
 
@@ -54,26 +54,49 @@ BluetoothHelper::State BluetoothHelper::parse() {
 }
 
 bool BluetoothHelper::handleTime() {
-  uint8_t hour = 0, minute = 0, second = 0;
-  if (std::sscanf(rx.data() + 5, "%2hhu:%2hhu:%2hhu", &hour, &minute,
-                  &second) == 3) {
-    RTC_setTime(hour, minute, second);
-    return true;
-  }
+  const char *str = rx.data() + 5;
 
-  return false;
+  uint8_t hour = 0;
+  if (!std::isdigit(str[0]) || !std::isdigit(str[1]))
+    return false;
+  hour = (str[0] - '0') * 10 + (str[1] - '0');
+
+  uint8_t minute = 0;
+  if (!std::isdigit(str[3]) || !std::isdigit(str[4]))
+    return false;
+  minute = (str[3] - '0') * 10 + (str[4] - '0');
+
+  uint8_t second = 0;
+  if (!std::isdigit(str[6]) || !std::isdigit(str[7]))
+    return false;
+  second = (str[6] - '0') * 10 + (str[7] - '0');
+
+  RTC_setTime(hour, minute, second);
+  return true;
 }
 
 bool BluetoothHelper::handleDate() {
+  const char *str = rx.data() + 5;
+
   uint16_t year = 0;
-  uint8_t month = 0, day = 0;
-  if (std::sscanf(rx.data() + 5, "%4hu-%2hhu-%2hhu", &year, &month, &day) ==
-      3) {
-    RTC_setDate(year, month, day);
-    return true;
+  for (int i = 0; i < 4; ++i) {
+    if (!std::isdigit(str[i]))
+      return false;
+    year = year * 10 + (str[i] - '0');
   }
 
-  return false;
+  uint8_t month = 0;
+  if (!std::isdigit(str[5]) || !std::isdigit(str[6]))
+    return false;
+  month = (str[5] - '0') * 10 + (str[6] - '0');
+
+  uint8_t day = 0;
+  if (!std::isdigit(str[8]) || !std::isdigit(str[9]))
+    return false;
+  day = (str[8] - '0') * 10 + (str[9] - '0');
+
+  RTC_setDate(year, month, day);
+  return true;
 }
 
 void BluetoothHelper::print(const char *str) {

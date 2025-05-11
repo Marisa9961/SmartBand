@@ -24,6 +24,7 @@ void BluetoothTask(void *parameter) {
 
     switch (helper.parse()) {
     case BluetoothHelper::State::SET_TIME: {
+      helper.handleTime();
       helper.print("TIME", helper.handleTime());
     } break;
     case BluetoothHelper::State::SET_DATE: {
