@@ -14,21 +14,27 @@
 extern UART_HandleTypeDef huart1;
 #define BLE_UART &huart1
 
-#define BLE_BUFFER_SIZE 32U
+#define BLE_BUFFER_SIZE 30U
 
 static struct {
   uint8_t data[BLE_BUFFER_SIZE];
   uint8_t read;
-  uint8_t write;
   uint8_t count;
 } ble_buffer = {};
 
-void BLE_init() {
-  HAL_UARTEx_ReceiveToIdle_DMA(BLE_UART, ble_buffer.data, BLE_BUFFER_SIZE);
+/* Some questions are very puzzling. Why does the STM32 DMA circular mode + idle
+ * interrupt mode not wake up the interrupt when the buffer is just filled when
+ * the half-full and full interrupts are turned off? This causes the interrupt
+ * to be unresponsive when a new message arrives, the software cannot work
+ * properly, and even introduces sequence errors? Finally, I choose to leave
+ * this question alone, and use the single receive mode (DMA Normal) for now. */
 
+void BLE_init() {
   extern DMA_HandleTypeDef hdma_usart1_rx;
   __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_HT);
   __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_TC);
+
+  HAL_UARTEx_ReceiveToIdle_DMA(BLE_UART, ble_buffer.data, BLE_BUFFER_SIZE);
 }
 
 void BLE_enable() {
@@ -40,27 +46,18 @@ void BLE_disable() {
 }
 
 void BLE_callback(uint16_t size) {
-  if (size > ble_buffer.write) {
-    ble_buffer.count += size - ble_buffer.write;
-  } else if (size < ble_buffer.write) {
-    ble_buffer.count += BLE_BUFFER_SIZE - ble_buffer.read + size;
-  }
-
-  ble_buffer.write = size;
+  ble_buffer.read = 0;
+  ble_buffer.count = size;
 }
 
 bool BLE_flag() { return ble_buffer.count > 0; }
 
 char BLE_readNextChar() {
-  char c = ble_buffer.data[ble_buffer.read];
-
-  ble_buffer.read =
-      ble_buffer.read + 1 >= BLE_BUFFER_SIZE ? 0 : ble_buffer.read + 1;
   ble_buffer.count -= 1;
-
-  return c;
+  return ble_buffer.data[ble_buffer.read++];
 }
 
 void BLE_transmit(const char *str) {
   HAL_UART_Transmit(BLE_UART, (uint8_t *)str, strlen(str), HAL_MAX_DELAY);
+  HAL_UARTEx_ReceiveToIdle_DMA(BLE_UART, ble_buffer.data, BLE_BUFFER_SIZE);
 }
