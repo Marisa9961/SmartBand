@@ -13,10 +13,10 @@ void ui_Home_screen_init(void);
 void ui_event_Home(lv_event_t * e);
 lv_obj_t * ui_Home;
 lv_obj_t * ui_Home_Date;
-lv_obj_t * ui_Home_Mouth;
-lv_obj_t * ui_Home_TimeMinute;
+lv_obj_t * ui_Home_Weekday;
+lv_obj_t * ui_Home_TimeHour;
 lv_obj_t * ui_Home_TimeSplit;
-lv_obj_t * ui_Home_TimeSecond;
+lv_obj_t * ui_Home_TimeMinute;
 void ui_event_Home_PanelApplication(lv_event_t * e);
 lv_obj_t * ui_Home_PanelApplication;
 lv_obj_t * ui_Home_LabelApplication;
@@ -102,6 +102,7 @@ void ui_event_Application_ContainerAlarm(lv_event_t * e);
 lv_obj_t * ui_Application_ContainerAlarm;
 lv_obj_t * ui_Application_ImageAlarm;
 lv_obj_t * ui_Application_LabelAlarm;
+void ui_event_Application_ContainerCalendar(lv_event_t * e);
 lv_obj_t * ui_Application_ContainerCalendar;
 lv_obj_t * ui_Application_ImageCalendar;
 lv_obj_t * ui_Application_LabelCalendar;
@@ -429,6 +430,15 @@ void ui_event_Application_ContainerAlarm(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         _ui_screen_change(&ui_Alarm, LV_SCR_LOAD_ANIM_NONE, 500, 0, &ui_Alarm_screen_init);
+    }
+}
+
+void ui_event_Application_ContainerCalendar(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_Calendar, LV_SCR_LOAD_ANIM_NONE, 500, 0, &ui_Calendar_screen_init);
     }
 }
 

@@ -36,6 +36,7 @@ void RTC_setTime(uint8_t hour, uint8_t minute, uint8_t second) {
 uint32_t HW_YEAR;
 uint32_t HW_MONTH;
 uint32_t HW_DAY;
+uint32_t HW_WEEKDAY;
 
 void RTC_freshDate() {
   RTC_DateTypeDef date = {};

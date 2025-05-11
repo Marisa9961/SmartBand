@@ -38,13 +38,13 @@ void ui_Home_update() {
   RTC_freshDate();
   sprintf(ui_timer_buffer, "%d-%d", (int)HW_MONTH, (int)HW_DAY);
   lv_label_set_text(ui_Home_Date, ui_timer_buffer);
-  lv_label_set_text(ui_Home_Mouth, week_str[(int)HW_WEEKDAY]);
+  lv_label_set_text(ui_Home_Weekday, week_str[(int)HW_WEEKDAY]);
 
   RTC_freshTime();
   sprintf(ui_timer_buffer, "%d", (int)HW_HOUR);
-  lv_label_set_text(ui_Home_TimeMinute, ui_timer_buffer);
+  lv_label_set_text(ui_Home_TimeHour, ui_timer_buffer);
   sprintf(ui_timer_buffer, "%d", (int)HW_MINUTE);
-  lv_label_set_text(ui_Home_TimeSecond, ui_timer_buffer);
+  lv_label_set_text(ui_Home_TimeMinute, ui_timer_buffer);
 
   lv_label_set_text(ui_Home_LabelApplication, "Today's Step: 103");
 
@@ -61,5 +61,5 @@ void ui_NotificationPanel_update() {
 
 void ui_Thermometer_update() {
   lv_label_set_text(ui_Thermometer_LabelTemp, " 28 °C");
-  lv_label_set_text(ui_Thermometer_LabelHumi, "90 %");
+  lv_label_set_text(ui_Thermometer_LabelHumi, " 90 %");
 }
