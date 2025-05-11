@@ -9,108 +9,42 @@
 
 #include "tasks/bluetooth.hpp"
 
-#include <array>
-#include <cstdio>
-#include <cstring>
+#include "func/bluetooth_helper.hpp"
 
 #include "tasks/core.hpp"
 
-#include "components/bluetooth/kt6368a.h"
+#include "components/battery/battery.h"
 
 namespace bd::task {
-enum BluetoothState {
-  ERROR,
-  SET_TIME,
-  SET_DATE,
-  FIND_BAT,
-  FIND_HR,
-  FIND_STEP,
-};
-
-std::array<char, 16> rx_buffer{};
-std::array<char, 16> tx_buffer{};
-
-BluetoothState parseBluetoothData() {
-  if (BLE_readNextChar() != '@') {
-    return ERROR;
-  }
-
-  for (uint32_t i{}; i < rx_buffer.size(); i++) {
-    auto c{BLE_readNextChar()};
-    if (c == '@') {
-      break;
-    }
-
-    rx_buffer[i] = c;
-  }
-
-  auto isSame{[](const char *str) {
-    return std::strncmp(rx_buffer.data(), str, std::strlen(str)) == 0;
-  }};
-
-  BluetoothState bluetooth_state{};
-  if (isSame("TIME:")) {
-    bluetooth_state = SET_TIME;
-  } else if (isSame("DATE:")) {
-    bluetooth_state = SET_DATE;
-  } else if (isSame("BATTERY?")) {
-    bluetooth_state = FIND_BAT;
-  } else if (isSame("HEARTRATE?")) {
-    bluetooth_state = FIND_HR;
-  } else if (isSame("STEPS?")) {
-    bluetooth_state = FIND_STEP;
-  }
-
-  return bluetooth_state;
-}
-
-void printBluetoothData(const char *str) {
-  std::sprintf(tx_buffer.data(), "#%s#", str);
-}
-
-void printBluetoothData(const char *str, bool state) {
-  if (state) {
-    std::sprintf(tx_buffer.data(), "#%s_OK#", str);
-  } else {
-    std::sprintf(tx_buffer.data(), "#RETRY");
-  }
-}
-
-void printBluetoothData(const char *str, int dat) {
-  std::sprintf(tx_buffer.data(), "#%s:%d#", str, dat);
-}
-
 void BluetoothTask(void *parameter) {
-  BLE_init();
+  BluetoothHelper helper{};
 
   while (true) {
     osThreadFlagsWait(core.flag(), osFlagsWaitAll, osWaitForever);
 
-    rx_buffer.fill(0);
-    tx_buffer.fill(0);
-
-    switch (parseBluetoothData()) {
-    case SET_TIME: {
-      printBluetoothData("TIME", true);
+    switch (helper.parse()) {
+    case BluetoothHelper::State::SET_TIME: {
+      helper.print("TIME", helper.handleTime());
     } break;
-    case SET_DATE: {
-      printBluetoothData("DATE", true);
+    case BluetoothHelper::State::SET_DATE: {
+      helper.handleDate();
+      helper.print("DATE", helper.handleDate());
     } break;
-    case FIND_BAT: {
-      printBluetoothData("BATTERY", 50);
+    case BluetoothHelper::State::FIND_BAT: {
+      helper.print("BATTERY", static_cast<int>(HW_BATTERY));
     } break;
-    case FIND_HR: {
-      printBluetoothData("HEARTRATE", 90);
+    case BluetoothHelper::State::FIND_HR: {
+      helper.print("HEARTRATE", 90);
     } break;
-    case FIND_STEP: {
-      printBluetoothData("STEPS", 8000);
+    case BluetoothHelper::State::FIND_STEP: {
+      helper.print("STEPS", 8000);
     } break;
-    case ERROR: {
-      printBluetoothData("ERROR");
+    case BluetoothHelper::State::ERROR: {
+      helper.print("ERROR");
     } break;
     }
 
-    BLE_transmit(tx_buffer.data());
+    helper.transmit();
   }
 }
 
