@@ -12,56 +12,55 @@ void ui_SettingsTime_screen_init(void)
     lv_obj_set_style_bg_color(ui_SettingsTime, lv_color_hex(0x393C41), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_SettingsTime, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SettingsTime_ImageLockTime1 = lv_image_create(ui_SettingsTime);
-    lv_image_set_src(ui_SettingsTime_ImageLockTime1, &ui_img_time_png);
-    lv_obj_set_width(ui_SettingsTime_ImageLockTime1, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_SettingsTime_ImageLockTime1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_SettingsTime_ImageLockTime1, 0);
-    lv_obj_set_y(ui_SettingsTime_ImageLockTime1, -75);
-    lv_obj_set_align(ui_SettingsTime_ImageLockTime1, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_SettingsTime_ImageLockTime1, LV_OBJ_FLAG_CLICKABLE);     /// Flags
-    lv_obj_remove_flag(ui_SettingsTime_ImageLockTime1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    ui_SettingsTime_ImageSetTime = lv_image_create(ui_SettingsTime);
+    lv_image_set_src(ui_SettingsTime_ImageSetTime, &ui_img_time_png);
+    lv_obj_set_width(ui_SettingsTime_ImageSetTime, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_SettingsTime_ImageSetTime, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_SettingsTime_ImageSetTime, 0);
+    lv_obj_set_y(ui_SettingsTime_ImageSetTime, -75);
+    lv_obj_set_align(ui_SettingsTime_ImageSetTime, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_SettingsTime_ImageSetTime, LV_OBJ_FLAG_CLICKABLE);     /// Flags
+    lv_obj_remove_flag(ui_SettingsTime_ImageSetTime, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
-    ui_SettingsTime_LabelLockTime1 = lv_label_create(ui_SettingsTime);
-    lv_obj_set_width(ui_SettingsTime_LabelLockTime1, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_SettingsTime_LabelLockTime1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_SettingsTime_LabelLockTime1, 0);
-    lv_obj_set_y(ui_SettingsTime_LabelLockTime1, -40);
-    lv_obj_set_align(ui_SettingsTime_LabelLockTime1, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SettingsTime_LabelLockTime1, "Time");
-    lv_obj_set_style_text_color(ui_SettingsTime_LabelLockTime1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_SettingsTime_LabelLockTime1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_SettingsTime_LabelLockTime1, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_SettingsTime_LabelSetTime = lv_label_create(ui_SettingsTime);
+    lv_obj_set_width(ui_SettingsTime_LabelSetTime, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_SettingsTime_LabelSetTime, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_SettingsTime_LabelSetTime, 0);
+    lv_obj_set_y(ui_SettingsTime_LabelSetTime, -40);
+    lv_obj_set_align(ui_SettingsTime_LabelSetTime, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_SettingsTime_LabelSetTime, "Time");
+    lv_obj_set_style_text_color(ui_SettingsTime_LabelSetTime, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_SettingsTime_LabelSetTime, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_SettingsTime_LabelSetTime, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SettingsTime_LabelLockTimeHint1 = lv_label_create(ui_SettingsTime);
-    lv_obj_set_width(ui_SettingsTime_LabelLockTimeHint1, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_SettingsTime_LabelLockTimeHint1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_SettingsTime_LabelLockTimeHint1, 0);
-    lv_obj_set_y(ui_SettingsTime_LabelLockTimeHint1, 60);
-    lv_obj_set_align(ui_SettingsTime_LabelLockTimeHint1, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SettingsTime_LabelLockTimeHint1, "Manually set the\ncurrent time for\ndisplay and sync");
-    lv_obj_set_style_text_color(ui_SettingsTime_LabelLockTimeHint1, lv_color_hex(0xFFFFFF),
-                                LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_SettingsTime_LabelLockTimeHint1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_align(ui_SettingsTime_LabelLockTimeHint1, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_SettingsTime_LabelSetTimeHint = lv_label_create(ui_SettingsTime);
+    lv_obj_set_width(ui_SettingsTime_LabelSetTimeHint, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_SettingsTime_LabelSetTimeHint, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_SettingsTime_LabelSetTimeHint, 0);
+    lv_obj_set_y(ui_SettingsTime_LabelSetTimeHint, 60);
+    lv_obj_set_align(ui_SettingsTime_LabelSetTimeHint, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_SettingsTime_LabelSetTimeHint, "Manually set the\ncurrent time for\ndisplay and sync");
+    lv_obj_set_style_text_color(ui_SettingsTime_LabelSetTimeHint, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_SettingsTime_LabelSetTimeHint, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui_SettingsTime_LabelSetTimeHint, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SettingsTime_Button6 = lv_button_create(ui_SettingsTime);
-    lv_obj_set_width(ui_SettingsTime_Button6, 80);
-    lv_obj_set_height(ui_SettingsTime_Button6, 40);
-    lv_obj_set_align(ui_SettingsTime_Button6, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_SettingsTime_Button6, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_remove_flag(ui_SettingsTime_Button6, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_SettingsTime_Button6, lv_color_hex(0x83858B), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_SettingsTime_Button6, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_SettingsTime_Button6, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_SettingsTime_Button6, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_SettingsTime_Button6, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_SettingsTime_ButtonSync = lv_button_create(ui_SettingsTime);
+    lv_obj_set_width(ui_SettingsTime_ButtonSync, 80);
+    lv_obj_set_height(ui_SettingsTime_ButtonSync, 40);
+    lv_obj_set_align(ui_SettingsTime_ButtonSync, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_SettingsTime_ButtonSync, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_remove_flag(ui_SettingsTime_ButtonSync, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_SettingsTime_ButtonSync, lv_color_hex(0x83858B), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_SettingsTime_ButtonSync, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_SettingsTime_ButtonSync, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_SettingsTime_ButtonSync, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_SettingsTime_ButtonSync, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SettingsTime_Label6 = lv_label_create(ui_SettingsTime_Button6);
-    lv_obj_set_width(ui_SettingsTime_Label6, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_SettingsTime_Label6, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_SettingsTime_Label6, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SettingsTime_Label6, "SYNC");
+    ui_SettingsTime_LabelSync = lv_label_create(ui_SettingsTime_ButtonSync);
+    lv_obj_set_width(ui_SettingsTime_LabelSync, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_SettingsTime_LabelSync, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_SettingsTime_LabelSync, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_SettingsTime_LabelSync, "SYNC");
 
     lv_obj_add_event_cb(ui_SettingsTime, ui_event_SettingsTime, LV_EVENT_ALL, NULL);
 

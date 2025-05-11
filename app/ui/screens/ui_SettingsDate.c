@@ -12,56 +12,55 @@ void ui_SettingsDate_screen_init(void)
     lv_obj_set_style_bg_color(ui_SettingsDate, lv_color_hex(0x393C41), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_SettingsDate, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SettingsDate_ImageLockTime2 = lv_image_create(ui_SettingsDate);
-    lv_image_set_src(ui_SettingsDate_ImageLockTime2, &ui_img_calendar_png);
-    lv_obj_set_width(ui_SettingsDate_ImageLockTime2, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_SettingsDate_ImageLockTime2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_SettingsDate_ImageLockTime2, 0);
-    lv_obj_set_y(ui_SettingsDate_ImageLockTime2, -75);
-    lv_obj_set_align(ui_SettingsDate_ImageLockTime2, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_SettingsDate_ImageLockTime2, LV_OBJ_FLAG_CLICKABLE);     /// Flags
-    lv_obj_remove_flag(ui_SettingsDate_ImageLockTime2, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    ui_SettingsDate_ImageSetDate = lv_image_create(ui_SettingsDate);
+    lv_image_set_src(ui_SettingsDate_ImageSetDate, &ui_img_calendar_png);
+    lv_obj_set_width(ui_SettingsDate_ImageSetDate, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_SettingsDate_ImageSetDate, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_SettingsDate_ImageSetDate, 0);
+    lv_obj_set_y(ui_SettingsDate_ImageSetDate, -75);
+    lv_obj_set_align(ui_SettingsDate_ImageSetDate, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_SettingsDate_ImageSetDate, LV_OBJ_FLAG_CLICKABLE);     /// Flags
+    lv_obj_remove_flag(ui_SettingsDate_ImageSetDate, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
-    ui_SettingsDate_LabelLockTime2 = lv_label_create(ui_SettingsDate);
-    lv_obj_set_width(ui_SettingsDate_LabelLockTime2, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_SettingsDate_LabelLockTime2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_SettingsDate_LabelLockTime2, 0);
-    lv_obj_set_y(ui_SettingsDate_LabelLockTime2, -40);
-    lv_obj_set_align(ui_SettingsDate_LabelLockTime2, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SettingsDate_LabelLockTime2, "Date");
-    lv_obj_set_style_text_color(ui_SettingsDate_LabelLockTime2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_SettingsDate_LabelLockTime2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_SettingsDate_LabelLockTime2, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_SettingsDate_LabelSetDate = lv_label_create(ui_SettingsDate);
+    lv_obj_set_width(ui_SettingsDate_LabelSetDate, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_SettingsDate_LabelSetDate, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_SettingsDate_LabelSetDate, 0);
+    lv_obj_set_y(ui_SettingsDate_LabelSetDate, -40);
+    lv_obj_set_align(ui_SettingsDate_LabelSetDate, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_SettingsDate_LabelSetDate, "Date");
+    lv_obj_set_style_text_color(ui_SettingsDate_LabelSetDate, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_SettingsDate_LabelSetDate, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_SettingsDate_LabelSetDate, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SettingsDate_LabelLockTimeHint2 = lv_label_create(ui_SettingsDate);
-    lv_obj_set_width(ui_SettingsDate_LabelLockTimeHint2, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_SettingsDate_LabelLockTimeHint2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_SettingsDate_LabelLockTimeHint2, 0);
-    lv_obj_set_y(ui_SettingsDate_LabelLockTimeHint2, 60);
-    lv_obj_set_align(ui_SettingsDate_LabelLockTimeHint2, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SettingsDate_LabelLockTimeHint2, "Manually set the\ncurrent date for\nlogging and display");
-    lv_obj_set_style_text_color(ui_SettingsDate_LabelLockTimeHint2, lv_color_hex(0xFFFFFF),
-                                LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_SettingsDate_LabelLockTimeHint2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_align(ui_SettingsDate_LabelLockTimeHint2, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_SettingsDate_LabelSetDateHint = lv_label_create(ui_SettingsDate);
+    lv_obj_set_width(ui_SettingsDate_LabelSetDateHint, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_SettingsDate_LabelSetDateHint, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_SettingsDate_LabelSetDateHint, 0);
+    lv_obj_set_y(ui_SettingsDate_LabelSetDateHint, 60);
+    lv_obj_set_align(ui_SettingsDate_LabelSetDateHint, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_SettingsDate_LabelSetDateHint, "Manually set the\ncurrent date for\nlogging and display");
+    lv_obj_set_style_text_color(ui_SettingsDate_LabelSetDateHint, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_SettingsDate_LabelSetDateHint, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui_SettingsDate_LabelSetDateHint, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SettingsDate_Button7 = lv_button_create(ui_SettingsDate);
-    lv_obj_set_width(ui_SettingsDate_Button7, 80);
-    lv_obj_set_height(ui_SettingsDate_Button7, 40);
-    lv_obj_set_align(ui_SettingsDate_Button7, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_SettingsDate_Button7, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_remove_flag(ui_SettingsDate_Button7, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_SettingsDate_Button7, lv_color_hex(0x83858B), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_SettingsDate_Button7, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_SettingsDate_Button7, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_SettingsDate_Button7, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_SettingsDate_Button7, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_SettingsDate_ButtonSync = lv_button_create(ui_SettingsDate);
+    lv_obj_set_width(ui_SettingsDate_ButtonSync, 80);
+    lv_obj_set_height(ui_SettingsDate_ButtonSync, 40);
+    lv_obj_set_align(ui_SettingsDate_ButtonSync, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_SettingsDate_ButtonSync, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_remove_flag(ui_SettingsDate_ButtonSync, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_SettingsDate_ButtonSync, lv_color_hex(0x83858B), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_SettingsDate_ButtonSync, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_SettingsDate_ButtonSync, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_SettingsDate_ButtonSync, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_SettingsDate_ButtonSync, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SettingsDate_Label7 = lv_label_create(ui_SettingsDate_Button7);
-    lv_obj_set_width(ui_SettingsDate_Label7, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_SettingsDate_Label7, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_SettingsDate_Label7, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SettingsDate_Label7, "SYNC");
+    ui_SettingsDate_LabelSync = lv_label_create(ui_SettingsDate_ButtonSync);
+    lv_obj_set_width(ui_SettingsDate_LabelSync, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_SettingsDate_LabelSync, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_SettingsDate_LabelSync, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_SettingsDate_LabelSync, "SYNC");
 
     lv_obj_add_event_cb(ui_SettingsDate, ui_event_SettingsDate, LV_EVENT_ALL, NULL);
 

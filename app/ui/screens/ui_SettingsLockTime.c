@@ -47,12 +47,12 @@ void ui_SettingsLockTime_screen_init(void)
     lv_obj_set_style_text_align(ui_SettingsLockTime_LabelLockTimeHint, LV_TEXT_ALIGN_CENTER,
                                 LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SettingsLockTime_Dropdown1 = lv_dropdown_create(ui_SettingsLockTime);
-    lv_dropdown_set_options(ui_SettingsLockTime_Dropdown1, "3s\n5s\n10s");
-    lv_obj_set_width(ui_SettingsLockTime_Dropdown1, 100);
-    lv_obj_set_height(ui_SettingsLockTime_Dropdown1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_SettingsLockTime_Dropdown1, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_SettingsLockTime_Dropdown1, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    ui_SettingsLockTime_Dropdown = lv_dropdown_create(ui_SettingsLockTime);
+    lv_dropdown_set_options(ui_SettingsLockTime_Dropdown, "3s\n5s\n10s");
+    lv_obj_set_width(ui_SettingsLockTime_Dropdown, 100);
+    lv_obj_set_height(ui_SettingsLockTime_Dropdown, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_SettingsLockTime_Dropdown, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_SettingsLockTime_Dropdown, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
 
     lv_obj_add_event_cb(ui_SettingsLockTime, ui_event_SettingsLockTime, LV_EVENT_ALL, NULL);
 

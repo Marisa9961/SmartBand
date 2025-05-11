@@ -12,13 +12,13 @@ void ui_Calendar_screen_init(void)
     lv_obj_set_style_bg_color(ui_Calendar, lv_color_hex(0x393C41), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_Calendar, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Calendar_Calendar1 = lv_calendar_create(ui_Calendar);
-    lv_calendar_set_today_date(ui_Calendar_Calendar1, 2025, 5, 5);
-    lv_calendar_set_showed_date(ui_Calendar_Calendar1, 2025, 5);
-    lv_obj_t * ui_Calendar_Calendar1_header = lv_calendar_header_arrow_create(ui_Calendar_Calendar1);
-    lv_obj_set_width(ui_Calendar_Calendar1, 220);
-    lv_obj_set_height(ui_Calendar_Calendar1, 240);
-    lv_obj_set_align(ui_Calendar_Calendar1, LV_ALIGN_CENTER);
+    ui_Calendar_CalendarInstance = lv_calendar_create(ui_Calendar);
+    lv_calendar_set_today_date(ui_Calendar_CalendarInstance, 2025, 5, 1);
+    lv_calendar_set_showed_date(ui_Calendar_CalendarInstance, 2025, 5);
+    lv_obj_t * ui_Calendar_CalendarInstance_header = lv_calendar_header_arrow_create(ui_Calendar_CalendarInstance);
+    lv_obj_set_width(ui_Calendar_CalendarInstance, 220);
+    lv_obj_set_height(ui_Calendar_CalendarInstance, 240);
+    lv_obj_set_align(ui_Calendar_CalendarInstance, LV_ALIGN_CENTER);
 
     lv_obj_add_event_cb(ui_Calendar, ui_event_Calendar, LV_EVENT_ALL, NULL);
 

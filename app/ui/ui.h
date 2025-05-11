@@ -50,6 +50,7 @@ extern lv_obj_t * ui_NotificationPanel_ImageFlash;
 void ui_event_NotificationPanel_ButtonSettings(lv_event_t * e);
 extern lv_obj_t * ui_NotificationPanel_ButtonSettings;
 extern lv_obj_t * ui_NotificationPanel_ImageSettings;
+void ui_event_NotificationPanel_ButtonAlarm(lv_event_t * e);
 extern lv_obj_t * ui_NotificationPanel_ButtonAlarm;
 extern lv_obj_t * ui_NotificationPanel_ImageAlarm;
 extern lv_obj_t * ui_NotificationPanel_ButtonNoDisturb;
@@ -58,7 +59,7 @@ extern lv_obj_t * ui_NotificationPanel_ButtonSleep;
 extern lv_obj_t * ui_NotificationPanel_ImageSleep;
 extern lv_obj_t * ui_NotificationPanel_LabelInfo;
 extern lv_obj_t * ui_NotificationPanel_ImageBand;
-extern lv_obj_t * ui_NotificationPanel_Slider1;
+extern lv_obj_t * ui_NotificationPanel_SliderLight;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_Settings
@@ -142,12 +143,12 @@ extern lv_obj_t * ui_Application_LabelSettings;
 void ui_Timer_screen_init(void);
 void ui_event_Timer(lv_event_t * e);
 extern lv_obj_t * ui_Timer;
-extern lv_obj_t * ui_Timer_Arc1;
-extern lv_obj_t * ui_Timer_Label1;
-extern lv_obj_t * ui_Timer_Button1;
-extern lv_obj_t * ui_Timer_Image1;
-extern lv_obj_t * ui_Timer_Button2;
-extern lv_obj_t * ui_Timer_Image2;
+extern lv_obj_t * ui_Timer_ArcTimer;
+extern lv_obj_t * ui_Timer_LabelTime;
+extern lv_obj_t * ui_Timer_ButtonStart;
+extern lv_obj_t * ui_Timer_ImageStart;
+extern lv_obj_t * ui_Timer_ButtonRestart;
+extern lv_obj_t * ui_Timer_ImageRestart;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_SettingsWristOn
@@ -167,88 +168,88 @@ extern lv_obj_t * ui_SettingsLockTime;
 extern lv_obj_t * ui_SettingsLockTime_ImageLockTime;
 extern lv_obj_t * ui_SettingsLockTime_LabelLockTime;
 extern lv_obj_t * ui_SettingsLockTime_LabelLockTimeHint;
-extern lv_obj_t * ui_SettingsLockTime_Dropdown1;
+extern lv_obj_t * ui_SettingsLockTime_Dropdown;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_SettingsBluetooth
 void ui_SettingsBluetooth_screen_init(void);
 void ui_event_SettingsBluetooth(lv_event_t * e);
 extern lv_obj_t * ui_SettingsBluetooth;
-extern lv_obj_t * ui_SettingsBluetooth_HeartBeatTitle2;
-void ui_event_SettingsBluetooth_HeartBeatImage2(lv_event_t * e);
-extern lv_obj_t * ui_SettingsBluetooth_HeartBeatImage2;
-extern lv_obj_t * ui_SettingsBluetooth_Switch1;
-extern lv_obj_t * ui_SettingsBluetooth_Label5;
+extern lv_obj_t * ui_SettingsBluetooth_LabelBluetooth;
+void ui_event_SettingsBluetooth_ImageBluetooth(lv_event_t * e);
+extern lv_obj_t * ui_SettingsBluetooth_ImageBluetooth;
+extern lv_obj_t * ui_SettingsBluetooth_SwitchBluetooth;
+extern lv_obj_t * ui_SettingsBluetooth_LabelBluetoothHint;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_SettingsDebug
 void ui_SettingsDebug_screen_init(void);
 void ui_event_SettingsDebug(lv_event_t * e);
 extern lv_obj_t * ui_SettingsDebug;
-extern lv_obj_t * ui_SettingsDebug_Keyboard2;
-extern lv_obj_t * ui_SettingsDebug_TextArea1;
-extern lv_obj_t * ui_SettingsDebug_TextArea2;
-extern lv_obj_t * ui_SettingsDebug_Label12;
-extern lv_obj_t * ui_SettingsDebug_Label13;
+extern lv_obj_t * ui_SettingsDebug_Keyboard;
+extern lv_obj_t * ui_SettingsDebug_TextAreaRX;
+extern lv_obj_t * ui_SettingsDebug_TextAreaTX;
+extern lv_obj_t * ui_SettingsDebug_LabelTX;
+extern lv_obj_t * ui_SettingsDebug_LabelRX;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_SettingsTime
 void ui_SettingsTime_screen_init(void);
 void ui_event_SettingsTime(lv_event_t * e);
 extern lv_obj_t * ui_SettingsTime;
-extern lv_obj_t * ui_SettingsTime_ImageLockTime1;
-extern lv_obj_t * ui_SettingsTime_LabelLockTime1;
-extern lv_obj_t * ui_SettingsTime_LabelLockTimeHint1;
-extern lv_obj_t * ui_SettingsTime_Button6;
-extern lv_obj_t * ui_SettingsTime_Label6;
+extern lv_obj_t * ui_SettingsTime_ImageSetTime;
+extern lv_obj_t * ui_SettingsTime_LabelSetTime;
+extern lv_obj_t * ui_SettingsTime_LabelSetTimeHint;
+extern lv_obj_t * ui_SettingsTime_ButtonSync;
+extern lv_obj_t * ui_SettingsTime_LabelSync;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_SettingsDate
 void ui_SettingsDate_screen_init(void);
 void ui_event_SettingsDate(lv_event_t * e);
 extern lv_obj_t * ui_SettingsDate;
-extern lv_obj_t * ui_SettingsDate_ImageLockTime2;
-extern lv_obj_t * ui_SettingsDate_LabelLockTime2;
-extern lv_obj_t * ui_SettingsDate_LabelLockTimeHint2;
-extern lv_obj_t * ui_SettingsDate_Button7;
-extern lv_obj_t * ui_SettingsDate_Label7;
+extern lv_obj_t * ui_SettingsDate_ImageSetDate;
+extern lv_obj_t * ui_SettingsDate_LabelSetDate;
+extern lv_obj_t * ui_SettingsDate_LabelSetDateHint;
+extern lv_obj_t * ui_SettingsDate_ButtonSync;
+extern lv_obj_t * ui_SettingsDate_LabelSync;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_Thermometer
 void ui_Thermometer_screen_init(void);
 void ui_event_Thermometer(lv_event_t * e);
 extern lv_obj_t * ui_Thermometer;
-extern lv_obj_t * ui_Thermometer_HeartBeatTitle1;
-extern lv_obj_t * ui_Thermometer_HeartBeatImage1;
-extern lv_obj_t * ui_Thermometer_Image3;
-extern lv_obj_t * ui_Thermometer_Label2;
-extern lv_obj_t * ui_Thermometer_Label3;
-extern lv_obj_t * ui_Thermometer_Button3;
-extern lv_obj_t * ui_Thermometer_Image4;
+extern lv_obj_t * ui_Thermometer_LabelThermometer;
+extern lv_obj_t * ui_Thermometer_ImageTemp;
+extern lv_obj_t * ui_Thermometer_ImageHumi;
+extern lv_obj_t * ui_Thermometer_LabelTemp;
+extern lv_obj_t * ui_Thermometer_LabelHumi;
+extern lv_obj_t * ui_Thermometer_ButtonFresh;
+extern lv_obj_t * ui_Thermometer_ImageFresh;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_HeartBeat
 void ui_HeartBeat_screen_init(void);
 void ui_event_HeartBeat(lv_event_t * e);
 extern lv_obj_t * ui_HeartBeat;
-extern lv_obj_t * ui_HeartBeat_HeartBeatTitle;
-extern lv_obj_t * ui_HeartBeat_HeartBeatImage;
-extern lv_obj_t * ui_HeartBeat_Label4;
-extern lv_obj_t * ui_HeartBeat_Button5;
-extern lv_obj_t * ui_HeartBeat_Image7;
+extern lv_obj_t * ui_HeartBeat_LabelHeartbeat;
+extern lv_obj_t * ui_HeartBeat_ImageHeartBeat;
+extern lv_obj_t * ui_HeartBeat_LabelHeartbeatNum;
+extern lv_obj_t * ui_HeartBeat_ButtonFresh;
+extern lv_obj_t * ui_HeartBeat_ImageFresh;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_Director
 void ui_Director_screen_init(void);
 void ui_event_Director(lv_event_t * e);
 extern lv_obj_t * ui_Director;
-extern lv_obj_t * ui_Director_HeartBeatTitle3;
-extern lv_obj_t * ui_Director_Image5;
-extern lv_obj_t * ui_Director_Label8;
-extern lv_obj_t * ui_Director_Label9;
-extern lv_obj_t * ui_Director_Button4;
-extern lv_obj_t * ui_Director_Image6;
-extern lv_obj_t * ui_Director_Image10;
+extern lv_obj_t * ui_Director_LabelDirector;
+extern lv_obj_t * ui_Director_ImageCompass;
+extern lv_obj_t * ui_Director_LabelCompass;
+extern lv_obj_t * ui_Director_ImageHeight;
+extern lv_obj_t * ui_Director_LabelHeight;
+extern lv_obj_t * ui_Director_ButtonFresh;
+extern lv_obj_t * ui_Director_ImageFresh;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_Flash
@@ -261,19 +262,19 @@ extern lv_obj_t * ui_Flash;
 void ui_Alarm_screen_init(void);
 void ui_event_Alarm(lv_event_t * e);
 extern lv_obj_t * ui_Alarm;
-extern lv_obj_t * ui_Alarm_HeartBeatTitle4;
-extern lv_obj_t * ui_Alarm_Image8;
-void ui_event_Alarm_Button8(lv_event_t * e);
-extern lv_obj_t * ui_Alarm_Button8;
-extern lv_obj_t * ui_Alarm_Label10;
-extern lv_obj_t * ui_Alarm_Label11;
+extern lv_obj_t * ui_Alarm_LabelAlarm;
+extern lv_obj_t * ui_Alarm_ImageAlarm;
+void ui_event_Alarm_ButtonBack(lv_event_t * e);
+extern lv_obj_t * ui_Alarm_ButtonBack;
+extern lv_obj_t * ui_Alarm_LabelBack;
+extern lv_obj_t * ui_Alarm_LabelAlarmInfo;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_Calendar
 void ui_Calendar_screen_init(void);
 void ui_event_Calendar(lv_event_t * e);
 extern lv_obj_t * ui_Calendar;
-extern lv_obj_t * ui_Calendar_Calendar1;
+extern lv_obj_t * ui_Calendar_CalendarInstance;
 // CUSTOM VARIABLES
 
 // EVENTS

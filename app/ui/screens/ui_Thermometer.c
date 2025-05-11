@@ -12,77 +12,77 @@ void ui_Thermometer_screen_init(void)
     lv_obj_set_style_bg_color(ui_Thermometer, lv_color_hex(0x393C41), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_Thermometer, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Thermometer_HeartBeatTitle1 = lv_label_create(ui_Thermometer);
-    lv_obj_set_width(ui_Thermometer_HeartBeatTitle1, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Thermometer_HeartBeatTitle1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Thermometer_HeartBeatTitle1, 0);
-    lv_obj_set_y(ui_Thermometer_HeartBeatTitle1, -90);
-    lv_obj_set_align(ui_Thermometer_HeartBeatTitle1, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Thermometer_HeartBeatTitle1, "temperature & humidity");
-    lv_obj_set_style_text_color(ui_Thermometer_HeartBeatTitle1, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Thermometer_HeartBeatTitle1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Thermometer_HeartBeatTitle1, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_Thermometer_LabelThermometer = lv_label_create(ui_Thermometer);
+    lv_obj_set_width(ui_Thermometer_LabelThermometer, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Thermometer_LabelThermometer, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Thermometer_LabelThermometer, 0);
+    lv_obj_set_y(ui_Thermometer_LabelThermometer, -90);
+    lv_obj_set_align(ui_Thermometer_LabelThermometer, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Thermometer_LabelThermometer, "temperature & humidity");
+    lv_obj_set_style_text_color(ui_Thermometer_LabelThermometer, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_Thermometer_LabelThermometer, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Thermometer_LabelThermometer, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Thermometer_HeartBeatImage1 = lv_image_create(ui_Thermometer);
-    lv_image_set_src(ui_Thermometer_HeartBeatImage1, &ui_img_thermometer_png);
-    lv_obj_set_width(ui_Thermometer_HeartBeatImage1, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Thermometer_HeartBeatImage1, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Thermometer_HeartBeatImage1, -50);
-    lv_obj_set_y(ui_Thermometer_HeartBeatImage1, -40);
-    lv_obj_set_align(ui_Thermometer_HeartBeatImage1, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Thermometer_HeartBeatImage1, LV_OBJ_FLAG_CLICKABLE);     /// Flags
-    lv_obj_remove_flag(ui_Thermometer_HeartBeatImage1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    ui_Thermometer_ImageTemp = lv_image_create(ui_Thermometer);
+    lv_image_set_src(ui_Thermometer_ImageTemp, &ui_img_thermometer_png);
+    lv_obj_set_width(ui_Thermometer_ImageTemp, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Thermometer_ImageTemp, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Thermometer_ImageTemp, -50);
+    lv_obj_set_y(ui_Thermometer_ImageTemp, -40);
+    lv_obj_set_align(ui_Thermometer_ImageTemp, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Thermometer_ImageTemp, LV_OBJ_FLAG_CLICKABLE);     /// Flags
+    lv_obj_remove_flag(ui_Thermometer_ImageTemp, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
-    ui_Thermometer_Image3 = lv_image_create(ui_Thermometer);
-    lv_image_set_src(ui_Thermometer_Image3, &ui_img_humi_png);
-    lv_obj_set_width(ui_Thermometer_Image3, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Thermometer_Image3, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Thermometer_Image3, -50);
-    lv_obj_set_y(ui_Thermometer_Image3, 10);
-    lv_obj_set_align(ui_Thermometer_Image3, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Thermometer_Image3, LV_OBJ_FLAG_CLICKABLE);     /// Flags
-    lv_obj_remove_flag(ui_Thermometer_Image3, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    ui_Thermometer_ImageHumi = lv_image_create(ui_Thermometer);
+    lv_image_set_src(ui_Thermometer_ImageHumi, &ui_img_humi_png);
+    lv_obj_set_width(ui_Thermometer_ImageHumi, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Thermometer_ImageHumi, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Thermometer_ImageHumi, -50);
+    lv_obj_set_y(ui_Thermometer_ImageHumi, 10);
+    lv_obj_set_align(ui_Thermometer_ImageHumi, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Thermometer_ImageHumi, LV_OBJ_FLAG_CLICKABLE);     /// Flags
+    lv_obj_remove_flag(ui_Thermometer_ImageHumi, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
-    ui_Thermometer_Label2 = lv_label_create(ui_Thermometer);
-    lv_obj_set_width(ui_Thermometer_Label2, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Thermometer_Label2, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Thermometer_Label2, 20);
-    lv_obj_set_y(ui_Thermometer_Label2, -40);
-    lv_obj_set_align(ui_Thermometer_Label2, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Thermometer_Label2, " 28 °C");
-    lv_obj_set_style_text_color(ui_Thermometer_Label2, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Thermometer_Label2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Thermometer_Label2, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_Thermometer_LabelTemp = lv_label_create(ui_Thermometer);
+    lv_obj_set_width(ui_Thermometer_LabelTemp, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Thermometer_LabelTemp, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Thermometer_LabelTemp, 20);
+    lv_obj_set_y(ui_Thermometer_LabelTemp, -40);
+    lv_obj_set_align(ui_Thermometer_LabelTemp, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Thermometer_LabelTemp, " 28 °C");
+    lv_obj_set_style_text_color(ui_Thermometer_LabelTemp, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_Thermometer_LabelTemp, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Thermometer_LabelTemp, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Thermometer_Label3 = lv_label_create(ui_Thermometer);
-    lv_obj_set_width(ui_Thermometer_Label3, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Thermometer_Label3, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Thermometer_Label3, 20);
-    lv_obj_set_y(ui_Thermometer_Label3, 10);
-    lv_obj_set_align(ui_Thermometer_Label3, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Thermometer_Label3, "90 %");
-    lv_obj_set_style_text_color(ui_Thermometer_Label3, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(ui_Thermometer_Label3, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_Thermometer_Label3, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_Thermometer_LabelHumi = lv_label_create(ui_Thermometer);
+    lv_obj_set_width(ui_Thermometer_LabelHumi, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Thermometer_LabelHumi, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Thermometer_LabelHumi, 20);
+    lv_obj_set_y(ui_Thermometer_LabelHumi, 10);
+    lv_obj_set_align(ui_Thermometer_LabelHumi, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Thermometer_LabelHumi, "90 %");
+    lv_obj_set_style_text_color(ui_Thermometer_LabelHumi, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui_Thermometer_LabelHumi, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_Thermometer_LabelHumi, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Thermometer_Button3 = lv_button_create(ui_Thermometer);
-    lv_obj_set_width(ui_Thermometer_Button3, 150);
-    lv_obj_set_height(ui_Thermometer_Button3, 50);
-    lv_obj_set_x(ui_Thermometer_Button3, 0);
-    lv_obj_set_y(ui_Thermometer_Button3, 80);
-    lv_obj_set_align(ui_Thermometer_Button3, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Thermometer_Button3, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_remove_flag(ui_Thermometer_Button3, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_bg_color(ui_Thermometer_Button3, lv_color_hex(0x83858B), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_Thermometer_Button3, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_Thermometer_ButtonFresh = lv_button_create(ui_Thermometer);
+    lv_obj_set_width(ui_Thermometer_ButtonFresh, 150);
+    lv_obj_set_height(ui_Thermometer_ButtonFresh, 50);
+    lv_obj_set_x(ui_Thermometer_ButtonFresh, 0);
+    lv_obj_set_y(ui_Thermometer_ButtonFresh, 80);
+    lv_obj_set_align(ui_Thermometer_ButtonFresh, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Thermometer_ButtonFresh, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
+    lv_obj_remove_flag(ui_Thermometer_ButtonFresh, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_bg_color(ui_Thermometer_ButtonFresh, lv_color_hex(0x83858B), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_Thermometer_ButtonFresh, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Thermometer_Image4 = lv_image_create(ui_Thermometer_Button3);
-    lv_image_set_src(ui_Thermometer_Image4, &ui_img_restart_png);
-    lv_obj_set_width(ui_Thermometer_Image4, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Thermometer_Image4, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Thermometer_Image4, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Thermometer_Image4, LV_OBJ_FLAG_CLICKABLE);     /// Flags
-    lv_obj_remove_flag(ui_Thermometer_Image4, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    ui_Thermometer_ImageFresh = lv_image_create(ui_Thermometer_ButtonFresh);
+    lv_image_set_src(ui_Thermometer_ImageFresh, &ui_img_restart_png);
+    lv_obj_set_width(ui_Thermometer_ImageFresh, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Thermometer_ImageFresh, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_align(ui_Thermometer_ImageFresh, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_Thermometer_ImageFresh, LV_OBJ_FLAG_CLICKABLE);     /// Flags
+    lv_obj_remove_flag(ui_Thermometer_ImageFresh, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
     lv_obj_add_event_cb(ui_Thermometer, ui_event_Thermometer, LV_EVENT_ALL, NULL);
 
