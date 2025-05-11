@@ -15,6 +15,8 @@
 
 #include "tasks/core.hpp"
 
+#include "components/lcd/st7789.h"
+
 #include "ui/ui.h"
 
 namespace bd::task {
@@ -25,9 +27,18 @@ void GuiTask(void *argument) {
 
   ui_init();
 
+  bool screen_off = false;
+
   while (true) {
     lv_task_handler();
     osDelayUntil(5);
+
+    bool is_timeout = lv_disp_get_inactive_time(nullptr) >= HW_ScreenOffTime;
+
+    if (screen_off != is_timeout) {
+      LCD_setLight(is_timeout ? 0 : HW_Light);
+      screen_off = is_timeout;
+    }
   }
 }
 

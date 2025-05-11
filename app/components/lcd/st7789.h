@@ -16,6 +16,9 @@
 extern "C" {
 #endif
 
+extern uint32_t HW_ScreenOffTime;
+extern uint32_t HW_Light;
+
 void LCD_init(void);
 void LCD_draw(uint16_t xbegin, uint16_t ybegin, uint16_t xend, uint16_t yend,
               uint8_t pic[]);
