@@ -9,10 +9,16 @@
 
 #include "ui_timer_helper.h"
 
+#include <stdio.h>
+
 #include "components/battery/battery.h"
 #include "components/rtc/rtc.h"
 
 #include "ui/ui.h"
+
+static char ui_timer_buffer[16];
+
+const char *week_str[] = {"", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
 
 void ui_Calendar_update() {
   lv_calendar_set_today_date(ui_Calendar_CalendarInstance, 2025, 5, 1);
@@ -29,11 +35,16 @@ void ui_HeartBeat_update() {
 }
 
 void ui_Home_update() {
-  lv_label_set_text(ui_Home_Date, "05-01");
-  lv_label_set_text(ui_Home_Mouth, "Thu");
+  RTC_freshDate();
+  sprintf(ui_timer_buffer, "%d-%d", (int)HW_MONTH, (int)HW_DAY);
+  lv_label_set_text(ui_Home_Date, ui_timer_buffer);
+  lv_label_set_text(ui_Home_Mouth, week_str[(int)HW_WEEKDAY]);
 
-  lv_label_set_text(ui_Home_TimeMinute, "12");
-  lv_label_set_text(ui_Home_TimeSecond, "34");
+  RTC_freshTime();
+  sprintf(ui_timer_buffer, "%d", (int)HW_HOUR);
+  lv_label_set_text(ui_Home_TimeMinute, ui_timer_buffer);
+  sprintf(ui_timer_buffer, "%d", (int)HW_MINUTE);
+  lv_label_set_text(ui_Home_TimeSecond, ui_timer_buffer);
 
   lv_label_set_text(ui_Home_LabelApplication, "Today's Step: 103");
 

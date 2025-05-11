@@ -18,7 +18,7 @@ uint32_t HW_SECOND;
 
 void RTC_freshTime() {
   RTC_TimeTypeDef time = {};
-  HAL_RTC_GetTime(RTC_HANDLE, &time, RTC_FORMAT_BCD);
+  HAL_RTC_GetTime(RTC_HANDLE, &time, RTC_FORMAT_BIN);
 
   HW_HOUR = time.Hours;
   HW_MINUTE = time.Minutes;
@@ -39,11 +39,12 @@ uint32_t HW_DAY;
 
 void RTC_freshDate() {
   RTC_DateTypeDef date = {};
-  HAL_RTC_GetDate(RTC_HANDLE, &date, RTC_FORMAT_BCD);
+  HAL_RTC_GetDate(RTC_HANDLE, &date, RTC_FORMAT_BIN);
 
   HW_YEAR = date.Year + 2000;
   HW_MONTH = date.Month;
   HW_DAY = date.Date;
+  HW_WEEKDAY = date.WeekDay;
 }
 
 void RTC_setDate(uint16_t year, uint8_t month, uint8_t day) {
@@ -64,6 +65,8 @@ void RTC_setDate(uint16_t year, uint8_t month, uint8_t day) {
     date.WeekDay =
         (day + (13 * (month + 1)) / 5 + K + K / 4 + J / 4 + 5 * J) % 7 + 6;
     date.WeekDay = (date.WeekDay % 7) + 1; // 1=Monday, ..., 7=Sunday
+
+    HW_WEEKDAY = date.WeekDay;
   }
 
   HAL_RTC_SetDate(RTC_HANDLE, &date, RTC_FORMAT_BIN);

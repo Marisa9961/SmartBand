@@ -26,6 +26,7 @@ void RTC_setTime(uint8_t hour, uint8_t minute, uint8_t second);
 extern uint32_t HW_YEAR;
 extern uint32_t HW_MONTH;
 extern uint32_t HW_DAY;
+extern uint32_t HW_WEEKDAY;
 
 void RTC_freshDate();
 void RTC_setDate(uint16_t year, uint8_t month, uint8_t day);
