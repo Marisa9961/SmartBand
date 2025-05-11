@@ -44,7 +44,7 @@ void BluetoothTask(void *parameter) {
     } break;
     }
 
-    helper.transmit();
+    helper.flush();
   }
 }
 

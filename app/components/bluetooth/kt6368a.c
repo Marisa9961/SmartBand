@@ -24,7 +24,6 @@ static struct {
 } ble_buffer = {};
 
 void BLE_init() {
-  HAL_GPIO_WritePin(BLE_ENABLE_GPIO_Port, BLE_ENABLE_Pin, GPIO_PIN_RESET);
   HAL_UARTEx_ReceiveToIdle_DMA(BLE_UART, ble_buffer.data, BLE_BUFFER_SIZE);
 
   extern DMA_HandleTypeDef hdma_usart1_rx;
@@ -32,7 +31,11 @@ void BLE_init() {
   __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_TC);
 }
 
-void BLE_deinit() {
+void BLE_enable() {
+  HAL_GPIO_WritePin(BLE_ENABLE_GPIO_Port, BLE_ENABLE_Pin, GPIO_PIN_RESET);
+}
+
+void BLE_disable() {
   HAL_GPIO_WritePin(BLE_ENABLE_GPIO_Port, BLE_ENABLE_Pin, GPIO_PIN_SET);
 }
 
@@ -59,5 +62,5 @@ char BLE_readNextChar() {
 }
 
 void BLE_transmit(const char *str) {
-  HAL_UART_Transmit_DMA(BLE_UART, (uint8_t *)str, strlen(str));
+  HAL_UART_Transmit(BLE_UART, (uint8_t *)str, strlen(str), HAL_MAX_DELAY);
 }

@@ -24,7 +24,8 @@ public:
     FIND_STEP,
   };
 
-  void clear();
+  BluetoothHelper();
+
   State parse();
 
   bool handleTime();
@@ -34,7 +35,7 @@ public:
   void print(const char *str, bool state);
   void print(const char *str, int dat);
 
-  void transmit();
+  void flush();
 
   std::array<char, 16> rx{};
   std::array<char, 16> tx{};

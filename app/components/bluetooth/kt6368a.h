@@ -17,7 +17,9 @@ extern "C" {
 #endif
 
 void BLE_init();
-void BLE_deinit();
+
+void BLE_enable();
+void BLE_disable();
 
 bool BLE_flag();
 char BLE_readNextChar();

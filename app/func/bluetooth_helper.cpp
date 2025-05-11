@@ -18,14 +18,9 @@
 #include "components/rtc/rtc.h"
 
 namespace bd::task {
-void BluetoothHelper::clear() {
-  rx.fill(0);
-  tx.fill(0);
-}
+BluetoothHelper::BluetoothHelper() { BLE_init(); }
 
 BluetoothHelper::State BluetoothHelper::parse() {
-  clear();
-
   if (BLE_readNextChar() != '@') {
     return ERROR;
   }
@@ -89,7 +84,7 @@ void BluetoothHelper::print(const char *str, bool state) {
   if (state) {
     std::sprintf(tx.data(), "#%s_OK#", str);
   } else {
-    std::sprintf(tx.data(), "#RETRY");
+    std::sprintf(tx.data(), "#RETRY#");
   }
 }
 
@@ -97,6 +92,10 @@ void BluetoothHelper::print(const char *str, int dat) {
   std::sprintf(tx.data(), "#%s:%d#", str, dat);
 }
 
-void BluetoothHelper::transmit() { BLE_transmit(tx.data()); }
+void BluetoothHelper::flush() {
+  BLE_transmit(tx.data());
+  rx.fill(0);
+  tx.fill(0);
+}
 
 } // namespace bd::task
