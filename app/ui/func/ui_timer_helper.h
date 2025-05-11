@@ -10,6 +10,11 @@
 #ifndef __UI_TIMER_HELPER__
 #define __UI_TIMER_HELPER__
 
+void ui_Calendar_update();
+void ui_Director_update();
+void ui_HeartBeat_update();
 void ui_Home_update();
+void ui_NotificationPanel_update();
+void ui_Thermometer_update();
 
 #endif

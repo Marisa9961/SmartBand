@@ -20,14 +20,25 @@ static lv_timer_t *timer;
 
 static void timer_callback(lv_timer_t *timer) {
   static lv_obj_t *current_screen;
-
   lv_obj_t *screen = lv_screen_active();
 
   if (current_screen != screen) {
-    if (screen == ui_Home) {
-      current_screen = screen;
+    if (screen == nullptr) {
+    } else if (screen == ui_Calendar) {
+      callback = ui_Calendar_update;
+    } else if (screen == ui_Director) {
+      callback = ui_Director_update;
+    } else if (screen == ui_HeartBeat) {
+      callback = ui_HeartBeat_update;
+    } else if (screen == ui_Home) {
       callback = ui_Home_update;
+    } else if (screen == ui_NotificationPanel) {
+      callback = ui_NotificationPanel_update;
+    } else if (screen == ui_Thermometer) {
+      callback = ui_Thermometer_update;
     }
+
+    current_screen = screen;
 
   } else {
     callback();
@@ -36,5 +47,5 @@ static void timer_callback(lv_timer_t *timer) {
 
 void ui_timer_init() {
   callback = ui_Home_update;
-  timer = lv_timer_create(timer_callback, 100, nullptr);
+  timer = lv_timer_create(timer_callback, 1000, nullptr);
 }
