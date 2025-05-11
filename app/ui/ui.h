@@ -109,7 +109,6 @@ void ui_event_Application_ContainerAlarm(lv_event_t * e);
 extern lv_obj_t * ui_Application_ContainerAlarm;
 extern lv_obj_t * ui_Application_ImageAlarm;
 extern lv_obj_t * ui_Application_LabelAlarm;
-void ui_event_Application_ContainerCalendar(lv_event_t * e);
 extern lv_obj_t * ui_Application_ContainerCalendar;
 extern lv_obj_t * ui_Application_ImageCalendar;
 extern lv_obj_t * ui_Application_LabelCalendar;
@@ -137,13 +136,6 @@ void ui_event_Application_ContainerSettings(lv_event_t * e);
 extern lv_obj_t * ui_Application_ContainerSettings;
 extern lv_obj_t * ui_Application_ImageSettings;
 extern lv_obj_t * ui_Application_LabelSettings;
-// CUSTOM VARIABLES
-
-// SCREEN: ui_Calendar
-void ui_Calendar_screen_init(void);
-void ui_event_Calendar(lv_event_t * e);
-extern lv_obj_t * ui_Calendar;
-extern lv_obj_t * ui_Calendar_CalendarIns;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_Timer
@@ -193,11 +185,11 @@ extern lv_obj_t * ui_SettingsBluetooth_Label5;
 void ui_SettingsDebug_screen_init(void);
 void ui_event_SettingsDebug(lv_event_t * e);
 extern lv_obj_t * ui_SettingsDebug;
-extern lv_obj_t * ui_SettingsDebug_Keyboard1;
+extern lv_obj_t * ui_SettingsDebug_Keyboard2;
 extern lv_obj_t * ui_SettingsDebug_TextArea1;
 extern lv_obj_t * ui_SettingsDebug_TextArea2;
-extern lv_obj_t * ui_SettingsDebug_Label10;
-extern lv_obj_t * ui_SettingsDebug_Label11;
+extern lv_obj_t * ui_SettingsDebug_Label12;
+extern lv_obj_t * ui_SettingsDebug_Label13;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_SettingsTime
@@ -271,12 +263,22 @@ void ui_event_Alarm(lv_event_t * e);
 extern lv_obj_t * ui_Alarm;
 extern lv_obj_t * ui_Alarm_HeartBeatTitle4;
 extern lv_obj_t * ui_Alarm_Image8;
+void ui_event_Alarm_Button8(lv_event_t * e);
 extern lv_obj_t * ui_Alarm_Button8;
-extern lv_obj_t * ui_Alarm_Image9;
+extern lv_obj_t * ui_Alarm_Label10;
+extern lv_obj_t * ui_Alarm_Label11;
+// CUSTOM VARIABLES
+
+// SCREEN: ui_Calendar
+void ui_Calendar_screen_init(void);
+void ui_event_Calendar(lv_event_t * e);
+extern lv_obj_t * ui_Calendar;
+extern lv_obj_t * ui_Calendar_Calendar1;
 // CUSTOM VARIABLES
 
 // EVENTS
 
+void ui_event____initial_actions0(lv_event_t * e);
 extern lv_obj_t * ui____initial_actions0;
 
 // IMAGES AND IMAGE SETS

@@ -235,7 +235,6 @@ void ui_Application_screen_init(void)
     lv_obj_set_style_text_font(ui_Application_LabelSettings, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_Application_ContainerAlarm, ui_event_Application_ContainerAlarm, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_Application_ContainerCalendar, ui_event_Application_ContainerCalendar, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Application_ContainerTimer, ui_event_Application_ContainerTimer, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Application_ContainerHeartBeat, ui_event_Application_ContainerHeartBeat, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Application_ContainerFlash, ui_event_Application_ContainerFlash, LV_EVENT_ALL, NULL);

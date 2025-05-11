@@ -101,7 +101,6 @@ void ui_event_Application_ContainerAlarm(lv_event_t * e);
 lv_obj_t * ui_Application_ContainerAlarm;
 lv_obj_t * ui_Application_ImageAlarm;
 lv_obj_t * ui_Application_LabelAlarm;
-void ui_event_Application_ContainerCalendar(lv_event_t * e);
 lv_obj_t * ui_Application_ContainerCalendar;
 lv_obj_t * ui_Application_ImageCalendar;
 lv_obj_t * ui_Application_LabelCalendar;
@@ -129,13 +128,6 @@ void ui_event_Application_ContainerSettings(lv_event_t * e);
 lv_obj_t * ui_Application_ContainerSettings;
 lv_obj_t * ui_Application_ImageSettings;
 lv_obj_t * ui_Application_LabelSettings;
-// CUSTOM VARIABLES
-
-// SCREEN: ui_Calendar
-void ui_Calendar_screen_init(void);
-void ui_event_Calendar(lv_event_t * e);
-lv_obj_t * ui_Calendar;
-lv_obj_t * ui_Calendar_CalendarIns;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_Timer
@@ -185,11 +177,11 @@ lv_obj_t * ui_SettingsBluetooth_Label5;
 void ui_SettingsDebug_screen_init(void);
 void ui_event_SettingsDebug(lv_event_t * e);
 lv_obj_t * ui_SettingsDebug;
-lv_obj_t * ui_SettingsDebug_Keyboard1;
+lv_obj_t * ui_SettingsDebug_Keyboard2;
 lv_obj_t * ui_SettingsDebug_TextArea1;
 lv_obj_t * ui_SettingsDebug_TextArea2;
-lv_obj_t * ui_SettingsDebug_Label10;
-lv_obj_t * ui_SettingsDebug_Label11;
+lv_obj_t * ui_SettingsDebug_Label12;
+lv_obj_t * ui_SettingsDebug_Label13;
 // CUSTOM VARIABLES
 
 // SCREEN: ui_SettingsTime
@@ -263,11 +255,21 @@ void ui_event_Alarm(lv_event_t * e);
 lv_obj_t * ui_Alarm;
 lv_obj_t * ui_Alarm_HeartBeatTitle4;
 lv_obj_t * ui_Alarm_Image8;
+void ui_event_Alarm_Button8(lv_event_t * e);
 lv_obj_t * ui_Alarm_Button8;
-lv_obj_t * ui_Alarm_Image9;
+lv_obj_t * ui_Alarm_Label10;
+lv_obj_t * ui_Alarm_Label11;
+// CUSTOM VARIABLES
+
+// SCREEN: ui_Calendar
+void ui_Calendar_screen_init(void);
+void ui_event_Calendar(lv_event_t * e);
+lv_obj_t * ui_Calendar;
+lv_obj_t * ui_Calendar_Calendar1;
 // CUSTOM VARIABLES
 
 // EVENTS
+void ui_event____initial_actions0(lv_event_t * e);
 lv_obj_t * ui____initial_actions0;
 
 // IMAGES AND IMAGE SETS
@@ -420,15 +422,6 @@ void ui_event_Application_ContainerAlarm(lv_event_t * e)
     }
 }
 
-void ui_event_Application_ContainerCalendar(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-
-    if(event_code == LV_EVENT_CLICKED) {
-        _ui_screen_change(&ui_Calendar, LV_SCR_LOAD_ANIM_NONE, 500, 0, &ui_Calendar_screen_init);
-    }
-}
-
 void ui_event_Application_ContainerTimer(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -480,16 +473,6 @@ void ui_event_Application_ContainerSettings(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         _ui_screen_change(&ui_Settings, LV_SCR_LOAD_ANIM_NONE, 500, 0, &ui_Settings_screen_init);
-    }
-}
-
-void ui_event_Calendar(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-
-    if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_active()) == LV_DIR_RIGHT) {
-        lv_indev_wait_release(lv_indev_active());
-        _ui_screen_change(&ui_Home, LV_SCR_LOAD_ANIM_NONE, 500, 0, &ui_Home_screen_init);
     }
 }
 
@@ -622,6 +605,34 @@ void ui_event_Alarm(lv_event_t * e)
     }
 }
 
+void ui_event_Alarm_Button8(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_CLICKED) {
+        _ui_screen_change(&ui_Home, LV_SCR_LOAD_ANIM_NONE, 500, 0, &ui_Home_screen_init);
+    }
+}
+
+void ui_event_Calendar(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_active()) == LV_DIR_RIGHT) {
+        lv_indev_wait_release(lv_indev_active());
+        _ui_screen_change(&ui_Home, LV_SCR_LOAD_ANIM_NONE, 500, 0, &ui_Home_screen_init);
+    }
+}
+
+void ui_event____initial_actions0(lv_event_t * e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+
+    if(event_code == LV_EVENT_SCREEN_LOAD_START) {
+        ui_init_action(e);
+    }
+}
+
 ///////////////////// SCREENS ////////////////////
 
 void ui_init(void)
@@ -635,7 +646,6 @@ void ui_init(void)
     ui_Settings_screen_init();
     ui_SettingsAbout_screen_init();
     ui_Application_screen_init();
-    ui_Calendar_screen_init();
     ui_Timer_screen_init();
     ui_SettingsWristOn_screen_init();
     ui_SettingsLockTime_screen_init();
@@ -648,6 +658,10 @@ void ui_init(void)
     ui_Director_screen_init();
     ui_Flash_screen_init();
     ui_Alarm_screen_init();
+    ui_Calendar_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
+    lv_obj_add_event_cb(ui____initial_actions0, ui_event____initial_actions0, LV_EVENT_ALL, NULL);
+
+    lv_disp_load_scr(ui____initial_actions0);
     lv_disp_load_scr(ui_Home);
 }
