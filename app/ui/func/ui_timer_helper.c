@@ -13,6 +13,7 @@
 
 #include "components/battery/battery.h"
 #include "components/rtc/rtc.h"
+#include "components/thermometer/aht21.h"
 
 #include "ui/ui.h"
 
@@ -60,6 +61,15 @@ void ui_NotificationPanel_update() {
 }
 
 void ui_Thermometer_update() {
-  lv_label_set_text(ui_Thermometer_LabelTemp, " 28 °C");
-  lv_label_set_text(ui_Thermometer_LabelHumi, " 90 %");
+  int temp_int = HW_TEMP / 10;
+  int temp_frac = HW_TEMP % 10;
+
+  int humi_int = HW_HUMI / 10;
+  int humi_frac = HW_HUMI % 10;
+
+  sprintf(ui_timer_buffer, "%d.%d°C", temp_int, temp_frac);
+  lv_label_set_text(ui_Thermometer_LabelTemp, ui_timer_buffer);
+
+  sprintf(ui_timer_buffer, "%d.%d%%", humi_int, humi_frac);
+  lv_label_set_text(ui_Thermometer_LabelHumi, ui_timer_buffer);
 }

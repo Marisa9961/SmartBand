@@ -13,13 +13,16 @@
 
 #include "tasks/bluetooth.hpp"
 #include "tasks/gui.hpp"
+#include "tasks/sensor.hpp"
 #include "tasks/storage.hpp"
 
 #include "components/bluetooth/kt6368a.h"
+#include "components/thermometer/aht21.h"
 
 namespace bd::task {
 void CoreTask(void *argument) {
   gui.run();
+  sensor.run();
   storage.run();
   bluetooth.run();
 
