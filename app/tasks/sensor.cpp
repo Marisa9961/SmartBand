@@ -9,15 +9,19 @@
 
 #include "sensor.hpp"
 
+#include "components/direct/lsm303.h"
 #include "components/thermometer/aht21.h"
 
 namespace bd::task {
 void SensorTask(void *argument) {
   THER_init();
+  DIRECT_init();
 
   while (true) {
     osDelay(1000);
+
     THER_fresh();
+    DIRECT_fresh();
   }
 }
 

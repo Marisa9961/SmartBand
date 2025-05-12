@@ -12,6 +12,7 @@
 #include <stdio.h>
 
 #include "components/battery/battery.h"
+#include "components/direct/lsm303.h"
 #include "components/rtc/rtc.h"
 #include "components/thermometer/aht21.h"
 
@@ -27,8 +28,8 @@ void ui_Calendar_update() {
 }
 
 void ui_Director_update() {
-  lv_label_set_text(ui_Director_LabelHeight, "0m");
-  lv_label_set_text(ui_Director_LabelCompass, "0°");
+  sprintf(ui_timer_buffer, "%d°", (int)HW_DIRECT);
+  lv_label_set_text(ui_Director_LabelCompass, ui_timer_buffer);
 }
 
 void ui_HeartBeat_update() {
