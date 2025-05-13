@@ -35,7 +35,7 @@ void ui_Director_update() {
 }
 
 void ui_HeartBeat_update() {
-  lv_label_set_text(ui_HeartBeat_LabelHeartbeatNum, "82");
+  // lv_label_set_text(ui_HeartBeat_LabelHeartbeatNum, "82");
 }
 
 void ui_Home_update() {
@@ -50,13 +50,13 @@ void ui_Home_update() {
   sprintf(ui_timer_buffer, "%d", (int)HW_MINUTE);
   lv_label_set_text(ui_Home_TimeMinute, ui_timer_buffer);
 
-  lv_label_set_text(ui_Home_LabelApplication, "Today's Step: 103");
+  // lv_label_set_text(ui_Home_LabelApplication, "Today's Step: 103");
 
-  lv_label_set_text(ui_Home_LabelWeather, "Sunny\n28/15 °C");
+  // lv_label_set_text(ui_Home_LabelWeather, "Sunny\n28/15 °C");
 
-  lv_label_set_text(ui_Home_LabelHeart, "75 BPM");
+  // lv_label_set_text(ui_Home_LabelHeart, "75 BPM");
 
-  lv_label_set_text(ui_Home_LabelBattery, "78%");
+  // lv_label_set_text(ui_Home_LabelBattery, "78%");
 }
 
 void ui_NotificationPanel_update() {
