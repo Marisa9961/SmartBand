@@ -23,8 +23,10 @@ static char ui_timer_buffer[16];
 const char *week_str[] = {"", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
 
 void ui_Calendar_update() {
-  lv_calendar_set_today_date(ui_Calendar_CalendarInstance, 2025, 5, 1);
-  lv_calendar_set_showed_date(ui_Calendar_CalendarInstance, 2025, 5);
+  RTC_freshDate();
+  lv_calendar_set_today_date(ui_Calendar_CalendarInstance, HW_YEAR, HW_MONTH,
+                             HW_DAY);
+  lv_calendar_set_showed_date(ui_Calendar_CalendarInstance, HW_YEAR, HW_MONTH);
 }
 
 void ui_Director_update() {
