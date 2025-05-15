@@ -24,6 +24,10 @@ Task::Task(osThreadFunc_t func, const char *name, uint32_t stack_size,
 }
 
 bool Task::run(void *argument) {
+  if (handle_ != nullptr) {
+    return false;
+  }
+
   osThreadAttr_t attr{};
 
   attr.name = name_;
