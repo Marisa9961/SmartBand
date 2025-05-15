@@ -161,5 +161,5 @@ void LCD_setLight(uint8_t level) {
   HAL_TIM_PWM_Start(LCD_TIM, TIM_CHANNEL_2);
 };
 
-uint32_t HW_ScreenOffTime = 5000;
-uint32_t HW_Light = 150;
+uint32_t HW_SCREEN_OFF_TIME = 5000;
+uint32_t HW_LEVEL = 150;

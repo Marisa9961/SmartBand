@@ -25,8 +25,21 @@ void CoreTask(void *argument) {
   storage.run();
   bluetooth.run();
 
+  uint32_t flag = 0;
+  auto validate{[&flag](const Task &task) { return flag & task.uid(); }};
+
   while (true) {
     osDelay(100);
+
+    flag = osThreadFlagsGet();
+
+    if (validate(gui)) {
+      // TODO
+    }
+
+    if (validate(storage)) {
+      // TODO
+    }
 
     if (BLE_flag()) {
       core.notify(bluetooth);

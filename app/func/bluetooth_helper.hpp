@@ -12,7 +12,7 @@
 
 #include <array>
 
-namespace bd::task {
+namespace bd {
 class BluetoothHelper {
 public:
   enum State {
@@ -41,6 +41,6 @@ public:
   std::array<char, 16> tx{};
 };
 
-} // namespace bd::task
+} // namespace bd
 
 #endif

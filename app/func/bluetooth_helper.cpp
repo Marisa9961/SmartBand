@@ -17,7 +17,7 @@
 #include "components/bluetooth/kt6368a.h"
 #include "components/rtc/rtc.h"
 
-namespace bd::task {
+namespace bd {
 BluetoothHelper::BluetoothHelper() { BLE_init(); }
 
 BluetoothHelper::State BluetoothHelper::parse() {
@@ -117,4 +117,4 @@ void BluetoothHelper::print(const char *str, int dat) {
 
 void BluetoothHelper::flush() { BLE_transmit(tx.data()); }
 
-} // namespace bd::task
+} // namespace bd

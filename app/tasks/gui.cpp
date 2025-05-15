@@ -27,17 +27,12 @@ void GuiTask(void *argument) {
 
   ui_init();
 
-  bool screen_off = false;
-
   while (true) {
     lv_task_handler();
     osDelayUntil(5);
 
-    bool is_timeout = lv_disp_get_inactive_time(nullptr) >= HW_SCREEN_OFF_TIME;
-
-    if (screen_off != is_timeout) {
-      LCD_setLight(is_timeout ? 0 : HW_LEVEL);
-      screen_off = is_timeout;
+    if (lv_disp_get_inactive_time(nullptr) >= HW_SCREEN_OFF_TIME) {
+      gui.notify(core);
     }
   }
 }
