@@ -30,7 +30,7 @@ void StorageTask(void *argument) {
   }
 
   while (true) {
-    osThreadFlagsWait(core.flag(), osFlagsWaitAll, osWaitForever);
+    storage.wait(core);
   }
 }
 

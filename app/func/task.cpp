@@ -14,14 +14,17 @@ namespace bd {
 // But only support up to 31 existed tasks
 // using like this -> osThreadFlagsSet(gui.getHandle(), core.getUid())
 // From CORE task send message to GUI task
+uint32_t getTaskUID() {
+  static uint32_t uid = 1;
+  auto ret{uid};
+  uid <<= 1;
+  return ret;
+}
+
 Task::Task(osThreadFunc_t func, const char *name, uint32_t stack_size,
            osPriority_t priority)
     : name_(name), stack_size_(stack_size), priority_(priority),
-      handle_(nullptr), func_(func) {
-  static Flag uid = 1;
-  task_flag_ = uid;
-  uid <<= 1;
-}
+      handle_(nullptr), func_(func), uid_(getTaskUID()) {}
 
 bool Task::run(void *argument) {
   if (handle_ != nullptr) {
@@ -37,6 +40,14 @@ bool Task::run(void *argument) {
   handle_ = osThreadNew(func_, argument, &attr);
 
   return handle_ != nullptr;
+}
+
+uint32_t Task::notify(const Task &other) {
+  return osThreadFlagsSet(other.handle(), uid());
+}
+
+uint32_t Task::wait(const Task &other) {
+  return osThreadFlagsWait(other.uid(), osFlagsWaitAny, osWaitForever);
 }
 
 } // namespace bd

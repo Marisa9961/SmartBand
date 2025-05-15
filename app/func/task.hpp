@@ -14,8 +14,6 @@
 
 namespace bd {
 class Task {
-  using Flag = uint32_t;
-
 public:
   Task(osThreadFunc_t func, const char *name, uint32_t stack_size,
        osPriority_t priority);
@@ -25,20 +23,22 @@ public:
   Task(Task &&) = delete;
   Task &operator=(Task &&) = delete;
 
-  inline constexpr osThreadId_t getHandle() { return handle_; }
-  inline constexpr Flag flag() { return task_flag_; }
-
   bool run(void *argument = nullptr);
+  uint32_t notify(const Task &other);
+  uint32_t wait(const Task &other);
+
+  [[nodiscard]] inline constexpr osThreadId_t handle() const { return handle_; }
+  [[nodiscard]] inline constexpr uint32_t uid() const { return uid_; }
 
 private:
-  Flag task_flag_;
-
   const char *name_;
   uint32_t stack_size_;
   osPriority_t priority_;
 
   osThreadId_t handle_;
   osThreadFunc_t func_;
+
+  uint32_t uid_;
 };
 
 } // namespace bd

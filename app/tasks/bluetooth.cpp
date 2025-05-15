@@ -20,7 +20,7 @@ void BluetoothTask(void *parameter) {
   BluetoothHelper helper{};
 
   while (true) {
-    osThreadFlagsWait(core.flag(), osFlagsWaitAll, osWaitForever);
+    bluetooth.wait(core);
 
     switch (helper.parse()) {
     case BluetoothHelper::State::SET_TIME: {

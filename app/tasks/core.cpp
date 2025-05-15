@@ -29,7 +29,7 @@ void CoreTask(void *argument) {
     osDelay(100);
 
     if (BLE_flag()) {
-      osThreadFlagsSet(bluetooth.getHandle(), core.flag());
+      core.notify(bluetooth);
     }
   }
 }
