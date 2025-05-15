@@ -115,10 +115,6 @@ void BluetoothHelper::print(const char *str, int dat) {
   std::sprintf(tx.data(), "#%s:%d#", str, dat);
 }
 
-void BluetoothHelper::flush() {
-  BLE_transmit(tx.data());
-  rx.fill(0);
-  tx.fill(0);
-}
+void BluetoothHelper::flush() { BLE_transmit(tx.data()); }
 
 } // namespace bd::task
