@@ -17,7 +17,7 @@ set(APP_PATH    "app")
 set(THIRD_PATH  "third-party")
 
 # ------------------------------- Source Files ------------------------------- #
-file(GLOB_RECURSE sources_file 
+file(GLOB_RECURSE sources_file CONFIGURE_DEPENDS
     "${APP_PATH}/*.c" 
     "${APP_PATH}/*.cpp" 
 )
