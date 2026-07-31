@@ -9,27 +9,61 @@
 
 #include "tasks/bluetooth.hpp"
 
-#include "func/bluetooth_helper.hpp"
+#include <cstdint>
 
-#include "tasks/core.hpp"
+#include <cmsis_os2.h>
+
+#include "base/bootstrap.h"
+#include "func/bluetooth_helper.hpp"
+#include "func/task.hpp"
+#include "tasks/core_messages.hpp"
 
 #include "components/battery/battery.h"
+#include "components/bluetooth/kt6368a.h"
+
+namespace {
+constexpr uint32_t bluetooth_rx_ready{1U << 0U};
+osThreadId_t bluetooth_thread{nullptr};
+}
+
+extern "C" void BluetoothRxReadyCallback(void) {
+  if (bluetooth_thread != nullptr) {
+    osThreadFlagsSet(bluetooth_thread, bluetooth_rx_ready);
+  }
+}
 
 namespace bd::task {
-void BluetoothTask(void *parameter) {
+[[noreturn]] void BluetoothTask(void *parameter) {
+  static_cast<void>(parameter);
+
+  bluetooth_thread = osThreadGetId();
+  BLE_init(BluetoothRxReadyCallback);
+
   BluetoothHelper helper{};
 
+  if (reportTaskReady(TaskId::Bluetooth) != osOK) {
+    app_fatal();
+  }
+
   while (true) {
-    bluetooth.wait(core);
+    const auto flags{osThreadFlagsWait(bluetooth_rx_ready, osFlagsWaitAny,
+                                       osWaitForever)};
+    if ((flags & osFlagsError) != 0U) {
+      if (reportTaskFault(TaskId::Bluetooth,
+                          static_cast<int32_t>(flags)) != osOK) {
+        app_fatal();
+      }
+      continue;
+    }
 
     switch (helper.parse()) {
     case BluetoothHelper::State::SET_TIME: {
-      helper.handleTime();
-      helper.print("TIME", helper.handleTime());
+      const bool success{helper.handleTime()};
+      helper.print("TIME", success);
     } break;
     case BluetoothHelper::State::SET_DATE: {
-      helper.handleDate();
-      helper.print("DATE", helper.handleDate());
+      const bool success{helper.handleDate()};
+      helper.print("DATE", success);
     } break;
     case BluetoothHelper::State::FIND_BAT: {
       helper.print("BATTERY", static_cast<int>(HW_BATTERY));
@@ -48,6 +82,4 @@ void BluetoothTask(void *parameter) {
     helper.flush();
   }
 }
-
-Task bluetooth{BluetoothTask, "BlueTooth", 128 * 4, osPriorityAboveNormal};
 } // namespace bd::task

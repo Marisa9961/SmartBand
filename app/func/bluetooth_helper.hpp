@@ -24,7 +24,7 @@ public:
     FIND_STEP,
   };
 
-  BluetoothHelper();
+  BluetoothHelper() = default;
 
   State parse();
 

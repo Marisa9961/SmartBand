@@ -10,10 +10,19 @@
 #ifndef __TASKS_GUI_HPP__
 #define __TASKS_GUI_HPP__
 
-#include "func/task.hpp"
+#include <cstdint>
 
 namespace bd::task {
-extern Task gui;
+enum class GuiSignal : uint32_t {
+  DisplayOff = 1U << 0U,
+  DisplayOn = 1U << 1U,
+};
+
+inline constexpr uint32_t gui_signal_mask{
+    static_cast<uint32_t>(GuiSignal::DisplayOff) |
+    static_cast<uint32_t>(GuiSignal::DisplayOn)};
+
+[[noreturn]] void GuiTask(void *argument);
 } // namespace bd::task
 
 #endif

@@ -10,44 +10,84 @@
 #include "func/task.hpp"
 
 namespace bd {
-// Notice: UID helps with threads message communication
-// But only support up to 31 existed tasks
-// using like this -> osThreadFlagsSet(gui.getHandle(), core.getUid())
-// From CORE task send message to GUI task
-uint32_t getTaskUID() {
-  static uint32_t uid = 1;
-  auto ret{uid};
-  uid <<= 1;
-  return ret;
-}
-
-Task::Task(osThreadFunc_t func, const char *name, uint32_t stack_size,
-           osPriority_t priority)
-    : name_(name), stack_size_(stack_size), priority_(priority),
-      handle_(nullptr), func_(func), uid_(getTaskUID()) {}
-
-bool Task::run(void *argument) {
-  if (handle_ != nullptr) {
+bool ManagedTask::create(const TaskSpec &spec, void *argument) {
+  if (state_ != TaskState::Dormant) {
     return false;
   }
 
+  spec_ = &spec;
+
   osThreadAttr_t attr{};
 
-  attr.name = name_;
-  attr.stack_size = stack_size_;
-  attr.priority = priority_;
+  attr.name = spec.name;
+  attr.stack_size = spec.stack_size;
+  attr.priority = spec.priority;
 
-  handle_ = osThreadNew(func_, argument, &attr);
+  handle_ = osThreadNew(spec.entry, argument, &attr);
+  state_ = handle_ == nullptr ? TaskState::Failed : TaskState::Created;
 
   return handle_ != nullptr;
 }
 
-uint32_t Task::notify(const Task &other) {
-  return osThreadFlagsSet(other.handle(), uid());
+bool ManagedTask::markReady() {
+  if (state_ != TaskState::Created) {
+    return false;
+  }
+
+  state_ = TaskState::Ready;
+  return true;
 }
 
-uint32_t Task::wait(const Task &other) {
-  return osThreadFlagsWait(other.uid(), osFlagsWaitAny, osWaitForever);
+void ManagedTask::markFailed() { state_ = TaskState::Failed; }
+
+ManagedTask *TaskRegistry::find(TaskId id) {
+  const auto index{static_cast<std::size_t>(id)};
+  return index < tasks_.size() ? &tasks_[index] : nullptr;
+}
+
+const ManagedTask *TaskRegistry::find(TaskId id) const {
+  const auto index{static_cast<std::size_t>(id)};
+  return index < tasks_.size() ? &tasks_[index] : nullptr;
+}
+
+bool TaskRegistry::create(const TaskSpec &spec, void *argument) {
+  auto *task{find(spec.id)};
+  return task != nullptr && task->create(spec, argument);
+}
+
+bool TaskRegistry::markReady(TaskId id) {
+  auto *task{find(id)};
+  return task != nullptr && task->markReady();
+}
+
+void TaskRegistry::markFailed(TaskId id) {
+  if (auto *task{find(id)}; task != nullptr) {
+    task->markFailed();
+  }
+}
+
+osThreadId_t TaskRegistry::handle(TaskId id) const {
+  const auto *task{find(id)};
+  return task == nullptr ? nullptr : task->handle();
+}
+
+TaskState TaskRegistry::state(TaskId id) const {
+  const auto *task{find(id)};
+  return task == nullptr ? TaskState::Failed : task->state();
+}
+
+const TaskSpec *TaskRegistry::spec(TaskId id) const {
+  const auto *task{find(id)};
+  return task == nullptr ? nullptr : task->spec();
+}
+
+uint32_t TaskRegistry::signal(TaskId id, uint32_t flags) const {
+  const auto task_handle{handle(id)};
+  if (task_handle == nullptr) {
+    return osFlagsErrorParameter;
+  }
+
+  return osThreadFlagsSet(task_handle, flags);
 }
 
 } // namespace bd

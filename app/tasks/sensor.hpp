@@ -10,10 +10,8 @@
 #ifndef __TASKS_SENSOR_HPP__
 #define __TASKS_SENSOR_HPP__
 
-#include "func/task.hpp"
-
 namespace bd::task {
-extern Task sensor;
+[[noreturn]] void SensorTask(void *argument);
 } // namespace bd::task
 
 #endif

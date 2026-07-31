@@ -10,10 +10,8 @@
 #ifndef __TASKS_BLUETOOTH_HPP__
 #define __TASKS_BLUETOOTH_HPP__
 
-#include "func/task.hpp"
-
 namespace bd::task {
-extern Task bluetooth;
+[[noreturn]] void BluetoothTask(void *argument);
 } // namespace bd::task
 
 #endif

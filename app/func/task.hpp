@@ -10,35 +10,74 @@
 #ifndef __FUNC_TASK_HPP__
 #define __FUNC_TASK_HPP__
 
+#include <array>
+#include <cstddef>
+#include <cstdint>
+
 #include <cmsis_os2.h>
 
 namespace bd {
-class Task {
+enum class TaskId : uint8_t {
+  Core,
+  Gui,
+  Sensor,
+  Storage,
+  Bluetooth,
+  Count,
+};
+
+enum class TaskState : uint8_t {
+  Dormant,
+  Created,
+  Ready,
+  Failed,
+};
+
+struct TaskSpec {
+  TaskId id;
+  const char *name;
+  osThreadFunc_t entry;
+  uint32_t stack_size;
+  osPriority_t priority;
+  bool required;
+};
+
+class ManagedTask {
 public:
-  Task(osThreadFunc_t func, const char *name, uint32_t stack_size,
-       osPriority_t priority);
+  bool create(const TaskSpec &spec, void *argument = nullptr);
+  bool markReady();
+  void markFailed();
 
-  Task(const Task &) = delete;
-  Task &operator=(const Task &) = delete;
-  Task(Task &&) = delete;
-  Task &operator=(Task &&) = delete;
-
-  bool run(void *argument = nullptr);
-  uint32_t notify(const Task &other);
-  uint32_t wait(const Task &other);
-
-  [[nodiscard]] inline constexpr osThreadId_t handle() const { return handle_; }
-  [[nodiscard]] inline constexpr uint32_t uid() const { return uid_; }
+  [[nodiscard]] constexpr osThreadId_t handle() const { return handle_; }
+  [[nodiscard]] constexpr TaskState state() const { return state_; }
+  [[nodiscard]] constexpr const TaskSpec *spec() const { return spec_; }
 
 private:
-  const char *name_;
-  uint32_t stack_size_;
-  osPriority_t priority_;
+  const TaskSpec *spec_{nullptr};
+  osThreadId_t handle_{nullptr};
+  TaskState state_{TaskState::Dormant};
+};
 
-  osThreadId_t handle_;
-  osThreadFunc_t func_;
+class TaskRegistry {
+public:
+  bool create(const TaskSpec &spec, void *argument = nullptr);
+  bool markReady(TaskId id);
+  void markFailed(TaskId id);
 
-  uint32_t uid_;
+  [[nodiscard]] osThreadId_t handle(TaskId id) const;
+  [[nodiscard]] TaskState state(TaskId id) const;
+  [[nodiscard]] const TaskSpec *spec(TaskId id) const;
+
+  uint32_t signal(TaskId id, uint32_t flags) const;
+
+private:
+  static constexpr std::size_t task_count{
+      static_cast<std::size_t>(TaskId::Count)};
+
+  [[nodiscard]] ManagedTask *find(TaskId id);
+  [[nodiscard]] const ManagedTask *find(TaskId id) const;
+
+  std::array<ManagedTask, task_count> tasks_{};
 };
 
 } // namespace bd

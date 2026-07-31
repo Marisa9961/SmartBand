@@ -16,12 +16,13 @@
 extern "C" {
 #endif
 
-void BLE_init();
+typedef void (*BLE_RxReadyCallback)(void);
+
+void BLE_init(BLE_RxReadyCallback callback);
 
 void BLE_enable();
 void BLE_disable();
 
-bool BLE_flag();
 char BLE_readNextChar();
 
 void BLE_transmit(const char *str);

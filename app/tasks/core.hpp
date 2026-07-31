@@ -10,10 +10,9 @@
 #ifndef __TASKS_CORE_HPP__
 #define __TASKS_CORE_HPP__
 
-#include "func/Task.hpp"
-
 namespace bd::task {
-extern Task core;
+bool prepareRuntime();
+[[noreturn]] void CoreTask(void *argument);
 } // namespace bd::task
 
 #endif

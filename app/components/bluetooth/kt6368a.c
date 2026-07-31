@@ -18,9 +18,11 @@ extern UART_HandleTypeDef huart1;
 
 static struct {
   uint8_t data[BLE_BUFFER_SIZE];
-  uint8_t read;
-  uint8_t count;
+  volatile uint8_t read;
+  volatile uint8_t count;
 } ble_buffer = {};
+
+static BLE_RxReadyCallback ble_rx_ready_callback;
 
 /* Some questions are very puzzling. Why does the STM32 DMA circular mode + idle
  * interrupt mode not wake up the interrupt when the buffer is just filled when
@@ -29,7 +31,9 @@ static struct {
  * properly, and even introduces sequence errors? Finally, I choose to leave
  * this question alone, and use the single receive mode (DMA Normal) for now. */
 
-void BLE_init() {
+void BLE_init(BLE_RxReadyCallback callback) {
+  ble_rx_ready_callback = callback;
+
   extern DMA_HandleTypeDef hdma_usart1_rx;
   __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_HT);
   __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_TC);
@@ -47,12 +51,19 @@ void BLE_disable() {
 
 void BLE_callback(uint16_t size) {
   ble_buffer.read = 0;
-  ble_buffer.count = size;
+  ble_buffer.count =
+      size > BLE_BUFFER_SIZE ? BLE_BUFFER_SIZE : (uint8_t)size;
+
+  if (ble_rx_ready_callback != NULL) {
+    ble_rx_ready_callback();
+  }
 }
 
-bool BLE_flag() { return ble_buffer.count > 0; }
-
 char BLE_readNextChar() {
+  if (ble_buffer.count == 0) {
+    return '\0';
+  }
+
   ble_buffer.count -= 1;
   return ble_buffer.data[ble_buffer.read++];
 }

@@ -18,8 +18,6 @@
 #include "components/rtc/rtc.h"
 
 namespace bd {
-BluetoothHelper::BluetoothHelper() { BLE_init(); }
-
 BluetoothHelper::State BluetoothHelper::parse() {
   if (BLE_readNextChar() != '@') {
     return ERROR;

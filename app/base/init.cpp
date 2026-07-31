@@ -7,9 +7,7 @@
  * @copyright Copyright (c) Marisa9961 2025
  */
 
-#include <ranges>
-
-#include "func/task.hpp"
+#include "base/bootstrap.h"
 #include "tasks/core.hpp"
 
 extern "C" {
@@ -17,18 +15,28 @@ extern "C" {
 
 #include "main.h"
 
-void init() {
+[[noreturn]] void app_fatal(void) {
+  __disable_irq();
+  while (true) {
+  }
+}
+
+[[noreturn]] void app_bootstrap(void) {
   // TODO long press waitting for power on
   // HAL_Delay(3000);
 
-  bd::task::core.run();
-
-  if (osKernelInitialize() == osOK) {
-    osKernelStart();
+  if (osKernelInitialize() != osOK) {
+    app_fatal();
   }
 
-  while (true) {
-    // Should never get here
+  if (!bd::task::prepareRuntime()) {
+    app_fatal();
   }
+
+  if (osKernelStart() != osOK) {
+    app_fatal();
+  }
+
+  app_fatal();
 }
-}
+} // extern "C"
