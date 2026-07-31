@@ -33,7 +33,7 @@ constexpr std::array worker_specs{
     TaskSpec{TaskId::Gui, "Gui", GuiTask, 128U * 24U, osPriorityLow, true},
     TaskSpec{TaskId::Sensor, "Sensor", SensorTask, 128U * 4U, osPriorityNormal,
              false},
-    TaskSpec{TaskId::Storage, "Storage", StorageTask, 128U * 12U,
+    TaskSpec{TaskId::Storage, "Storage", StorageTask, 128U * 16U,
              osPriorityNormal, false},
     TaskSpec{TaskId::Bluetooth, "Bluetooth", BluetoothTask, 128U * 4U,
              osPriorityAboveNormal, false},

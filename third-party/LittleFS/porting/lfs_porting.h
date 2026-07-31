@@ -18,7 +18,7 @@
 extern "C" {
 #endif
 
-extern struct lfs_config lfs_config;
+extern const struct lfs_config lfs_config;
 
 #ifdef __cplusplus
 } /*extern "C"*/

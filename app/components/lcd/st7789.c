@@ -155,11 +155,17 @@ void LCD_draw(uint16_t xbegin, uint16_t ybegin, uint16_t xend, uint16_t yend,
 }
 
 void LCD_setLight(uint8_t level) {
-  HAL_TIM_PWM_Stop(LCD_TIM, TIM_CHANNEL_2);
-  __HAL_TIM_SET_COMPARE(LCD_TIM, TIM_CHANNEL_2,
-                        level == 0 ? (0) : (level * 3 - 1));
-  HAL_TIM_PWM_Start(LCD_TIM, TIM_CHANNEL_2);
-};
+  if (level > 100U) {
+    level = 100U;
+  }
 
-uint32_t HW_SCREEN_OFF_TIME = 5000;
-uint32_t HW_LEVEL = 150;
+  const uint32_t period = __HAL_TIM_GET_AUTORELOAD(LCD_TIM) + 1U;
+  uint32_t compare = (period * level) / 100U;
+  if (compare > 0U) {
+    --compare;
+  }
+
+  HAL_TIM_PWM_Stop(LCD_TIM, TIM_CHANNEL_2);
+  __HAL_TIM_SET_COMPARE(LCD_TIM, TIM_CHANNEL_2, compare);
+  HAL_TIM_PWM_Start(LCD_TIM, TIM_CHANNEL_2);
+}
