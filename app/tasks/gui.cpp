@@ -25,19 +25,13 @@ namespace bd::task {
 namespace {
 constexpr uint32_t gui_period_ticks{5U};
 
-void applyPendingSignals() {
-  const auto flags{
-      osThreadFlagsWait(gui_signal_mask, osFlagsWaitAny, 0U)};
-  if ((flags & osFlagsError) != 0U) {
+void updateDisplayIdleState(bool should_idle, bool &is_idle) {
+  if (should_idle == is_idle) {
     return;
   }
 
-  if ((flags & static_cast<uint32_t>(GuiSignal::DisplayOff)) != 0U) {
-    LCD_setLight(0U);
-  }
-  if ((flags & static_cast<uint32_t>(GuiSignal::DisplayOn)) != 0U) {
-    LCD_setLight(static_cast<uint8_t>(HW_LEVEL));
-  }
+  LCD_setLight(should_idle ? 0U : static_cast<uint8_t>(HW_LEVEL));
+  is_idle = should_idle;
 }
 } // namespace
 
@@ -54,23 +48,15 @@ void applyPendingSignals() {
     app_fatal();
   }
 
-  bool idle_reported{false};
+  bool display_idle{false};
   uint32_t next_wake{osKernelGetTickCount()};
 
   while (true) {
-    applyPendingSignals();
     lv_task_handler();
 
-    const bool display_idle{
+    const bool should_display_idle{
         lv_disp_get_inactive_time(nullptr) >= HW_SCREEN_OFF_TIME};
-    if (display_idle != idle_reported) {
-      const CoreCommandType command_type{
-          display_idle ? CoreCommandType::DisplayIdle
-                       : CoreCommandType::DisplayActive};
-      if (postCoreCommand(CoreCommand{command_type, TaskId::Gui, 0}) == osOK) {
-        idle_reported = display_idle;
-      }
-    }
+    updateDisplayIdleState(should_display_idle, display_idle);
 
     next_wake += gui_period_ticks;
     if (osDelayUntil(next_wake) != osOK) {

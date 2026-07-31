@@ -16,8 +16,6 @@ namespace bd::task {
 enum class CoreCommandType : uint8_t {
   TaskReady,
   TaskFault,
-  DisplayIdle,
-  DisplayActive,
 };
 
 struct CoreCommand {

@@ -33,16 +33,10 @@ constexpr std::array worker_specs{
     TaskSpec{TaskId::Gui, "Gui", GuiTask, 128U * 24U, osPriorityLow, true},
     TaskSpec{TaskId::Sensor, "Sensor", SensorTask, 128U * 4U, osPriorityNormal,
              false},
-    TaskSpec{TaskId::Storage, "Storage", StorageTask, 128U * 8U,
+    TaskSpec{TaskId::Storage, "Storage", StorageTask, 128U * 12U,
              osPriorityNormal, false},
     TaskSpec{TaskId::Bluetooth, "Bluetooth", BluetoothTask, 128U * 4U,
              osPriorityAboveNormal, false},
-};
-
-enum class RuntimeState : uint8_t {
-  Booting,
-  Running,
-  Degraded,
 };
 
 osMessageQueueId_t core_inbox{nullptr};
@@ -67,8 +61,6 @@ public:
     if (!startWorkers()) {
       app_fatal();
     }
-
-    updateRuntimeState();
 
     while (true) {
       CoreCommand command{};
@@ -99,74 +91,24 @@ private:
     case CoreCommandType::TaskReady:
       if (!registry_.markReady(command.source)) {
         registry_.markFailed(command.source);
+        if (const auto *spec{registry_.spec(command.source)};
+            spec == nullptr || spec->required) {
+          app_fatal();
+        }
       }
-      updateRuntimeState();
       break;
 
     case CoreCommandType::TaskFault:
       registry_.markFailed(command.source);
       if (const auto *spec{registry_.spec(command.source)};
-          spec != nullptr && spec->required) {
+          spec == nullptr || spec->required) {
         app_fatal();
       }
-      updateRuntimeState();
       break;
-
-    case CoreCommandType::DisplayIdle:
-      setDisplayIdle(true);
-      break;
-
-    case CoreCommandType::DisplayActive:
-      setDisplayIdle(false);
-      break;
-    }
-  }
-
-  void setDisplayIdle(bool idle) {
-    if (display_idle_ == idle) {
-      return;
-    }
-
-    const auto signal{
-        idle ? static_cast<uint32_t>(GuiSignal::DisplayOff)
-             : static_cast<uint32_t>(GuiSignal::DisplayOn)};
-    const auto flags{registry_.signal(TaskId::Gui, signal)};
-    if ((flags & osFlagsError) != 0U) {
-      app_fatal();
-    }
-
-    display_idle_ = idle;
-  }
-
-  void updateRuntimeState() {
-    bool pending{false};
-    bool degraded{false};
-
-    for (const auto &spec : worker_specs) {
-      switch (registry_.state(spec.id)) {
-      case TaskState::Dormant:
-      case TaskState::Created:
-        pending = true;
-        break;
-      case TaskState::Ready:
-        break;
-      case TaskState::Failed:
-        if (spec.required) {
-          app_fatal();
-        }
-        degraded = true;
-        break;
-      }
-    }
-
-    if (!pending) {
-      state_ = degraded ? RuntimeState::Degraded : RuntimeState::Running;
     }
   }
 
   TaskRegistry registry_{};
-  RuntimeState state_{RuntimeState::Booting};
-  bool display_idle_{false};
 };
 
 CoreRuntime runtime{};

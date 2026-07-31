@@ -48,8 +48,6 @@ public:
   bool markReady();
   void markFailed();
 
-  [[nodiscard]] constexpr osThreadId_t handle() const { return handle_; }
-  [[nodiscard]] constexpr TaskState state() const { return state_; }
   [[nodiscard]] constexpr const TaskSpec *spec() const { return spec_; }
 
 private:
@@ -64,11 +62,7 @@ public:
   bool markReady(TaskId id);
   void markFailed(TaskId id);
 
-  [[nodiscard]] osThreadId_t handle(TaskId id) const;
-  [[nodiscard]] TaskState state(TaskId id) const;
   [[nodiscard]] const TaskSpec *spec(TaskId id) const;
-
-  uint32_t signal(TaskId id, uint32_t flags) const;
 
 private:
   static constexpr std::size_t task_count{

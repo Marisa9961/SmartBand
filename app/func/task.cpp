@@ -66,28 +66,9 @@ void TaskRegistry::markFailed(TaskId id) {
   }
 }
 
-osThreadId_t TaskRegistry::handle(TaskId id) const {
-  const auto *task{find(id)};
-  return task == nullptr ? nullptr : task->handle();
-}
-
-TaskState TaskRegistry::state(TaskId id) const {
-  const auto *task{find(id)};
-  return task == nullptr ? TaskState::Failed : task->state();
-}
-
 const TaskSpec *TaskRegistry::spec(TaskId id) const {
   const auto *task{find(id)};
   return task == nullptr ? nullptr : task->spec();
-}
-
-uint32_t TaskRegistry::signal(TaskId id, uint32_t flags) const {
-  const auto task_handle{handle(id)};
-  if (task_handle == nullptr) {
-    return osFlagsErrorParameter;
-  }
-
-  return osThreadFlagsSet(task_handle, flags);
 }
 
 } // namespace bd
