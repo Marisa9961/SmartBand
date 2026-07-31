@@ -9,26 +9,28 @@
 
 #include "battery.h"
 
+#include "main.h"
+
 extern ADC_HandleTypeDef hadc1;
 #define ADC_HANDLE &hadc1
 
 uint32_t HW_BATTERY;
 
-void BAT_enable() {
+void BAT_enable(void) {
   HAL_GPIO_WritePin(BATTERY_GPIO_Port, BATTERY_Pin, GPIO_PIN_SET);
 }
 
-void BAT_disable() {
+void BAT_disable(void) {
   HAL_GPIO_WritePin(BATTERY_GPIO_Port, BATTERY_Pin, GPIO_PIN_RESET);
 }
 
-void BAT_fresh() {
+void BAT_fresh(void) {
   HAL_ADC_Start(ADC_HANDLE);
   HAL_ADC_PollForConversion(ADC_HANDLE, HAL_MAX_DELAY);
   HW_BATTERY = HAL_ADC_GetValue(ADC_HANDLE);
   HAL_ADC_Stop(ADC_HANDLE);
 }
 
-bool BAT_charging() {
+bool BAT_charging(void) {
   return HAL_GPIO_ReadPin(CHARGE_GPIO_Port, CHARGE_Pin) == GPIO_PIN_SET;
 }

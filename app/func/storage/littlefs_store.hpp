@@ -26,17 +26,12 @@ public:
 
   StorageOutcome read(std::string_view path, std::span<uint8_t> destination,
                       std::size_t &bytes_read);
-  StorageOutcome write(std::string_view path,
-                       std::span<const uint8_t> source);
+  StorageOutcome replace(std::string_view path,
+                         std::span<const uint8_t> source);
   StorageOutcome remove(std::string_view path);
-  StorageOutcome makeConsistent();
-  StorageOutcome garbageCollect();
-
-  [[nodiscard]] constexpr bool ready() const { return mounted_; }
 
 private:
   [[nodiscard]] static StorageOutcome fromLittleFsError(int error);
-  [[nodiscard]] static bool validPath(std::string_view path);
 
   lfs_t filesystem_{};
   bool mounted_{false};

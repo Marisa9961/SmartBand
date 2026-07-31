@@ -7,10 +7,10 @@
  * @copyright Copyright (c) Marisa9961 2025
  */
 
-#ifndef __AHT21_H__
-#define __AHT21_H__
+#ifndef BD_COMPONENTS_AHT21_H
+#define BD_COMPONENTS_AHT21_H
 
-#include "components/prf.h"
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -19,8 +19,8 @@ extern "C" {
 extern uint32_t HW_TEMP;
 extern uint32_t HW_HUMI;
 
-void THER_init();
-void THER_fresh();
+void THER_init(void);
+void THER_fresh(void);
 
 #ifdef __cplusplus
 } /*extern "C"*/

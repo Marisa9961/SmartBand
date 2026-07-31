@@ -11,6 +11,10 @@
 
 #include <math.h>
 
+#include <cmsis_os2.h>
+
+#include "main.h"
+
 uint32_t HW_DIRECT;
 
 extern I2C_HandleTypeDef hi2c2;
@@ -103,7 +107,7 @@ static void DIRECT_wakeup(void) {
   HAL_I2C_Master_Transmit(&hi2c2, LSM303_MAG_ADDR, wake_mag, sizeof(wake_mag),
                           HAL_MAX_DELAY);
 
-  delay(15);
+  osDelay(15U);
 }
 
 static void DIRECT_sleep(void) {

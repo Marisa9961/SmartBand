@@ -7,12 +7,11 @@
  * @copyright Copyright (c) Marisa9961 2025
  */
 
-#ifndef __W25Q16_H__
-#define __W25Q16_H__
+#ifndef BD_COMPONENTS_W25Q16_H
+#define BD_COMPONENTS_W25Q16_H
 
 #include <stdbool.h>
-
-#include "components/prf.h"
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {

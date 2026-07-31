@@ -22,7 +22,7 @@ extern "C" {
 }
 
 [[noreturn]] void app_bootstrap(void) {
-  // TODO long press waitting for power on
+  // TODO: Require a long press on PC13 before starting the RTOS.
   // HAL_Delay(3000);
 
   if (osKernelInitialize() != osOK) {

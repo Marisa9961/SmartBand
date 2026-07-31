@@ -11,6 +11,8 @@
 
 #include <string.h>
 
+#include "main.h"
+
 extern UART_HandleTypeDef huart1;
 #define BLE_UART &huart1
 
@@ -41,15 +43,15 @@ void BLE_init(BLE_RxReadyCallback callback) {
   HAL_UARTEx_ReceiveToIdle_DMA(BLE_UART, ble_buffer.data, BLE_BUFFER_SIZE);
 }
 
-void BLE_enable() {
+void BLE_enable(void) {
   HAL_GPIO_WritePin(BLE_ENABLE_GPIO_Port, BLE_ENABLE_Pin, GPIO_PIN_RESET);
 }
 
-void BLE_disable() {
+void BLE_disable(void) {
   HAL_GPIO_WritePin(BLE_ENABLE_GPIO_Port, BLE_ENABLE_Pin, GPIO_PIN_SET);
 }
 
-void BLE_callback(uint16_t size) {
+static void BLE_handleRxEvent(uint16_t size) {
   ble_buffer.read = 0;
   ble_buffer.count =
       size > BLE_BUFFER_SIZE ? BLE_BUFFER_SIZE : (uint8_t)size;
@@ -59,7 +61,13 @@ void BLE_callback(uint16_t size) {
   }
 }
 
-char BLE_readNextChar() {
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *uart, uint16_t size) {
+  if (uart != NULL && uart->Instance == USART1) {
+    BLE_handleRxEvent(size);
+  }
+}
+
+char BLE_readNextChar(void) {
   if (ble_buffer.count == 0) {
     return '\0';
   }

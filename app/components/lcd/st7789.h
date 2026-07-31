@@ -7,10 +7,10 @@
  * @copyright Copyright (c) Marisa9961 2025
  */
 
-#ifndef __ST7789_H__
-#define __ST7789_H__
+#ifndef BD_COMPONENTS_ST7789_H
+#define BD_COMPONENTS_ST7789_H
 
-#include "components/prf.h"
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {

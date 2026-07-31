@@ -14,11 +14,9 @@
 #include <cmsis_os2.h>
 
 #include "base/bootstrap.h"
-#include "func/bluetooth_helper.hpp"
-#include "func/task.hpp"
-#include "tasks/core_messages.hpp"
+#include "func/bluetooth_protocol.hpp"
+#include "tasks/core.hpp"
 
-#include "components/battery/battery.h"
 #include "components/bluetooth/kt6368a.h"
 
 namespace {
@@ -39,7 +37,7 @@ namespace bd::task {
   bluetooth_thread = osThreadGetId();
   BLE_init(BluetoothRxReadyCallback);
 
-  BluetoothHelper helper{};
+  BluetoothProtocol protocol{};
 
   if (reportTaskReady(TaskId::Bluetooth) != osOK) {
     app_fatal();
@@ -49,37 +47,27 @@ namespace bd::task {
     const auto flags{osThreadFlagsWait(bluetooth_rx_ready, osFlagsWaitAny,
                                        osWaitForever)};
     if ((flags & osFlagsError) != 0U) {
-      if (reportTaskFault(TaskId::Bluetooth,
-                          static_cast<int32_t>(flags)) != osOK) {
+      if (reportTaskFault(TaskId::Bluetooth) != osOK) {
         app_fatal();
       }
       continue;
     }
 
-    switch (helper.parse()) {
-    case BluetoothHelper::State::SET_TIME: {
-      const bool success{helper.handleTime()};
-      helper.print("TIME", success);
+    switch (protocol.receiveCommand()) {
+    case BluetoothProtocol::Command::SetTime: {
+      const bool success{protocol.applyTime()};
+      protocol.prepareStatusResponse("TIME", success);
     } break;
-    case BluetoothHelper::State::SET_DATE: {
-      const bool success{helper.handleDate()};
-      helper.print("DATE", success);
+    case BluetoothProtocol::Command::SetDate: {
+      const bool success{protocol.applyDate()};
+      protocol.prepareStatusResponse("DATE", success);
     } break;
-    case BluetoothHelper::State::FIND_BAT: {
-      helper.print("BATTERY", static_cast<int>(HW_BATTERY));
-    } break;
-    case BluetoothHelper::State::FIND_HR: {
-      helper.print("HEARTRATE", 90);
-    } break;
-    case BluetoothHelper::State::FIND_STEP: {
-      helper.print("STEPS", 8000);
-    } break;
-    case BluetoothHelper::State::ERROR: {
-      helper.print("ERROR");
+    case BluetoothProtocol::Command::Invalid: {
+      protocol.prepareResponse("ERROR");
     } break;
     }
 
-    helper.flush();
+    protocol.sendResponse();
   }
 }
 } // namespace bd::task

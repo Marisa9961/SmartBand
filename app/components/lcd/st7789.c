@@ -9,6 +9,10 @@
 
 #include "st7789.h"
 
+#include <cmsis_os2.h>
+
+#include "main.h"
+
 extern SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef *const LCD_SPI = &hspi1;
 
@@ -79,14 +83,14 @@ static void LCD_setAddress(uint16_t xbegin, uint16_t ybegin, uint16_t xend,
 
 void LCD_init(void) {
   HAL_GPIO_WritePin(LCD_RST_GPIO_Port, LCD_RST_Pin, GPIO_PIN_RESET);
-  delay(1);
+  osDelay(1U);
 
   HAL_GPIO_WritePin(LCD_RST_GPIO_Port, LCD_RST_Pin, GPIO_PIN_SET);
-  delay(120);
+  osDelay(120U);
 
   LCD_writeREG(0x11); // SLEEP_OFF
   LCD_writeREG(0x11); // SLEEP_OFF
-  delay(120);
+  osDelay(120U);
 
   // MEM_CTRL & MEM_CTRL_DAT
   LCD_writeREG(0x36);
@@ -138,7 +142,7 @@ void LCD_init(void) {
   LCD_writeREG(0x21); // INVS_ON
 
   LCD_writeREG(0x11); // SLEEP_OFF
-  delay(120);
+  osDelay(120U);
 
   LCD_writeREG(0x29); // PLAY_ON
 

@@ -9,6 +9,10 @@
 
 #include "aht21.h"
 
+#include <cmsis_os2.h>
+
+#include "main.h"
+
 extern I2C_HandleTypeDef hi2c2;
 #define TEMP_I2C hi2c2
 #define AHT21_I2C_ADDR (0x38 << 1)
@@ -16,35 +20,35 @@ extern I2C_HandleTypeDef hi2c2;
 uint32_t HW_TEMP;
 uint32_t HW_HUMI;
 
-static bool THER_isBusy() {
+static bool THER_isBusy(void) {
   uint8_t status = 0x71;
   HAL_I2C_Master_Transmit(&TEMP_I2C, AHT21_I2C_ADDR, &status, 1, HAL_MAX_DELAY);
   HAL_I2C_Master_Receive(&TEMP_I2C, AHT21_I2C_ADDR, &status, 1, HAL_MAX_DELAY);
   return (status & 0x08) == 0;
 }
 
-static void THER_wait() {
+static void THER_wait(void) {
   uint8_t timeout = 5;
   while (THER_isBusy() && timeout--) {
-    delay(5);
+    osDelay(5U);
   }
 }
 
-void THER_init() {
+void THER_init(void) {
   THER_wait();
 
   uint8_t init_cmd[] = {0xBE, 0x08, 0x00};
   HAL_I2C_Master_Transmit(&TEMP_I2C, AHT21_I2C_ADDR, init_cmd, sizeof(init_cmd),
                           HAL_MAX_DELAY);
-  delay(10);
+  osDelay(10U);
 }
 
-void THER_fresh() {
+void THER_fresh(void) {
   uint8_t measure_cmd[] = {0xAC, 0x33, 0x00};
 
   HAL_I2C_Master_Transmit(&TEMP_I2C, AHT21_I2C_ADDR, measure_cmd,
                           sizeof(measure_cmd), HAL_MAX_DELAY);
-  delay(80);
+  osDelay(80U);
   THER_wait();
 
   uint8_t raw_data[6];

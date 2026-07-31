@@ -16,12 +16,6 @@ namespace bd::storage {
 namespace {
 constexpr std::string_view temporary_suffix{".tmp"};
 
-StoragePath terminatedPath(std::string_view path) {
-  StoragePath result{};
-  std::copy(path.begin(), path.end(), result.begin());
-  return result;
-}
-
 std::array<char, max_path_length + temporary_suffix.size() + 1U>
 temporaryPath(std::string_view path) {
   std::array<char, max_path_length + temporary_suffix.size() + 1U> result{};
@@ -62,11 +56,11 @@ StorageOutcome LittleFsStore::read(std::string_view path,
   if (!mounted_) {
     return {StorageStatus::NotReady, LFS_ERR_BADF};
   }
-  if (!validPath(path)) {
+  StoragePath file_path{};
+  if (!copyPath(path, file_path)) {
     return {StorageStatus::InvalidArgument, LFS_ERR_INVAL};
   }
 
-  const auto file_path{terminatedPath(path)};
   lfs_file_t file{};
   int error{lfs_file_open(&filesystem_, &file, file_path.data(),
                           LFS_O_RDONLY)};
@@ -100,19 +94,19 @@ StorageOutcome LittleFsStore::read(std::string_view path,
   return fromLittleFsError(error);
 }
 
-StorageOutcome LittleFsStore::write(std::string_view path,
-                                    std::span<const uint8_t> source) {
+StorageOutcome LittleFsStore::replace(std::string_view path,
+                                      std::span<const uint8_t> source) {
   if (!mounted_) {
     return {StorageStatus::NotReady, LFS_ERR_BADF};
   }
-  if (!validPath(path)) {
+  StoragePath file_path{};
+  if (!copyPath(path, file_path)) {
     return {StorageStatus::InvalidArgument, LFS_ERR_INVAL};
   }
   if (source.size() > std::numeric_limits<lfs_size_t>::max()) {
     return {StorageStatus::TooLarge, LFS_ERR_FBIG};
   }
 
-  const auto file_path{terminatedPath(path)};
   const auto temporary_path{temporaryPath(path)};
 
   int error{lfs_remove(&filesystem_, temporary_path.data())};
@@ -162,26 +156,12 @@ StorageOutcome LittleFsStore::remove(std::string_view path) {
   if (!mounted_) {
     return {StorageStatus::NotReady, LFS_ERR_BADF};
   }
-  if (!validPath(path)) {
+  StoragePath file_path{};
+  if (!copyPath(path, file_path)) {
     return {StorageStatus::InvalidArgument, LFS_ERR_INVAL};
   }
 
-  const auto file_path{terminatedPath(path)};
   return fromLittleFsError(lfs_remove(&filesystem_, file_path.data()));
-}
-
-StorageOutcome LittleFsStore::makeConsistent() {
-  if (!mounted_) {
-    return {StorageStatus::NotReady, LFS_ERR_BADF};
-  }
-  return fromLittleFsError(lfs_fs_mkconsistent(&filesystem_));
-}
-
-StorageOutcome LittleFsStore::garbageCollect() {
-  if (!mounted_) {
-    return {StorageStatus::NotReady, LFS_ERR_BADF};
-  }
-  return fromLittleFsError(lfs_fs_gc(&filesystem_));
 }
 
 StorageOutcome LittleFsStore::fromLittleFsError(int error) {
@@ -215,8 +195,4 @@ StorageOutcome LittleFsStore::fromLittleFsError(int error) {
   }
 }
 
-bool LittleFsStore::validPath(std::string_view path) {
-  return !path.empty() && path.size() <= max_path_length &&
-         path.find('\0') == std::string_view::npos;
-}
 } // namespace bd::storage

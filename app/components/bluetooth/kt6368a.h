@@ -7,10 +7,8 @@
  * @copyright Copyright (c) Marisa9961 2025
  */
 
-#ifndef __KT6368A_H__
-#define __KT6368A_H__
-
-#include "components/prf.h"
+#ifndef BD_COMPONENTS_KT6368A_H
+#define BD_COMPONENTS_KT6368A_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -20,10 +18,10 @@ typedef void (*BLE_RxReadyCallback)(void);
 
 void BLE_init(BLE_RxReadyCallback callback);
 
-void BLE_enable();
-void BLE_disable();
+void BLE_enable(void);
+void BLE_disable(void);
 
-char BLE_readNextChar();
+char BLE_readNextChar(void);
 
 void BLE_transmit(const char *str);
 

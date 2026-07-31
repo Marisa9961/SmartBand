@@ -7,16 +7,16 @@
  * @copyright Copyright (c) Marisa9961 2025
  */
 
-#ifndef __BUTTON_H__
-#define __BUTTON_H__
+#ifndef BD_COMPONENTS_BUTTON_H
+#define BD_COMPONENTS_BUTTON_H
 
-#include "components/prf.h"
+#include <stdbool.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-bool BTN_read();
+bool BTN_read(void);
 
 #ifdef __cplusplus
 } /*extern "C"*/

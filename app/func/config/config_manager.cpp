@@ -120,7 +120,7 @@ bool ConfigManager::startSave() {
   std::array<uint8_t, storage::payload_capacity> encoded{};
   const std::size_t encoded_size{encodeDeviceConfig(config_, encoded)};
   if (encoded_size == 0U ||
-      task::requestStorageWrite(
+      task::requestStorageReplace(
           config_path,
           std::span<const uint8_t>{encoded.data(), encoded_size},
           response_queue_) != osOK) {
@@ -140,7 +140,7 @@ void ConfigManager::handleResponse(const storage::StorageResponse &response,
     handleLoadResponse(response, notify_change);
     break;
 
-  case storage::StorageOperation::Write:
+  case storage::StorageOperation::Replace:
     io_state_ = IoState::Idle;
     if (response.status != storage::StorageStatus::Ok) {
       dirty_ = true;
@@ -149,8 +149,6 @@ void ConfigManager::handleResponse(const storage::StorageResponse &response,
     break;
 
   case storage::StorageOperation::Remove:
-  case storage::StorageOperation::MakeConsistent:
-  case storage::StorageOperation::GarbageCollect:
     break;
   }
 }

@@ -7,10 +7,11 @@
  * @copyright Copyright (c) Marisa9961 2025
  */
 
-#ifndef __BATTERY_H__
-#define __BATTERY_H__
+#ifndef BD_COMPONENTS_BATTERY_H
+#define BD_COMPONENTS_BATTERY_H
 
-#include "components/prf.h"
+#include <stdbool.h>
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -18,11 +19,11 @@ extern "C" {
 
 extern uint32_t HW_BATTERY;
 
-void BAT_enable();
-void BAT_disable();
-void BAT_fresh();
+void BAT_enable(void);
+void BAT_disable(void);
+void BAT_fresh(void);
 
-bool BAT_charging();
+bool BAT_charging(void);
 
 #ifdef __cplusplus
 } /*extern "C"*/

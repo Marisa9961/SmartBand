@@ -11,6 +11,8 @@
 
 #include <cmsis_os2.h>
 
+#include "main.h"
+
 extern SPI_HandleTypeDef hspi2;
 #define FLASH_HANDLE &hspi2
 
@@ -43,7 +45,7 @@ static bool FLASH_rangeValid(uint32_t address, uint32_t size) {
 
 static void FLASH_yieldWhileBusy(void) {
   if (osKernelGetState() == osKernelRunning) {
-    (void)osDelay(1U);
+    osDelay(1U);
   }
 }
 

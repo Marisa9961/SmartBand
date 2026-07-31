@@ -3,8 +3,8 @@
  * @brief Explicit hand-off from CubeMX startup to the application runtime.
  */
 
-#ifndef __BASE_BOOTSTRAP_H__
-#define __BASE_BOOTSTRAP_H__
+#ifndef BD_BASE_BOOTSTRAP_H
+#define BD_BASE_BOOTSTRAP_H
 
 #ifdef __cplusplus
 extern "C" {

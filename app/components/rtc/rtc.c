@@ -9,6 +9,8 @@
 
 #include "rtc.h"
 
+#include "main.h"
+
 extern RTC_HandleTypeDef hrtc;
 #define RTC_HANDLE &hrtc
 
@@ -16,7 +18,7 @@ uint32_t HW_HOUR;
 uint32_t HW_MINUTE;
 uint32_t HW_SECOND;
 
-void RTC_freshTime() {
+void RTC_freshTime(void) {
   RTC_TimeTypeDef time = {};
   HAL_RTC_GetTime(RTC_HANDLE, &time, RTC_FORMAT_BIN);
 
@@ -38,7 +40,7 @@ uint32_t HW_MONTH;
 uint32_t HW_DAY;
 uint32_t HW_WEEKDAY;
 
-void RTC_freshDate() {
+void RTC_freshDate(void) {
   RTC_DateTypeDef date = {};
   HAL_RTC_GetDate(RTC_HANDLE, &date, RTC_FORMAT_BIN);
 

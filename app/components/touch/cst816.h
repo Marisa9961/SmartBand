@@ -7,10 +7,10 @@
  * @copyright Copyright (c) Marisa9961 2025
  */
 
-#ifndef __CST816_H__
-#define __CST816_H__
+#ifndef BD_COMPONENTS_CST816_H
+#define BD_COMPONENTS_CST816_H
 
-#include "components/prf.h"
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -23,9 +23,9 @@ typedef struct {
 
 extern TOUCH_Info touch_info;
 
-void TOUCH_init();
-void TOUCH_freshXY();
-uint8_t TOUCH_getFingerNum();
+void TOUCH_init(void);
+void TOUCH_freshXY(void);
+uint8_t TOUCH_getFingerNum(void);
 
 #ifdef __cplusplus
 } /*extern "C"*/

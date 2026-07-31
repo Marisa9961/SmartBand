@@ -7,10 +7,10 @@
  * @copyright Copyright (c) Marisa9961 2025
  */
 
-#ifndef __RTC_H__
-#define __RTC_H__
+#ifndef BD_COMPONENTS_RTC_H
+#define BD_COMPONENTS_RTC_H
 
-#include "components/prf.h"
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -20,7 +20,7 @@ extern uint32_t HW_HOUR;
 extern uint32_t HW_MINUTE;
 extern uint32_t HW_SECOND;
 
-void RTC_freshTime();
+void RTC_freshTime(void);
 void RTC_setTime(uint8_t hour, uint8_t minute, uint8_t second);
 
 extern uint32_t HW_YEAR;
@@ -28,7 +28,7 @@ extern uint32_t HW_MONTH;
 extern uint32_t HW_DAY;
 extern uint32_t HW_WEEKDAY;
 
-void RTC_freshDate();
+void RTC_freshDate(void);
 void RTC_setDate(uint16_t year, uint8_t month, uint8_t day);
 
 #ifdef __cplusplus

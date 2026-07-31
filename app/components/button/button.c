@@ -9,4 +9,8 @@
 
 #include "button.h"
 
-bool BTN_read() { return HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_SET; }
+#include "main.h"
+
+bool BTN_read(void) {
+  return HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_SET;
+}

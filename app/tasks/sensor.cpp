@@ -12,8 +12,7 @@
 #include "base/bootstrap.h"
 #include "components/direct/lsm303.h"
 #include "components/thermometer/aht21.h"
-#include "func/task.hpp"
-#include "tasks/core_messages.hpp"
+#include "tasks/core.hpp"
 
 namespace bd::task {
 namespace {

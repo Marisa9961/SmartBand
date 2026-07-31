@@ -17,8 +17,7 @@
 
 #include "base/bootstrap.h"
 #include "func/config/config_manager.hpp"
-#include "func/task.hpp"
-#include "tasks/core_messages.hpp"
+#include "tasks/core.hpp"
 
 #include "components/lcd/st7789.h"
 
